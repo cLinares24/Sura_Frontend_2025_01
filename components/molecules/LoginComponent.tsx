@@ -1,92 +1,137 @@
-'use client'
-import { useForm, SubmitHandler } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
+"use client";
 
-// import { LoginDTO } from "@/interfaces/login"
-import { LoginDTO } from "../../interfaces/login"
-// import { loginScheme } from "@/schemas/login"
-import { loginScheme } from "../../schemas/login"
-
-// import { loginService } from "@/libs/authService"
-import { loginService } from "../../libs/authService"
-import InputComponents from "../atoms/InputComponents"
+import { useForm, SubmitHandler } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { LoginDTO } from "../../interfaces/login";
+import { loginScheme } from "../../schemas/login";
+import { loginService } from "../../libs/authService";
+import InputComponents from "../atoms/InputComponents";
 
 export default function LoginComponent() {
-
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
   } = useForm<LoginDTO>({
-    resolver: zodResolver(loginScheme)
-  })
+    resolver: zodResolver(loginScheme),
+  });
 
   const onSubmit: SubmitHandler<LoginDTO> = (data) => {
     loginService(data)
       .then((info) => {
-        localStorage.setItem('token', info.access_token)
+        localStorage.setItem("token", info.access_token);
       })
-      .catch(e => {
-        console.log('Error en solicitud');
-      })
-  }
-
-  const onErrors = () => {
-    console.log('Errores', errors);
-
-    alert('Informacion incompleta')
+      .catch((e) => {
+        console.log("Error en solicitud");
+      });
   };
 
-  
+  const onErrors = () => {
+    console.log("Errores", errors);
+    alert("Información incompleta");
+  };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit, onErrors)} className="flex flex-col space-y-4">
-      {/* Correo */}
-      <div>
+    <div className="min-h-screen flex items-center justify-center bg-white">
+      <div className="w-full max-w-md bg-white shadow rounded-lg p-8">
+        {/* Logo */}
+        <div className="flex justify-center mb-4">
+          <img
+            src="/sura-logo.png"
+            alt="Sura"
+            className="h-10"
+          />
+        </div>
 
-        <InputComponents
-          label="Correo electrónico"
-          typeElement="text"
-          placeHolder="Ingresa tu correo electrónico"
-          className="w-full border-b border-gray-300 focus:border-green-600 outline-none py-2"
-          classLabel = "block text-sm text-gray-700"
-          registerName = "user"
-           register={register}
-        />
+        {/* Título */}
+        <h2 className="text-center text-2xl font-semibold">Iniciar sesión</h2>
+        <p className="text-center text-sm text-gray-500 mb-6">
+          EPS SURA
+        </p>
 
+        {/* Formulario */}
+        <form
+          onSubmit={handleSubmit(onSubmit, onErrors)}
+          className="flex flex-col space-y-4"
+        >
+          {/* Tipo de identificación */}
+          <div>
+            <label className="block text-sm text-gray-700 mb-1">
+              Tipo de identificación
+            </label>
+            <select
+             // {...register("tipoDocumento")}
+              className="w-full border border-gray-300 rounded-md px-3 py-2 focus:border-blue-600 outline-none"
+            >
+              <option value="">Seleccione...</option>
+              <option value="cc">Cédula de ciudadanía</option>
+              <option value="ce">Cédula de extranjería</option>
+              <option value="ti">Tarjeta de identidad</option>
+            </select>
+          </div>
 
+          {/* Número de identificación */}
+          <InputComponents
+            label="Número de identificación"
+            typeElement="text"
+            placeHolder="Ingresa tu número de identificación"
+            className="w-full border border-gray-300 rounded-md px-3 py-2 focus:border-blue-600 outline-none"
+            classLabel="block text-sm text-gray-700 mb-1"
+            registerName="user"
+            register={register}
+          />
+
+          {/* Contraseña */}
+          <InputComponents
+            label="Contraseña"
+            typeElement="password"
+            placeHolder="Ingresa tu contraseña"
+            className="w-full border border-gray-300 rounded-md px-3 py-2 focus:border-blue-600 outline-none"
+            classLabel="block text-sm text-gray-700 mb-1"
+            registerName="password"
+            register={register}
+          />
+
+          {/* ¿Olvidaste tu contraseña? */}
+          <div className="flex justify-between items-center text-sm">
+            <a href="#" className="text-blue-600 hover:underline">
+              ¿Has olvidado tu contraseña?
+            </a>
+          </div>
+
+          {/* Botón ingresar */}
+          <button
+            type="submit"
+            className="w-full bg-blue-800 hover:bg-blue-900 text-white py-3 rounded-full font-medium"
+          >
+            Iniciar sesión
+          </button>
+        </form>
+
+        {/* Crear cuenta */}
+        <p className="text-center text-sm mt-6">
+          ¿Aún no tienes una cuenta?{" "}
+          <a href="#" className="text-blue-600 hover:underline font-medium">
+            Crear una cuenta
+          </a>
+        </p>
       </div>
 
-      {/* Contraseña */}
-      <div>
-        <InputComponents
-          label="Contraseña"
-          typeElement="password"
-          placeHolder="Ingresa tu contraseña"
-          className="w-full border-b border-gray-300 focus:border-green-600 outline-none py-2"
-          classLabel = "block text-sm text-gray-700"
-          registerName = "password"
-           register={register}
-        />
-      </div>
-
-      {/* Olvidaste tu contraseña */}
-      <p className="text-xs text-gray-500">
-        ¿Olvidaste tu contraseña? No te preocupes, pide un código
-        verificador por{" "}
-        <a href="#" className="text-blue-600 hover:underline">
-          correo
+      {/* Footer */}
+      <div className="absolute bottom-2 text-xs text-gray-500 text-center w-full">
+        © 2025 Suramericana S.A &nbsp; | &nbsp;
+        <a href="#" className="hover:underline">
+          Ayuda
         </a>{" "}
-        para cambiar tu contraseña.
-      </p>
-
-      {/* Botón ingresar */}
-      <button
-        type="submit"
-        className="w-full bg-gray-800 hover:bg-gray-900 text-white py-3 rounded-full font-medium"
-      >
-        Ingresar
-      </button>
-    </form>
-  )
+        |{" "}
+        <a href="#" className="hover:underline">
+          Privacidad
+        </a>{" "}
+        |{" "}
+        <a href="#" className="hover:underline">
+          Seguridad
+        </a>
+      </div>
+    </div>
+  );
 }

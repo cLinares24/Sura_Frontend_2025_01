@@ -1,6 +1,6 @@
 "use client";
 
-import AmazonLogin from "@/app/(webpage)/login/page";
+import SuraLogin from "@/app/(webpage)/login/page";
 import React, { useState } from "react";
 import Link from "next/link"
 
@@ -28,7 +28,7 @@ export default function HeaderComponent() {
       .replace(/\s+/g, "-");
 
   if (currentView === "login") {
-    return <AmazonLogin />;
+    return <SuraLogin />;
   }
   return (
     <header className="sticky top-0 w-full z-50 bg-white shadow-md">
@@ -66,46 +66,47 @@ export default function HeaderComponent() {
 
           <div className="flex items-center">
             {/* <!-- Botón --> */}
-            <button className="bg-[#0033A0] text-white font-bold px-6 py-2 rounded-full flex items-center gap-2 mr-4 cursor-pointer">
-              INICIAR SESIÓN
-              <svg
-                width="14px"
-                height="14px"
-                viewBox="0 -0.5 17 17"
-                version="1.1"
-                xmlns="http://www.w3.org/2000/svg"
-                //xmlns:xlink="http://www.w3.org/1999/xlink"
-                className="si-glyph si-glyph-triangle-down"
-                fill="#000000"
-              >
-                <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-                <g
-                  id="SVGRepo_tracerCarrier"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                ></g>
-                <g id="SVGRepo_iconCarrier">
-                  {" "}
-                  <title>1237</title> <defs> </defs>{" "}
+            <Link href="/login" passHref>
+              <button className="bg-[#0033A0] text-white font-bold px-6 py-2 rounded-full flex items-center gap-2 mr-4 cursor-pointer">
+                INICIAR SESIÓN
+                <svg
+                  width="14px"
+                  height="14px"
+                  viewBox="0 -0.5 17 17"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  //xmlns:xlink="http://www.w3.org/1999/xlink"
+                  className="si-glyph si-glyph-triangle-down"
+                  fill="#000000"
+                >
+                  <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
                   <g
-                    stroke="none"
-                    strokeWidth="1"
-                    fill="none"
-                    fillRule="evenodd"
-                  >
+                    id="SVGRepo_tracerCarrier"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  ></g>
+                  <g id="SVGRepo_iconCarrier">
                     {" "}
-                    <path
-                      d="M10.106,12.69 C9.525,13.27 8.584,13.27 8.002,12.69 L1.561,6.246 C0.979,5.665 0.722,4.143 2.561,4.143 L15.549,4.143 C17.45,4.143 17.131,5.664 16.549,6.246 L10.106,12.69 L10.106,12.69 Z"
-                      fill="#FFFFFF"
-                      className="si-glyph-fill"
+                    <title>1237</title> <defs> </defs>{" "}
+                    <g
+                      stroke="none"
+                      strokeWidth="1"
+                      fill="none"
+                      fillRule="evenodd"
                     >
                       {" "}
-                    </path>{" "}
-                  </g>{" "}
-                </g>
-              </svg>
-            </button>
-
+                      <path
+                        d="M10.106,12.69 C9.525,13.27 8.584,13.27 8.002,12.69 L1.561,6.246 C0.979,5.665 0.722,4.143 2.561,4.143 L15.549,4.143 C17.45,4.143 17.131,5.664 16.549,6.246 L10.106,12.69 L10.106,12.69 Z"
+                        fill="#FFFFFF"
+                        className="si-glyph-fill"
+                      >
+                        {" "}
+                      </path>{" "}
+                    </g>{" "}
+                  </g>
+                </svg>
+              </button>
+            </Link>
             {/* <!-- Icono lupa --> */}
             <div className="w-10 h-10 flex items-center justify-center border border-[#EDEDED] rounded-full cursor-pointer">
               {/* <!-- Usando Heroicons (SVG lupa) --> */}
