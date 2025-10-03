@@ -1,6 +1,8 @@
 "use client";
 import { ArrowRight } from "lucide-react";
 
+import Image from "next/image";
+
 const Plataform = () => {
   const items = [
     {
@@ -45,11 +47,13 @@ const Plataform = () => {
               key={i}
               className="bg-white shadow-md overflow-hidden text-left flex flex-col border-1 border-white max-w-[270px]"
             >
-              <img
-                src={item.img}
-                alt={item.title}
-                className="w-full h-40 object-cover"
-              />
+             <Image
+  src={item.img}
+  alt={item.title}
+  width={800}
+  height={160}
+  className="w-full h-40 object-cover"
+/>
               <div className="p-4 flex flex-col flex-1">
                 <h3 className="text-lg text-gray-700  font-bold mb-2">
                   {item.title}

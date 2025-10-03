@@ -3,6 +3,7 @@
 import SuraLogin from "@/app/(webpage)/login/page";
 import React, { useState } from "react";
 import Link from "next/link"
+import Image from "next/image";
 
 export default function HeaderComponent() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -41,9 +42,11 @@ export default function HeaderComponent() {
         <div className=" flex items-center h-18 px-4">
           {/* Logo */}
           <div className="ml-15 max-w-[190px] max-h-[190px] cursor-pointer">
-            <img
+            <Image
               src="https://www.epssura.com/files/home-2021/header-footer/logo_eps.png"
               alt="epssuralogo"
+              width={200}   
+              height={60} 
             />
           </div>
           <div className="flex gap-8 mr-7">

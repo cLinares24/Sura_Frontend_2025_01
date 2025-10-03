@@ -1,6 +1,6 @@
 'use client'
 import { useEffect, useRef, useState } from 'react';
-
+import Image from "next/image";
 
 const products = [
     {
@@ -67,7 +67,7 @@ const products = [
         discount: '-42%',
         rating: 4.5,
     },
-    
+
     {
         image: 'https://media.falabella.com/falabellaCO/121010446_01/w=276,h=276',
         brand: 'VENECIA',
@@ -195,7 +195,13 @@ const ProductCarousel = () => {
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 transition-transform duration-500 ease-in-out ml-15 mr-15">
                 {currentProducts.map((product, index) => (
                     <div key={index} className="flex flex-col items-start bg-white rounded-lg overflow-hidden border border-gray-200">
-                        <img src={product.image} alt={product.name} className="w-full h-auto object-cover" />
+                        <Image
+                            src={product.image}
+                            alt={product.name}
+                            width={800}
+                            height={600}
+                            className="w-full h-auto object-cover"
+                        />
                         <div className="p-3 w-full">
                             <p className="text-xs text-gray-500 font-medium">{product.brand}</p>
                             <p className="text-sm font-semibold text-gray-800 line-clamp-2 mt-1">{product.name}</p>
@@ -240,9 +246,8 @@ const ProductCarousel = () => {
                     <button
                         key={index}
                         onClick={() => setCurrentPage(index)}
-                        className={`w-3 h-3 rounded-full ${
-                            currentPage === index ? 'bg-gray-800' : 'bg-gray-400'
-                        }`}
+                        className={`w-3 h-3 rounded-full ${currentPage === index ? 'bg-gray-800' : 'bg-gray-400'
+                            }`}
                     ></button>
                 ))}
             </div>

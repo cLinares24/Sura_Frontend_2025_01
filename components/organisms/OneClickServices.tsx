@@ -1,5 +1,6 @@
 "use client";
 import { ArrowRight } from "lucide-react";
+import Image from "next/image";
 
 const Services = () => {
   const items = [
@@ -40,32 +41,34 @@ const Services = () => {
       <div className="flex flex-wrap gap-3 p-9 md:-ml-23 relative z-20 md:w-[70%] mt-3">
         {items.map((item, i) => (
           <div
-          key={i}
-          className="bg-white text-center flex flex-col border border-gray-200 w-[230px] h-[340px] rounded-sm shadow-lg"
-        >
-          {/* Contenedor central */}
-          <div className="flex-1 flex flex-col items-center justify-center">
-            <h3 className="text-md text-gray-600 font-semibold px-2 max-w-[170px] leading-tight m-0 mb-3 -mt-3">
-              {item.title}
-            </h3>
-            <img
-              src={item.img}
-              alt={item.title}
-              className="w-[140px] h-[160px] object-contain"
-            />
+            key={i}
+            className="bg-white text-center flex flex-col border border-gray-200 w-[230px] h-[340px] rounded-sm shadow-lg"
+          >
+            {/* Contenedor central */}
+            <div className="flex-1 flex flex-col items-center justify-center">
+              <h3 className="text-md text-gray-600 font-semibold px-2 max-w-[170px] leading-tight m-0 mb-3 -mt-3">
+                {item.title}
+              </h3>
+              <Image
+                src={item.img}
+                alt={item.title}
+                width={140}
+                height={160}
+                className="w-[140px] h-[160px] object-contain"
+              />
+            </div>
+
+            {/* Link abajo */}
+            <div className="p-4">
+              <a
+                href="#"
+                className="text-[#003DA5] font-bold flex items-center justify-end gap-1 hover:text-[#1f57cf]"
+              >
+                {item.link} <ArrowRight size={16} />
+              </a>
+            </div>
           </div>
-        
-          {/* Link abajo */}
-          <div className="p-4">
-            <a
-              href="#"
-              className="text-[#003DA5] font-bold flex items-center justify-end gap-1 hover:text-[#1f57cf]"
-            >
-              {item.link} <ArrowRight size={16} />
-            </a>
-          </div>
-        </div>
-        
+
         ))}
       </div>
     </div>

@@ -1,6 +1,6 @@
 'use client'
 import React from 'react';
-
+import Image from "next/image";
 const offers = [
   {
     title: 'BELLEZA',
@@ -19,12 +19,18 @@ const offers = [
 const DontMissIt = () => {
   return (
 
- <div className="w-full max-w-[1200px] mx-auto mt-10 p-4">
+    <div className="w-full max-w-[1200px] mx-auto mt-10 p-4">
       <h2 className="text-2xl font-semibold text-gray-800 mb-6">¡No te lo pierdas!</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* El primer elemento es más ancho, ocupa 1/2 en pantallas medianas */}
         <div key={0} className="relative w-full h-[400px] rounded-xl overflow-hidden shadow-md">
-          <img src={offers[0].image} alt={offers[0].title} className="w-full h-full" />
+          <Image
+            src={offers[0].image}
+            alt={offers[0].title}
+            width={800}  // valor base (ajústalo según tu caso)
+            height={600} // valor base (ajústalo según tu caso)
+            className="w-full h-full"
+          />
           <div className="absolute top-4 left-4">
           </div>
         </div>
@@ -33,7 +39,13 @@ const DontMissIt = () => {
         <div className="flex gap-4">
           {offers.slice(1).map((offer, index) => (
             <div key={index + 1} className="relative w-full h-[400px] rounded-xl overflow-hidden shadow-md">
-              <img src={offer.image} alt={offer.title} className="w-full h-full" />
+              <Image
+                src={offer.image}
+                alt={offer.title}
+                width={800}   // referencia, no afecta porque usas w-full h-full
+                height={600}
+                className="w-full h-full"
+              />
               <div className="absolute top-4 left-4">
               </div>
             </div>

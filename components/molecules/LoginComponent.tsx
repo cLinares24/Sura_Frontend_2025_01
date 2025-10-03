@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginDTO } from "../../interfaces/login";
 import { loginScheme } from "../../schemas/login";
 import { loginService } from "../../libs/authService";
+import Image from "next/image";
 import InputComponents from "../atoms/InputComponents";
 
 export default function LoginComponent() {
@@ -35,11 +36,12 @@ export default function LoginComponent() {
     <div className="min-h-screen flex items-center justify-center bg-white">
       <div className="w-full max-w-md bg-white shadow rounded-lg p-8">
         {/* Logo */}
-        <div className="flex justify-center mb-4">
-          <img
-            src="/sura-logo.png"
+        <div className="flex justify-center mb-4 max-w-[170px] h-14 relative mx-auto">
+          <Image
+            src="https://login.sura.com/media/svg/logo-sura.svg"
             alt="Sura"
-            className="h-10"
+            fill
+            className="object-contain"
           />
         </div>
 
