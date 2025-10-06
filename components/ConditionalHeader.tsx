@@ -7,7 +7,7 @@ export default function ConditionalHeader() {
   const pathname = usePathname();
 
   // Mostrar el header solo si no estamos en /login
-  if (pathname === "/login") {
+  if (pathname === "/login" || pathname === "/register") {
     return null;
   }
 

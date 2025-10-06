@@ -113,9 +113,9 @@ export default function LoginComponent() {
 
         {/* Crear cuenta */}
         <p className="text-center text-sm mt-6">
-          ¿Aún no tienes una cuenta?{" "}
+          ¿Ya tienes una cuenta?{" "}
           <Link href="/login" className="text-blue-600 hover:underline font-medium">
-            Crear una cuenta
+            Iniciar Sesión
           </Link>
         </p>
       </div>
