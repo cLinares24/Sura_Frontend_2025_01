@@ -9,17 +9,21 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
+        hostname: "epssura.com", // 👈 agregado
+      },
+      {
+        protocol: "https",
         hostname: "login.sura.com",
       },
       {
         protocol: "https",
         hostname: "sura.com",
       },
-       {
+      {
         protocol: "https",
         hostname: "images.falabella.com",
       },
-       {
+      {
         protocol: "https",
         hostname: "media.falabella.com",
       },

@@ -12,6 +12,12 @@ import Footer from "@/components/organisms/Footer";
 
 export default function Home() {
   return (
-    <><SuraMainCarrousel /><SuraPlataform /> <Services /> <Affiliations /> <DontMissIt /> <RenewYourHome /> <DownCategories /> <FollowUs />  <CreditsLinio /> <Footer  /> </>
+    <>
+      <SuraMainCarrousel />
+      <SuraPlataform />
+      <Services />
+      <Affiliations />
+      <Footer />
+    </>
   );
 }
