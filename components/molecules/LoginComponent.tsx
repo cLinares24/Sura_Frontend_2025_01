@@ -8,6 +8,7 @@ import { loginService } from "../../libs/authService";
 import Image from "next/image";
 import InputComponents from "../atoms/InputComponents";
 import Link from "next/link";
+import PasswordWithPad from "../atoms/PasswordWithPad";
 
 export default function LoginComponent() {
   const {
@@ -85,14 +86,12 @@ export default function LoginComponent() {
           />
 
           {/* Contraseña */}
-          <InputComponents
+          <PasswordWithPad
             label="Contraseña"
-            typeElement="password"
-            placeHolder="Ingresa tu contraseña"
-            className="w-full border border-gray-300 rounded-md px-3 py-2 focus:border-blue-600 outline-none"
-            classLabel="block text-sm text-gray-700 mb-1"
             registerName="password"
             register={register}
+            className="w-full border border-gray-300 rounded-md px-3 py-2 focus:border-blue-600 outline-none"
+            classLabel="block text-sm text-gray-700 mb-1"
           />
 
           {/* ¿Olvidaste tu contraseña? */}
