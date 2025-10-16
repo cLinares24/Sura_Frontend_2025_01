@@ -113,14 +113,14 @@ export default function LoginComponent() {
         {/* Crear cuenta */}
         <p className="text-center text-sm mt-6">
           ¿Aún no tienes una cuenta?{" "}
-          <Link href="/login" className="text-blue-600 hover:underline font-medium">
+          <Link href="/register" className="text-blue-600 hover:underline font-medium">
             Crear una cuenta
           </Link>
         </p>
       </div>
 
       {/* Footer */}
-      <div className="absolute bottom-2 text-xs text-gray-500 text-center w-full">
+      <div className="absolute bottom-2 text-xs text-gray-500 text-center w-full mt-4">
         © 2025 Suramericana S.A &nbsp; | &nbsp;
         <a href="#" className="hover:underline">
           Ayuda
