@@ -33,160 +33,46 @@ export default function HeaderComponent() {
   }
   return (
     <header className="sticky top-0 w-full z-50 bg-white shadow-md">
-      {/* Barra superior blanca */}
-      <div className="w-full bg-[#53575b] ">
+      {/* Barra Morada */}
+      <div className="w-full bg-[#9155A7] ">
         <div className="max-w-[1200px] flex items-center gap-8 h-[34px] px-4"></div>
       </div>
+      {/* Barra Blanca */}
+      <div className="w-full max-w-7xl flex items-center justify-between h-20 px-6">
+        {/* Logo */}
+        <div className="flex items-center space-x-2">
+          {/* Icono tipo ECG */}
+          <svg fill="#ad46ff" width="32px" height="32px" viewBox="0 0 32 32" style={{
+            fillRule: "evenodd",
+            clipRule: "evenodd",
+            strokeLinejoin: "round",
+            strokeMiterlimit: 2,
+          }} version="1.1" xmlns="http://www.w3.org/2000/svg" stroke="#ad46ff" stroke-width="0.00032" transform="rotate(0)"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M15.988,1.988c-7.727,-0 -14,6.273 -14,14c-0,7.726 6.273,14 14,14c7.726,-0 14,-6.274 14,-14c-0,-7.727 -6.274,-14 -14,-14Zm-0,2c6.623,-0 12,5.377 12,12c-0,6.623 -5.377,12 -12,12c-6.623,-0 -12,-5.377 -12,-12c-0,-6.623 5.377,-12 12,-12Z"></path><path d="M11.976,11.992l-2.976,-0c-1.657,-0 -3,1.343 -3,3l0,2.023c0,1.657 1.343,3 3,3c0,-0 2.976,-0 2.976,-0c-0,-0 -0,2.998 -0,2.998c-0,1.657 1.343,3 3,3l2.023,0c1.657,0 3,-1.343 3,-3c-0,0 -0,-2.998 -0,-2.998c-0,-0 3.001,-0 3.001,-0c1.657,-0 3,-1.343 3,-3l-0,-2.023c-0,-1.657 -1.343,-3 -3,-3c-0,-0 -3.001,-0 -3.001,-0c-0,-0 -0,-2.953 -0,-2.953c-0,-1.657 -1.343,-3 -3,-3l-2.023,-0c-1.657,-0 -3,1.343 -3,3l-0,2.953Zm1,2c0.552,-0 1,-0.448 1,-1l-0,-3.953c-0,-0.553 0.447,-1 1,-1c-0,-0 2.023,-0 2.023,-0c0.552,-0 1,0.447 1,1l-0,3.953c-0,0.552 0.447,1 1,1l4.001,-0c0.552,-0 1,0.447 1,1c0,-0 -0,2.023 -0,2.023c-0,0.552 -0.448,1 -1,1l-4.001,-0c-0.553,-0 -1,0.447 -1,1l-0,3.998c-0,0.553 -0.448,1 -1,1c-0,0 -2.023,0 -2.023,0c-0.553,0 -1,-0.447 -1,-1l-0,-3.998c-0,-0.553 -0.448,-1 -1,-1l-3.976,-0c-0.552,-0 -1,-0.448 -1,-1c-0,-0 0,-2.023 0,-2.023c0,-0.553 0.448,-1 1,-1l3.976,-0Z"></path></g></svg>
 
-      <div className="w-full bg-white flex justify-center">
-        <div className=" flex items-center h-18 px-4">
-          {/* Logo */}
-          <div className="ml-15 max-w-[190px] max-h-[190px] cursor-pointer">
-            <Image
-              src="https://www.epssura.com/files/home-2021/header-footer/logo_eps.png"
-              alt="epssuralogo"
-              width={200}   
-              height={60} 
-            />
-          </div>
-          <div className="flex gap-8 mr-7">
-            <a href="" className="ml-8 link-custom">
-              Ley de transparencia
-            </a>
-            <a href="" className="link-custom">
-              Preguntas frecuentes
-            </a>
-            <a href="" className="link-custom">
-              Escríbenos tus PQRS
-            </a>
-            <a href="" className="link-custom">
-              Canales de contacto
-            </a>
-            <a href="" className="link-custom">
-              Solicitar clave
-            </a>
-          </div>
-
-          <div className="flex items-center">
-            {/* <!-- Botón --> */}
-            <Link href="/login" passHref>
-              <button className="bg-[#0033A0] text-white font-bold px-6 py-2 rounded-full flex items-center gap-2 mr-4 cursor-pointer">
-                INICIAR SESIÓN
-                <svg
-                  width="14px"
-                  height="14px"
-                  viewBox="0 -0.5 17 17"
-                  version="1.1"
-                  xmlns="http://www.w3.org/2000/svg"
-                  //xmlns:xlink="http://www.w3.org/1999/xlink"
-                  className="si-glyph si-glyph-triangle-down"
-                  fill="#000000"
-                >
-                  <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-                  <g
-                    id="SVGRepo_tracerCarrier"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  ></g>
-                  <g id="SVGRepo_iconCarrier">
-                    {" "}
-                    <title>1237</title> <defs> </defs>{" "}
-                    <g
-                      stroke="none"
-                      strokeWidth="1"
-                      fill="none"
-                      fillRule="evenodd"
-                    >
-                      {" "}
-                      <path
-                        d="M10.106,12.69 C9.525,13.27 8.584,13.27 8.002,12.69 L1.561,6.246 C0.979,5.665 0.722,4.143 2.561,4.143 L15.549,4.143 C17.45,4.143 17.131,5.664 16.549,6.246 L10.106,12.69 L10.106,12.69 Z"
-                        fill="#FFFFFF"
-                        className="si-glyph-fill"
-                      >
-                        {" "}
-                      </path>{" "}
-                    </g>{" "}
-                  </g>
-                </svg>
-              </button>
-            </Link>
-            {/* <!-- Icono lupa --> */}
-            <div className="w-10 h-10 flex items-center justify-center border border-[#EDEDED] rounded-full cursor-pointer">
-              {/* <!-- Usando Heroicons (SVG lupa) --> */}
-              <svg
-                viewBox="0 0 22 22"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                stroke="#0033A0"
-              >
-                <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-                <g
-                  id="SVGRepo_tracerCarrier"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                ></g>
-                <g id="SVGRepo_iconCarrier">
-                  {" "}
-                  <path
-                    d="M19.9604 11.4802C19.9604 13.8094 19.0227 15.9176 17.5019 17.4512C16.9332 18.0247 16.2834 18.5173 15.5716 18.9102C14.3594 19.5793 12.9658 19.9604 11.4802 19.9604C6.79672 19.9604 3 16.1637 3 11.4802C3 6.79672 6.79672 3 11.4802 3C16.1637 3 19.9604 6.79672 19.9604 11.4802Z"
-                    stroke="#0033A0"
-                    strokeWidth="2"
-                  ></path>{" "}
-                  <path
-                    d="M18.1553 18.1553L21.8871 21.8871"
-                    stroke="#0033A0"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                  ></path>{" "}
-                </g>
-              </svg>
+          <div className="flex flex-col leading-tight">
+            <div>
+              <span className="text-purple-500 font-semibold text-xl">Clínica </span>
+              <span className="text-green-500 font-semibold text-xl">Médica</span>
             </div>
+            <span className="text-gray-400 text-sm">Medicamentos y citas</span>
           </div>
         </div>
+
+        {/* Menú */}
+        <nav className="flex items-center space-x-8 text-sm font-medium">
+          <a href="#" className="text-purple-500">INICIO</a>
+          <a href="#" className="text-gray-700 hover:text-purple-500">ACERCA DE</a>
+          <a href="#" className="text-gray-700 hover:text-purple-500">DEPARTAMENTOS</a>
+          <a href="#" className="text-gray-700 hover:text-purple-500">SEGURO</a>
+          <a href="#" className="text-gray-700 hover:text-purple-500">CONTACTO</a>
+        </nav>
+
+        {/* Botón de usuario */}
+        <button className="flex items-center space-x-1 text-purple-500 hover:text-purple-600">
+          <svg width="24px" height="24px" viewBox="0 0 24.00 24.00" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <circle opacity="0.5" cx="12" cy="9" r="3" stroke="#ad46ff" stroke-width="1.5"></circle> <circle cx="12" cy="12" r="10" stroke="#ad46ff" stroke-width="1.5"></circle> <path opacity="0.5" d="M17.9691 20C17.81 17.1085 16.9247 15 11.9999 15C7.07521 15 6.18991 17.1085 6.03076 20" stroke="#ad46ff" stroke-width="1.5" stroke-linecap="round"></path> </g></svg>
+          <span>Entrar</span>
+        </button>
       </div>
-
-      {/* HeaderAzul */}
-      <div className="w-full bg-[#08a4e4]">
-        <div className="max-w-[1200px] mx-auto flex items-center justify-between px-4 h-[40px] text-white font-bold">
-          {/* Logo o título */}
-          <div className="tracking-wide text-md">
-            EPS
-          </div>
-
-          {/* Menú de navegación */}
-          <nav className="hidden md:flex items-center gap-6 lg:gap-8 h-full">
-            {menuItems.map((item) => (
-              <Link
-                key={item.label}
-                href={item.href}
-                className="group relative flex items-center justify-center text-xs sm:text-sm text-white h-full"
-              >
-                {item.label}
-
-                {/* Línea animada */}
-                <div
-                  className="
-             absolute
-            bottom-0
-            left-0
-            h-[0.5px]
-            w-full
-            bg-white
-            origin-center
-            scale-x-0
-            scale-y-100      /* ✅ mantiene el alto en 1px */
-            transition-transform
-            duration-300
-            group-hover:scale-x-100
-            "
-                />
-              </Link>
-            ))}
-          </nav>
-        </div>
-      </div>
-
-
     </header>
   );
 }
