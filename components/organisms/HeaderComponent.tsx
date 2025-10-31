@@ -51,8 +51,8 @@ export default function HeaderComponent() {
 
           <div className="flex flex-col leading-tight">
             <div>
-              <span className="text-purple-500 font-semibold text-xl">Clínica </span>
-              <span className="text-green-500 font-semibold text-xl">Médica</span>
+              <span className="text-purple-500 font-semibold text-xl">Medici</span>
+              <span className="text-green-500 font-semibold text-xl">Col</span>
             </div>
             <span className="text-gray-400 text-sm">Medicamentos y citas</span>
           </div>
