@@ -56,12 +56,12 @@ const ImageCarousel: React.FC = () => {
 
   useEffect(() => {
     resetTimeout();
-     timeoutRef.current = setTimeout(nextSlide, 10000);
+    timeoutRef.current = setTimeout(nextSlide, 10000);
     return resetTimeout;
   }, [currentIndex]);
 
   return (
-    <div className="w-full  mx-auto relative h-[420px] overflow-hidden group">
+    <div className="w-full  mx-auto relative h-[600px] overflow-hidden group">
       <div
         className="flex h-full transition-transform duration-700 ease-in-out"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
@@ -74,26 +74,31 @@ const ImageCarousel: React.FC = () => {
               backgroundImage: `linear-gradient(to bottom, rgba(24,23,23,0.38), rgb(0,0,0)), url(${item.img})`,
             }}
           >
-            {/* Contenedor del texto */}
-            <div className="text-left text-white p-6 absolute top-15   left-1/4 transform -translate-x-1/6  space-x-2  max-w-[600px]">
-              <h1 className={item.class}>
-                {item.text.split("-").map((line, idx) => (
-                  <span key={idx} className="block leading-[1.2]">
-                    {line}
-                  </span>
-                ))}
-              </h1>
 
-              {item.button && (
-                <button className="px-7 py-1 rounded-full border-white border-2 transition-all font-bold text-[15px] cursor-pointer">
-                  {item.button}
-                </button>
-              )}
-            </div>
           </div>
         ))}
       </div>
 
+
+      {/* 🟩 Tarjetas sobrepuestas */}
+      <div className="absolute left-1/2 top-[80%] -translate-x-1/2 -translate-y-4/5 flex gap-6 z-20">
+        {[
+          { title: "Cardiología", text: "Párrafo. Haz clic aquí para agregar tu texto y editar. Permite que tus usuarios te conozcan." },
+          { title: "Neurología", text: "Párrafo. Haz clic aquí para agregar tu texto y editar. Permite que tus usuarios te conozcan." },
+          { title: "Ortopedia", text: "Párrafo. Haz clic aquí para agregar tu texto y editar. Permite que tus usuarios te conozcan." },
+        ].map((card, idx) => (
+          <div
+            key={idx}
+            className="bg-green-600/30 text-white p-6 w-72 shadow-lg backdrop-blur-sm"
+          >
+            <h3 className="text-lg font-semibold mb-2">{card.title}</h3>
+            <p className="text-sm mb-4">{card.text}</p>
+            <button className="bg-green-700 hover:bg-green-800 text-white px-4 py-2 text-sm rounded transition">
+              Leer más
+            </button>
+          </div>
+        ))}
+      </div>
       {/* Botones de navegación del carrusel */}
       {/* Flecha izquierda */}
       <div className="absolute inset-y-0 left-0 flex items-center text-[#C2C2C2]">
@@ -158,60 +163,6 @@ const ImageCarousel: React.FC = () => {
             </g>
           </svg>
         </button>
-      </div>
-
-      {/* Indicadores de navegación */}
-      <div className="absolute bottom-30 left-1/4 transform -translate-x-3/4 flex space-x-2 gap-1">
-        {items.map((_, idx) => (
-          <div
-            key={idx}
-            className={`w-2.5 h-2.5 rounded-full cursor-pointer transition-all duration-300 ${
-              currentIndex === idx ? "bg-[#049ad3] scale-110" : "bg-gray-400"
-            }`}
-            onClick={() => setCurrentIndex(idx)}
-          />
-        ))}
-      </div>
-      {/* Opciones a un clic */}
-      <div className="absolute bottom-0 left-1/2  -translate-x-2/4  space-x-20 w-[59%]">
-        <div className="w-full text-white">
-          <div className="  items-center py-4">
-            {/* Título con líneas */}
-            <div className="flex items-center w-full justify-center mb-3">
-              <div className="flex-1 border-t-2 border-white"></div>
-              <span className="px-1 text-[18px] font-semibold mb-1">
-                OPCIONES A UN CLIC
-              </span>
-              <div className="flex-1 border-t-2 border-white"></div>
-            </div>
-
-            {/* Opciones */}
-            <div className="flex flex-wrap justify-center gap-6 text-sm">
-              <div className="flex flex-wrap justify-center text-sm divide-x divide-gray-500">
-                <div className="flex items-center gap-2 px-4 cursor-pointer hover:text-[#08a4e4] transition">
-                  <span className="w-4 h-4">📱</span>
-                  <span>SERVICIOS A UN CLIC</span>
-                </div>
-                <div className="flex items-center gap-2 px-4 cursor-pointer hover:text-[#08a4e4] transition">
-                  <span className="w-4 h-4">💳</span>
-                  <span>MEDIOS DE PAGO</span>
-                </div>
-                <div className="flex items-center gap-2 px-4 cursor-pointer hover:text-[#08a4e4] transition">
-                  <span className="w-4 h-4">🖱️</span>
-                  <span>TURNO VIRTUAL</span>
-                </div>
-                <div className="flex items-center gap-2 px-4 cursor-pointer hover:text-[#08a4e4] transition">
-                  <span className="w-4 h-4">📋</span>
-                  <span>DIRECTORIO MÉDICO</span>
-                </div>
-                <div className="flex items-center gap-2 px-4 cursor-pointer hover:text-[#08a4e4] transition">
-                  <span className="w-4 h-4">👤</span>
-                  <span>CERTIFICADO DE DISCAPACIDAD</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );
