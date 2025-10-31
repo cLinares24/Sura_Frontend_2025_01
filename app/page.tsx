@@ -1,7 +1,7 @@
 import SuraMainCarrousel from "@/components/organisms/SuraMainCarrousel";
 import SuraPlataform from "@/components/organisms/SuraPlataform";
 import Image from "next/image";
-import Services from "@/components/organisms/OneClickServices";
+import Appointment from "@/components/organisms/Appointment";
 import Affiliations from "@/components/organisms/Affiliations";
 import DontMissIt from "@/components/organisms/DontMissItLinio";
 import RenewYourHome from "@/components/organisms/RenewYourHome";
@@ -14,8 +14,9 @@ export default function Home() {
   return (
     <>
       <SuraMainCarrousel />
+
+      <Appointment />
       <SuraPlataform />
-      <Services />
       <Affiliations />
       <Footer />
     </>
