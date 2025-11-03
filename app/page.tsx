@@ -1,8 +1,9 @@
-import SuraMainCarrousel from "@/components/organisms/SuraMainCarrousel";
-import SuraPlataform from "@/components/organisms/SuraPlataform";
+import MainCarrousel from "@/components/organisms/MainCarrousel";
+import CaringYourHealth from "@/components/organisms/CaringYourHealth";
 import Image from "next/image";
 import Appointment from "@/components/organisms/Appointment";
-import Affiliations from "@/components/organisms/Affiliations";
+import Bulletin from "@/components/organisms/Bulletin";
+
 import DontMissIt from "@/components/organisms/DontMissItLinio";
 import RenewYourHome from "@/components/organisms/RenewYourHome";
 import DownCategories from "@/components/organisms/DownCategoriesLinio";
@@ -13,11 +14,10 @@ import Footer from "@/components/organisms/Footer";
 export default function Home() {
   return (
     <>
-      <SuraMainCarrousel />
-
+      <MainCarrousel />
       <Appointment />
-      <SuraPlataform />
-      <Affiliations />
+      <CaringYourHealth />
+      <Bulletin />
       <Footer />
     </>
   );

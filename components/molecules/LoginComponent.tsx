@@ -3,23 +3,24 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginDTO } from "../../interfaces/login";
-import { loginScheme } from "../../schemas/login";
+import { qaSchema } from "../../schemas/qa";
 import { loginService } from "../../libs/authService";
 import Image from "next/image";
 import InputComponents from "../atoms/InputComponents";
 import Link from "next/link";
 import PasswordWithPad from "../atoms/PasswordWithPad";
+import { QADTO } from "@/interfaces/products/qa";
 
 export default function LoginComponent() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginDTO>({
-    resolver: zodResolver(loginScheme),
+  } = useForm<QADTO>({
+    resolver: zodResolver(qaSchema),
   });
 
-  const onSubmit: SubmitHandler<LoginDTO> = (data) => {
+  const onSubmit: SubmitHandler<QADTO> = (data) => {
     loginService(data)
       .then((info) => {
         localStorage.setItem("token", info.access_token);

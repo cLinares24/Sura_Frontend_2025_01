@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import CardCarrousel from "../molecules/CardsCarrouselComponent";
 import {
   MousePointerClick,
   CreditCard,
@@ -10,35 +11,39 @@ import {
 
 const items = [
   {
-    img: "https://www.epssura.com/files/home-2021/img/foro-17-septiembre.jpg",
-    alt: "Logo EPS Sura",
-    text: "Hablemos de prevención del suicidio: botiquín de primeros auxilios en salud mental. - Conéctate a nuestro foro en vivo este miércoles 17 de septiembre a las 6:00 p. m.",
-    button: "INGRESA",
-    class: "font-bold text-[18px] mb-5",
+    img: "https://www.elhospital.com/uploads/news-pictures/pphoto-1033.jpg",
+    alt: "Cardiologia",
   },
   {
-    img: "https://www.epssura.com/files/home-2021/img/banner-fraude-ginecologia-junio-2025.png",
-    alt: "Imagen salud",
-    text: "Ninguna persona o institución de salud te va a solicitar en nombre de SURA, mostrar tus partes íntimas en una videollamada. Si te lo piden, ¡no lo hagas!",
-    class: "font-bold text-[18px] mb-5 mt-5",
+    img: "https://ismet.es/wp-content/uploads/2023/07/Sin-titulo-1-770x400.jpg",
+    alt: "Neurologia",
   },
   {
-    img: "https://www.epssura.com/files/home-2021/img/banner-farmadomicilios.png",
-    alt: "Imagen afiliados",
-    text: "Farmadomicilios - La mejor opción para solicitar tus medicamentos sin filas ni desplazamientos.",
-    button: "INGRESA AQUÍ",
-    class: "font-bold text-[24px] mb-5",
+    img: "https://www.clinicadelnorte.org/wp-content/uploads/2022/01/asian-woman-patient-with-bandage-compression-knee-brace-support-injury-on-the-bed-in-nursing-hospital-healthcare-and-medical-support-768x513.jpg",
+    alt: "Ortopedia",
   },
   {
-    img: "https://www.epssura.com/files/home-2021/img/banner-como-reclamar-los-medicamentos-2024.jpg",
-    alt: "Imagen afiliados",
-    text: "¿Cómo reclamar los medicamentos que te ordena tu médico?",
-    button: "AQUÍ TE CONTAMOS",
-    class: "font-bold text-[24px] mb-5",
+    img: "https://magnetosur.com/wp-content/uploads/2021/11/Que-diferencias-existen-entre-la-medicina-general-y-la-medicina-interna.jpg",
+    alt: "Medicina General",
+  },
+];
+const cards = [
+  {
+    title: "Cardiología",
+    text: "Párrafo. Haz clic aquí para agregar tu texto y editar. Permite que tus usuarios te conozcan.",
+  },
+  {
+    title: "Neurología",
+    text: "Párrafo. Haz clic aquí para agregar tu texto y editar. Permite que tus usuarios te conozcan.",
+  },
+  {
+    title: "Ortopedia",
+    text: "Párrafo. Haz clic aquí para agregar tu texto y editar. Permite que tus usuarios te conozcan.",
   },
 ];
 
-const ImageCarousel: React.FC = () => {
+
+const MainCarrousel: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -82,21 +87,8 @@ const ImageCarousel: React.FC = () => {
 
       {/* 🟩 Tarjetas sobrepuestas */}
       <div className="absolute left-1/2 top-[80%] -translate-x-1/2 -translate-y-4/5 flex gap-6 z-20">
-        {[
-          { title: "Cardiología", text: "Párrafo. Haz clic aquí para agregar tu texto y editar. Permite que tus usuarios te conozcan." },
-          { title: "Neurología", text: "Párrafo. Haz clic aquí para agregar tu texto y editar. Permite que tus usuarios te conozcan." },
-          { title: "Ortopedia", text: "Párrafo. Haz clic aquí para agregar tu texto y editar. Permite que tus usuarios te conozcan." },
-        ].map((card, idx) => (
-          <div
-            key={idx}
-            className="bg-[#6DCCA3]/70 text-white p-6 w-72 shadow-lg backdrop-blur-sm"
-          >
-            <h3 className="text-lg font-semibold mb-2">{card.title}</h3>
-            <p className="text-sm mb-4">{card.text}</p>
-            <button className="bg-[#2A7957] hover:bg-green-800 text-white px-4 py-2 text-sm rounded transition">
-              Leer más
-            </button>
-          </div>
+        {cards.map((card, idx) => (
+          <CardCarrousel key={idx} title={card.title} text={card.text} />
         ))}
       </div>
       {/* Botones de navegación del carrusel */}
@@ -168,4 +160,4 @@ const ImageCarousel: React.FC = () => {
   );
 };
 
-export default ImageCarousel;
+export default MainCarrousel;
