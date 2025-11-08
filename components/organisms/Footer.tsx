@@ -7,7 +7,7 @@ const Footer = () => {
   return (
     <footer className="w-full bg-[#6dcca3] px-6 py-10">
       {/* Logo principal arriba */}
-      <div className="mb-3">
+      <div className="">
         <div className="flex items-center space-x-2">
           {/* Icono tipo ECG */}
           <svg fill="#ffffffff" width="32px" height="32px" viewBox="0 0 32 32" style={{
@@ -30,20 +30,15 @@ const Footer = () => {
       {/* Contenedor inferior: columna delgada izquierda + contenido */}
       <div className="max-w-[60%] mx-auto grid">
 
-            <ul className="space-y-1">
-              <li>CE0008 de 2020</li>
-              <li>Estados financieros</li>
-              <li>Normatividad</li>
-              <li>Corporativo</li>
-              <li>Nuestras oficinas</li>
-              <li>Trabaje con nosotros</li>
-              <li>Consulta de oportunidad</li>
-              <li>Indicadores de Salud</li>
-              <li>Línea ética</li>
-              <li>Participación ciudadana</li>
-              <li>Rendición de cuentas</li>
-              <li>Mapa del sitio</li>
-            </ul>
+        <ul className="grid grid-cols-3 justify-items text-white text-sm gap-y-2">
+          <li>© Camilo Linares y Jerónimo Gaviria</li>
+          <li>Términos y condiciones</li>
+          <li>Política de Privacidad</li>
+          <li>Tel: 6068844444</li>
+          <li>Universidad Autónoma de Manizales</li>
+        </ul>
+
+
       </div>
     </footer>
 

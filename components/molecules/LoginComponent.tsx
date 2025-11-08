@@ -3,24 +3,56 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginDTO } from "../../interfaces/login";
-import { qaSchema } from "../../schemas/qa";
+import { loginScheme } from "../../schemas/login";
 import { loginService } from "../../libs/authService";
 import Image from "next/image";
 import InputComponents from "../atoms/InputComponents";
+import ButtonComponent from "../atoms/ButtonComponent";
 import Link from "next/link";
-import PasswordWithPad from "../atoms/PasswordWithPad";
-import { QADTO } from "@/interfaces/products/qa";
 
 export default function LoginComponent() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<QADTO>({
-    resolver: zodResolver(qaSchema),
+  } = useForm<LoginDTO>({
+    resolver: zodResolver(loginScheme),
   });
 
-  const onSubmit: SubmitHandler<QADTO> = (data) => {
+  // Manejo de errores
+  const onErrors = () => {
+    const campos = Object.keys(errors);
+
+    if (campos.length === 0) {
+      alert("Por favor, ingrese los datos.");
+      return;
+    }
+
+    // Busca el primer mensaje disponible o usa un texto genérico
+    const primerError = errors[campos[0] as keyof typeof errors];
+    const mensaje = primerError?.message || "Por favor, ingrese los datos.";
+
+    alert(mensaje);
+  };
+
+
+  // onSubmit temporal
+  const onSubmit = (data: LoginDTO) => {
+    console.log("Formulario enviado:", data);
+    alert("Melo");
+    // Por ahora no hace nada más
+  };
+
+  /*
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginDTO>({
+    resolver: zodResolver(loginScheme),
+  });
+
+  const onSubmit: SubmitHandler<LoginDTO> = (data) => {
     loginService(data)
       .then((info) => {
         localStorage.setItem("token", info.access_token);
@@ -34,95 +66,80 @@ export default function LoginComponent() {
     console.log("Errores", errors);
     alert("Información incompleta");
   };
-
+*/
   return (
-    <div className="min-h-screen flex items-center justify-center bg-white">
-      <div className="w-full max-w-md bg-white shadow rounded-lg p-8">
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="w-[40%] bg-[#6DCCA3]/20 rounded-lg p-8 border border-[#6DCCA3]">
         {/* Logo */}
-        <div className="flex justify-center mb-4 max-w-[170px] h-14 relative mx-auto">
-          <Image
-            src="https://login.sura.com/media/svg/logo-sura.svg"
-            alt="Sura"
-            fill
-            className="object-contain"
-          />
-        </div>
+         <Link href="/../">
+          <div className="flex items-center cursor-pointer">
+            {/* Icono tipo ECG */}
+            <svg fill="#ad46ff" width="32px" height="32px" viewBox="0 0 32 32" style={{
+              fillRule: "evenodd",
+              clipRule: "evenodd",
+              strokeLinejoin: "round",
+              strokeMiterlimit: 2,
+            }} version="1.1" xmlns="http://www.w3.org/2000/svg" stroke="#ad46ff" strokeWidth="0.00032" transform="rotate(0)"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M15.988,1.988c-7.727,-0 -14,6.273 -14,14c-0,7.726 6.273,14 14,14c7.726,-0 14,-6.274 14,-14c-0,-7.727 -6.274,-14 -14,-14Zm-0,2c6.623,-0 12,5.377 12,12c-0,6.623 -5.377,12 -12,12c-6.623,-0 -12,-5.377 -12,-12c-0,-6.623 5.377,-12 12,-12Z"></path><path d="M11.976,11.992l-2.976,-0c-1.657,-0 -3,1.343 -3,3l0,2.023c0,1.657 1.343,3 3,3c0,-0 2.976,-0 2.976,-0c-0,-0 -0,2.998 -0,2.998c-0,1.657 1.343,3 3,3l2.023,0c1.657,0 3,-1.343 3,-3c-0,0 -0,-2.998 -0,-2.998c-0,-0 3.001,-0 3.001,-0c1.657,-0 3,-1.343 3,-3l-0,-2.023c-0,-1.657 -1.343,-3 -3,-3c-0,-0 -3.001,-0 -3.001,-0c-0,-0 -0,-2.953 -0,-2.953c-0,-1.657 -1.343,-3 -3,-3l-2.023,-0c-1.657,-0 -3,1.343 -3,3l-0,2.953Zm1,2c0.552,-0 1,-0.448 1,-1l-0,-3.953c-0,-0.553 0.447,-1 1,-1c-0,-0 2.023,-0 2.023,-0c0.552,-0 1,0.447 1,1l-0,3.953c-0,0.552 0.447,1 1,1l4.001,-0c0.552,-0 1,0.447 1,1c0,-0 -0,2.023 -0,2.023c-0,0.552 -0.448,1 -1,1l-4.001,-0c-0.553,-0 -1,0.447 -1,1l-0,3.998c-0,0.553 -0.448,1 -1,1c-0,0 -2.023,0 -2.023,0c-0.553,0 -1,-0.447 -1,-1l-0,-3.998c-0,-0.553 -0.448,-1 -1,-1l-3.976,-0c-0.552,-0 -1,-0.448 -1,-1c-0,-0 0,-2.023 0,-2.023c0,-0.553 0.448,-1 1,-1l3.976,-0Z"></path></g></svg>
+
+            <div className="flex flex-col leading-tight">
+              <div>
+                <span className="text-purple-500 font-semibold text-xl">Medici</span>
+                <span className="text-green-500 font-semibold text-xl">Col</span>
+              </div>
+            </div>
+          </div>
+        </Link>
 
         {/* Título */}
-        <h2 className="text-center text-2xl font-semibold">Iniciar sesión</h2>
-        <p className="text-center text-sm text-gray-500 mb-6">
-          EPS SURA
-        </p>
+        <h2 className="text-center text-2xl font-semibold mb-3">Iniciar sesión</h2>
+
 
         {/* Formulario */}
         <form
           onSubmit={handleSubmit(onSubmit, onErrors)}
           className="flex flex-col space-y-4"
         >
-          {/* Tipo de identificación */}
-          <div>
-            <label className="block text-sm text-gray-700 mb-1">
-              Tipo de identificación
-            </label>
-            <select
-              // {...register("tipoDocumento")}
-              className="w-full border border-gray-300 rounded-md px-3 py-2 focus:border-blue-600 outline-none"
-            >
-              <option value="">Seleccione...</option>
-              <option value="cc">Cédula de ciudadanía</option>
-              <option value="ce">Cédula de extranjería</option>
-              <option value="ti">Tarjeta de identidad</option>
-            </select>
-          </div>
-
-          {/* Número de identificación */}
+          {/* Correo */}
           <InputComponents
-            label="Número de identificación"
-            typeElement="text"
-            placeHolder="Ingresa tu número de identificación"
-            className="w-full border border-gray-300 rounded-md px-3 py-2 focus:border-blue-600 outline-none"
-            classLabel="block text-sm text-gray-700 mb-1"
-            registerName="user"
+            label="Correo electrónico*"
+            typeElement="email"
+            placeHolder="Ingresa tu correo electrónico"
+            className="w-full bg-transparent border-b border-black focus:border-[#0db26b] outline-none py-2 placeholder-gray-500 text-sm text-black"
+            classLabel="block text-md  text-black mb-1 font-semibold"
+            registerName="correo"
             register={register}
           />
 
-          {/* Contraseña */}
-          <PasswordWithPad
-            label="Contraseña"
-            registerName="password"
+          <InputComponents
+            label="Contraseña*"
+            typeElement="password"
+            placeHolder="Ingresa tu contraseña"
+            className="w-full bg-transparent border-b border-black focus:border-[#0db26b] outline-none py-2 placeholder-gray-500 text-sm text-black"
+            classLabel="block text-md text-black mb-1 font-semibold"
+            registerName="contrasena"
             register={register}
-            className="w-full border border-gray-300 rounded-md px-3 py-2 focus:border-blue-600 outline-none"
-            classLabel="block text-sm text-gray-700 mb-1"
           />
 
-          {/* ¿Olvidaste tu contraseña? */}
-          <div className="flex justify-between items-center text-sm">
-            <a href="#" className="text-blue-600 hover:underline">
-              ¿Has olvidado tu contraseña?
-            </a>
-          </div>
 
-          {/* Botón ingresar */}
-          <button
+          <ButtonComponent
+            label="Enviar"
             type="submit"
-            className="w-full bg-blue-800 hover:bg-blue-900 text-white py-3 rounded-full font-medium"
-          >
-            Iniciar sesión
-          </button>
+            className="w-full bg-[#9155a7] hover:bg-[#8538a1] text-white py-2 rounded- font-medium"
+          />
         </form>
 
         {/* Crear cuenta */}
         <p className="text-center text-sm mt-6">
-          ¿Aún no tienes una cuenta?{" "}
-          <Link href="/register" className="text-blue-600 hover:underline font-medium">
-            Crear una cuenta
+          ¿No tienes cuenta?{" "}
+          <Link href="/register" className="text-[#00B05D] hover:underline font-medium">
+            Regístrate
           </Link>
         </p>
       </div>
 
       {/* Footer */}
-      <div className="absolute bottom-2 text-xs text-gray-500 text-center w-full mt-4">
-        © 2025 Suramericana S.A &nbsp; | &nbsp;
+      <div className="absolute bottom-2 text-xs text-gray-500 text-center w-full">
+        © 2025 MediciCol S.A &nbsp; | &nbsp;
         <a href="#" className="hover:underline">
           Ayuda
         </a>{" "}

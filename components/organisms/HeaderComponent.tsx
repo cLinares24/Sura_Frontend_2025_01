@@ -1,6 +1,5 @@
 "use client";
 
-import SuraLogin from "@/app/(webpage)/login/page";
 import React, { useState } from "react";
 import Link from "next/link"
 import Image from "next/image";
@@ -28,9 +27,7 @@ export default function HeaderComponent() {
       .toLowerCase()
       .replace(/\s+/g, "-");
 
-  if (currentView === "login") {
-    return <SuraLogin />;
-  }
+
   return (
     <header className="sticky top-0 w-full z-50 bg-white shadow-md">
       {/* Barra Morada */}
@@ -78,10 +75,52 @@ export default function HeaderComponent() {
         </nav>
 
         {/* Botón de usuario */}
-        <button className="flex items-center space-x-1 text-purple-500 hover:text-purple-600">
-          <svg width="24px" height="24px" viewBox="0 0 24.00 24.00" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <circle opacity="0.5" cx="12" cy="9" r="3" stroke="#ad46ff" strokeWidth="1.5"></circle> <circle cx="12" cy="12" r="10" stroke="#ad46ff" strokeWidth="1.5"></circle> <path opacity="0.5" d="M17.9691 20C17.81 17.1085 16.9247 15 11.9999 15C7.07521 15 6.18991 17.1085 6.03076 20" stroke="#ad46ff" strokeWidth="1.5" strokeLinecap="round"></path> </g></svg>
-          <span>Entrar</span>
-        </button>
+        <div className="relative inline-block text-left">
+          {/* Botón */}
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="flex items-center space-x-1 text-purple-500 hover:text-purple-600"
+          >
+            <svg width="24px" height="24px" viewBox="0 0 24.00 24.00" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <circle opacity="0.5" cx="12" cy="9" r="3" stroke="#ad46ff" strokeWidth="1.5"></circle> <circle cx="12" cy="12" r="10" stroke="#ad46ff" strokeWidth="1.5"></circle> <path opacity="0.5" d="M17.9691 20C17.81 17.1085 16.9247 15 11.9999 15C7.07521 15 6.18991 17.1085 6.03076 20" stroke="#ad46ff" strokeWidth="1.5" strokeLinecap="round"></path> </g></svg>
+            <span>Entrar</span>
+          </button>
+
+          {/* Menú desplegable */}
+          {isMenuOpen && (
+            <div
+              className="absolute right-0 top-full mt-2 w-56 shadow-lg bg-white focus:outline-none z-50 rounded-lg"
+              role="menu"
+              aria-orientation="vertical"
+              aria-labelledby="menu-button"
+            >
+              <div className="py-1" role="none">
+                <Link
+                  href="/login"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Inicia sesión
+                </Link>
+
+                <Link
+                  href="/register"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Regístrate
+                </Link>
+
+                <Link
+                  href="/account"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Mi cuenta
+                </Link>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </header>
   );

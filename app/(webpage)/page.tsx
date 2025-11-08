@@ -1,6 +1,9 @@
 
-export default function page() {
+import RegisterComponent from "@/components/molecules/LoginComponent";
+
+export default function Home() {
   return (
-    <div>page</div>
-  )
+    <><RegisterComponent />
+    </>
+  );
 }
