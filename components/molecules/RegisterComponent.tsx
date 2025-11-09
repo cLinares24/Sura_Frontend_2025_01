@@ -2,71 +2,41 @@
 
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { LoginDTO } from "../../interfaces/login";
-import { loginScheme } from "../../schemas/login";
-import { loginService } from "../../libs/authService";
-import Image from "next/image";
+import Swal from "sweetalert2";
+import { registerSchema } from "../../schemas/register";
+import { RegisterDTO } from "../../interfaces/user";
 import InputComponents from "../atoms/InputComponents";
 import ButtonComponent from "../atoms/ButtonComponent";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function RegisterComponent() {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginDTO>({
-    resolver: zodResolver(loginScheme),
+  } = useForm<RegisterDTO>({
+    resolver: zodResolver(registerSchema),
   });
 
-  // Manejo de errores
-  const onErrors = () => {
-    const campos = Object.keys(errors);
+ const onSubmit: SubmitHandler<RegisterDTO> = async (data) => {
+  console.log("Formulario enviado:", data);
 
-    if (campos.length === 0) {
-      alert("Por favor, ingrese los datos.");
-      return;
-    }
-
-    // Busca el primer mensaje disponible o usa un texto genérico
-    const primerError = errors[campos[0] as keyof typeof errors];
-    const mensaje = primerError?.message || "Por favor, ingrese los datos.";
-
-    alert(mensaje);
-  };
-
-
-  // onSubmit temporal
-  const onSubmit = (data: LoginDTO) => {
-    console.log("Formulario enviado:", data);
-    alert("Melo");
-    // Por ahora no hace nada más
-  };
-
-  /*
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<LoginDTO>({
-    resolver: zodResolver(loginScheme),
+  await Swal.fire({
+    title: "¡Registro exitoso!",
+    text: "Tu cuenta ha sido creada correctamente.",
+    icon: "success",
+    confirmButtonColor: "#ad46ff",
+    confirmButtonText: "Aceptar",
   });
-
-  const onSubmit: SubmitHandler<LoginDTO> = (data) => {
-    loginService(data)
-      .then((info) => {
-        localStorage.setItem("token", info.access_token);
-      })
-      .catch((e) => {
-        console.log("Error en solicitud");
-      });
-  };
+  router.push("/login");
+};
 
   const onErrors = () => {
-    console.log("Errores", errors);
-    alert("Información incompleta");
+    const primerError = Object.values(errors)[0];
   };
-*/
+
   return (
     <div className="min-h-screen flex items-center justify-center">
       <div className=" w-[45%] bg-[#6DCCA3]/20 rounded-lg p-8 border border-[#6DCCA3]">
@@ -110,6 +80,9 @@ export default function RegisterComponent() {
               registerName="cedula"
               register={register}
             />
+            {errors.cedula && (
+              <span className="text-red-500 text-xs">{errors.cedula.message}</span>
+            )}
           </div>
 
           <div className="flex flex-col">
@@ -127,6 +100,9 @@ export default function RegisterComponent() {
                 { value: "F", label: "Femenino" },
               ]}
             />
+            {errors.genero && (
+              <span className="text-red-500 text-xs">{errors.genero.message}</span>
+            )}
           </div>
 
 
@@ -138,9 +114,12 @@ export default function RegisterComponent() {
               placeHolder="Ingresa tu nombre completo"
               className="w-full bg-transparent border-b border-black focus:border-[#0db26b] outline-none py-2 placeholder-gray-500 text-sm text-black"
               classLabel="block text-md text-black mb-1 font-semibold"
-              registerName="cedula"
+              registerName="nombre"
               register={register}
             />
+            {errors.nombre && (
+              <span className="text-red-500 text-xs">{errors.nombre.message}</span>
+            )}
           </div>
 
           <div className="flex flex-col">
@@ -153,6 +132,9 @@ export default function RegisterComponent() {
               registerName="correo"
               register={register}
             />
+            {errors.correo && (
+              <span className="text-red-500 text-xs">{errors.correo.message}</span>
+            )}
           </div>
 
 
@@ -168,6 +150,9 @@ export default function RegisterComponent() {
               registerName="contrasena"
               register={register}
             />
+            {errors.contrasena && (
+              <span className="text-red-500 text-xs">{errors.contrasena.message}</span>
+            )}
           </div>
 
           <div className="flex flex-col">
@@ -180,7 +165,14 @@ export default function RegisterComponent() {
               registerName="contrasena2"
               register={register}
             />
+            {errors.contrasena2 && (
+              <span className="text-red-500 text-xs">{errors.contrasena2.message}</span>
+            )}
           </div>
+
+
+          {/* Campo oculto que siempre envía "U" */}
+          <input type="hidden" {...register("rol")} value="U" />
 
           {/* Botón en toda la fila */}
           <div className="col-span-2">

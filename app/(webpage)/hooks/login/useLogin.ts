@@ -1,6 +1,6 @@
 import { useForm, SubmitHandler } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { LoginDTO } from "@/interfaces/login"
+import { LoginDTO } from "@/interfaces/user"
 import { loginScheme } from "@/schemas/login"
 import { loginService } from "@/libs/authService"
 import { useAuth } from "../../context/AuthContext"

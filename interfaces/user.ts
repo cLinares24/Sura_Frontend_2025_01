@@ -1,12 +1,15 @@
 export interface UserDTO {
-  name: string
-  email: string
-  address: string
-  phone: string
-  password: string
+  cedula: string;
+  genero: "M" | "F";
+  nombre: string;
+  correo: string;
+  contrasena: string;
+  contrasena2: string;
+  rol: "A" | "U";
 }
 
-export interface UserDAO extends UserDTO {
-  id_user: number | string
-  state_id: number | string
-}
+// Login solo necesita correo y contraseña
+export type LoginDTO = Pick<UserDTO, "correo" | "contrasena">;
+
+// Registro usa todos los campos del usuario
+export type RegisterDTO = UserDTO;

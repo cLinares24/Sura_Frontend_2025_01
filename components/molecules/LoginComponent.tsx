@@ -2,15 +2,18 @@
 
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { LoginDTO } from "../../interfaces/login";
+import Swal from "sweetalert2";
+import { LoginDTO } from "../../interfaces/user";
 import { loginScheme } from "../../schemas/login";
 import { loginService } from "../../libs/authService";
 import Image from "next/image";
 import InputComponents from "../atoms/InputComponents";
 import ButtonComponent from "../atoms/ButtonComponent";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function LoginComponent() {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -19,59 +22,36 @@ export default function LoginComponent() {
     resolver: zodResolver(loginScheme),
   });
 
-  // Manejo de errores
-  const onErrors = () => {
-    const campos = Object.keys(errors);
-
-    if (campos.length === 0) {
-      alert("Por favor, ingrese los datos.");
-      return;
-    }
-
-    // Busca el primer mensaje disponible o usa un texto genérico
-    const primerError = errors[campos[0] as keyof typeof errors];
-    const mensaje = primerError?.message || "Por favor, ingrese los datos.";
-
-    alert(mensaje);
-  };
-
-
-  // onSubmit temporal
-  const onSubmit = (data: LoginDTO) => {
+  const onSubmit: SubmitHandler<LoginDTO> = async (data) => {
     console.log("Formulario enviado:", data);
-    alert("Melo");
-    // Por ahora no hace nada más
-  };
 
-  /*
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<LoginDTO>({
-    resolver: zodResolver(loginScheme),
-  });
+    const fakeToken = crypto.randomUUID(); 
 
-  const onSubmit: SubmitHandler<LoginDTO> = (data) => {
-    loginService(data)
-      .then((info) => {
-        localStorage.setItem("token", info.access_token);
-      })
-      .catch((e) => {
-        console.log("Error en solicitud");
-      });
+    // Guardar token en localStorage
+    localStorage.setItem("token", fakeToken);
+    localStorage.setItem("user", JSON.stringify({ correo: data.correo }));
+    localStorage.setItem("rol", JSON.stringify({ rol: "U" }));
+    // Mostrar alerta de éxito
+    await Swal.fire({
+      title: "¡Inicio de sesión exitoso! 🎉",
+      text: "Bienvenido a MediciCol.",
+      icon: "success",
+      confirmButtonColor: "#ad46ff",
+      confirmButtonText: "Continuar",
+    });
+
+    // Redirigir al inicio o dashboard
+    //router.push("/../");
   };
 
   const onErrors = () => {
-    console.log("Errores", errors);
-    alert("Información incompleta");
+    const primerError = Object.values(errors)[0];
   };
-*/
   return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="w-[40%] bg-[#6DCCA3]/20 rounded-lg p-8 border border-[#6DCCA3]">
         {/* Logo */}
-         <Link href="/../">
+        <Link href="/../">
           <div className="flex items-center cursor-pointer">
             {/* Icono tipo ECG */}
             <svg fill="#ad46ff" width="32px" height="32px" viewBox="0 0 32 32" style={{
@@ -100,25 +80,35 @@ export default function LoginComponent() {
           className="flex flex-col space-y-4"
         >
           {/* Correo */}
-          <InputComponents
-            label="Correo electrónico*"
-            typeElement="email"
-            placeHolder="Ingresa tu correo electrónico"
-            className="w-full bg-transparent border-b border-black focus:border-[#0db26b] outline-none py-2 placeholder-gray-500 text-sm text-black"
-            classLabel="block text-md  text-black mb-1 font-semibold"
-            registerName="correo"
-            register={register}
-          />
+          <div className="flex flex-col">
+            <InputComponents
+              label="Correo electrónico*"
+              typeElement="email"
+              placeHolder="Ingresa tu correo electrónico"
+              className="w-full bg-transparent border-b border-black focus:border-[#0db26b] outline-none py-2 placeholder-gray-500 text-sm text-black"
+              classLabel="block text-md text-black mb-1 font-semibold"
+              registerName="correo"
+              register={register}
+            />
+            {errors.correo && (
+              <span className="text-red-500 text-xs">{errors.correo.message}</span>
+            )}
+          </div>
 
-          <InputComponents
-            label="Contraseña*"
-            typeElement="password"
-            placeHolder="Ingresa tu contraseña"
-            className="w-full bg-transparent border-b border-black focus:border-[#0db26b] outline-none py-2 placeholder-gray-500 text-sm text-black"
-            classLabel="block text-md text-black mb-1 font-semibold"
-            registerName="contrasena"
-            register={register}
-          />
+          <div className="flex flex-col">
+            <InputComponents
+              label="Contraseña*"
+              typeElement="password"
+              placeHolder="Ingresa tu contraseña"
+              className="w-full bg-transparent border-b border-black focus:border-[#0db26b] outline-none py-2 placeholder-gray-500 text-sm text-black"
+              classLabel="block text-md text-black mb-1 font-semibold"
+              registerName="contrasena"
+              register={register}
+            />
+            {errors.contrasena && (
+              <span className="text-red-500 text-xs">{errors.contrasena.message}</span>
+            )}
+          </div>
 
 
           <ButtonComponent

@@ -5,7 +5,7 @@ import Image from "next/image";
 
 import InputComponents from "./../atoms/InputComponents";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { LoginDTO } from "../../interfaces/login";
+import { LoginDTO } from "../../interfaces/user";
 import { qaSchema } from "../../schemas/qa";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { loginService } from "../../libs/authService";
