@@ -6,26 +6,8 @@ import Image from "next/image";
 
 export default function HeaderComponent() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [currentView, setCurrentView] = useState("header");
-  const [isOpen, setIsOpen] = useState(false);
 
-  const menuItems = [
-    { label: "INICIO", href: "/" },
-    { label: "AFILIADOS", href: "/afiliados" },
-    { label: "EMPLEADORES", href: "/empleadores" },
-    { label: "INDEPENDIENTES", href: "/independientes" },
-    { label: "ASESORES COMERCIALES", href: "/asesores" },
-    { label: "PRESTADORES DE SERVICIO", href: "/prestadores" },
-    { label: "PAC", href: "/pac" },
-  ];
 
-  //const [activeCategory, setActiveCategory] = useState<keyof typeof categories>("Tecnología");
-  const slugify = (str: string) =>
-    str
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .toLowerCase()
-      .replace(/\s+/g, "-");
 
 
   return (
@@ -60,7 +42,7 @@ export default function HeaderComponent() {
           <Link href="/" className="text-purple-500">
             INICIO
           </Link>
-          <Link href="/acerca" className="text-gray-700 hover:text-purple-500">
+          <Link href="/specialities" className="text-gray-700 hover:text-purple-500">
             ACERCA DE
           </Link>
           <Link href="/departamentos" className="text-gray-700 hover:text-purple-500">
