@@ -5,9 +5,9 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className="w-full bg-[#6dcca3] px-6 py-10">
+    <footer className="w-full bg-[#6dcca3] px-6 py-3">
       {/* Logo principal arriba */}
-      <div className="">
+      
         <div className="flex items-center space-x-2">
           {/* Icono tipo ECG */}
           <svg fill="#ffffffff" width="32px" height="32px" viewBox="0 0 32 32" style={{
@@ -24,7 +24,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-      </div>
+  
 
 
       {/* Contenedor inferior: columna delgada izquierda + contenido */}
