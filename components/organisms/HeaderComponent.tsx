@@ -19,7 +19,8 @@ export default function HeaderComponent() {
       {/* Barra Blanca */}
       <div className="w-full max-w-7xl flex items-center justify-between h-17 px-6">
         {/* Logo */}
-        <div className="flex items-center space-x-2">
+        <Link href="/../">
+        <div className="flex items-center space-x-2 cursor-pointer">
           {/* Icono tipo ECG */}
           <svg fill="#ad46ff" width="32px" height="32px" viewBox="0 0 32 32" style={{
             fillRule: "evenodd",
@@ -36,7 +37,7 @@ export default function HeaderComponent() {
             <span className="text-gray-400 text-sm">Medicamentos y citas</span>
           </div>
         </div>
-
+          </Link>
         {/* Menú */}
         <nav className="flex items-center space-x-8 text-sm font-medium">
           <Link href="/" className="text-purple-500">
@@ -45,7 +46,7 @@ export default function HeaderComponent() {
           <Link href="/specialities" className="text-gray-700 hover:text-purple-500">
             ACERCA DE
           </Link>
-          <Link href="/departamentos" className="text-gray-700 hover:text-purple-500">
+          <Link href="/doctors" className="text-gray-700 hover:text-purple-500">
             DEPARTAMENTOS
           </Link>
           <Link href="/seguro" className="text-gray-700 hover:text-purple-500">

@@ -12,7 +12,6 @@ import { loginService } from "../../libs/authService";
 import { QADTO } from "@/interfaces/products/qa";
 import ButtonComponent from "../atoms/ButtonComponent";
 
-
 interface FormValues {
   nombre: string;
   email: string;
@@ -29,21 +28,20 @@ export default function Bulletin() {
   });
 
   // Manejo de errores
- const onErrors = () => {
-  const campos = Object.keys(errors);
+  const onErrors = () => {
+    const campos = Object.keys(errors);
 
-  if (campos.length === 0) {
-    alert("Por favor, ingrese los datos.");
-    return;
-  }
+    if (campos.length === 0) {
+      alert("Por favor, ingrese los datos.");
+      return;
+    }
 
-  // Busca el primer mensaje disponible o usa un texto genérico
-  const primerError = errors[campos[0] as keyof typeof errors];
-  const mensaje = primerError?.message || "Por favor, ingrese los datos.";
+    // Busca el primer mensaje disponible o usa un texto genérico
+    const primerError = errors[campos[0] as keyof typeof errors];
+    const mensaje = primerError?.message || "Por favor, ingrese los datos.";
 
-  alert(mensaje);
-};
-
+    alert(mensaje);
+  };
 
   // onSubmit temporal
   const onSubmit = (data: QADTO) => {
@@ -51,7 +49,6 @@ export default function Bulletin() {
     alert("Melo");
     // Por ahora no hace nada más
   };
-
 
   /*
 const onSubmit: SubmitHandler<LoginDTO> = (data) => {
@@ -65,7 +62,6 @@ const onSubmit: SubmitHandler<LoginDTO> = (data) => {
 };
 */
 
-
   return (
     <section className="bg-[#f2f2f2] py-10 w-full h-max-[650px]">
       <div className="mx-auto text-center mb-5">
@@ -75,7 +71,6 @@ const onSubmit: SubmitHandler<LoginDTO> = (data) => {
         <div className="border-t-2 border-[#ccd6ec] max-w-[60px] mx-auto"></div>
       </div>
       <div className="max-w-[800px] mx-auto items-center">
-
         <form
           onSubmit={handleSubmit(onSubmit, onErrors)}
           className="flex flex-col space-y-4"
@@ -112,15 +107,13 @@ const onSubmit: SubmitHandler<LoginDTO> = (data) => {
           />
 
           <ButtonComponent
-            label="Enviar"
             type="submit"
             className="w-full bg-[#9155a7] hover:bg-[#8538a1] text-white py-2 rounded- font-medium"
-          />
+          >
+            Enviar
+          </ButtonComponent>
         </form>
       </div>
     </section>
   );
 }
-
-
-

@@ -25,7 +25,7 @@ export default function LoginComponent() {
   const onSubmit: SubmitHandler<LoginDTO> = async (data) => {
     console.log("Formulario enviado:", data);
 
-    const fakeToken = crypto.randomUUID(); 
+    const fakeToken = crypto.randomUUID();
 
     // Guardar token en localStorage
     localStorage.setItem("token", fakeToken);
@@ -112,10 +112,12 @@ export default function LoginComponent() {
 
 
           <ButtonComponent
-            label="Enviar"
             type="submit"
-            className="w-full bg-[#9155a7] hover:bg-[#8538a1] text-white py-2 rounded- font-medium"
-          />
+            className="w-full bg-[#9155a7] hover:bg-[#8538a1] text-white py-2 rounded font-medium"
+          >
+            Enviar
+          </ButtonComponent>
+
         </form>
 
         {/* Crear cuenta */}

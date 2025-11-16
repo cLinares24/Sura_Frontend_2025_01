@@ -1,10 +1,10 @@
-import SpecialitiesComponent from "@/components/organisms/SpecialitiesComponent";
+import DoctorComponent from "@/components/organisms/DoctorComponent";
 import Footer from "@/components/organisms/Footer"
 
 export default function Home() {
   return (
     <>
-      <SpecialitiesComponent />
+      <DoctorComponent />
       <Footer />
     </>
   );

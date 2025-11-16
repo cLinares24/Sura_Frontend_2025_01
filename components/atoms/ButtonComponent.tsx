@@ -1,22 +1,26 @@
-"use client";
-
-interface ButtonComponentProps {
-  label: string;
+interface ButtonComponentsProps {
+  children: React.ReactNode;
+  onClick?: () => void;
   type?: "button" | "submit" | "reset";
-  className?: string;
+  className: string; // se lo envías tú al igual que InputComponents
+  disabled?: boolean;
 }
 
 export default function ButtonComponent({
-  label,
+  children,
+  onClick,
   type = "button",
-  className = "",
-}: ButtonComponentProps) {
+  className,
+  disabled = false,
+}: ButtonComponentsProps) {
   return (
     <button
       type={type}
-      className={`cursor-pointer transition-colors duration-300 ${className}`}
+      onClick={onClick}
+      disabled={disabled}
+      className={className}
     >
-      {label}
+      {children}
     </button>
   );
 }

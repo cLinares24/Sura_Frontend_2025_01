@@ -177,10 +177,10 @@ export default function RegisterComponent() {
           {/* Botón en toda la fila */}
           <div className="col-span-2">
             <ButtonComponent
-              label="Enviar"
               type="submit"
-              className="w-full bg-[#9155a7] hover:bg-[#8538a1] text-white py-2 rounded font-medium"
-            />
+              className="w-full bg-[#9155a7] hover:bg-[#8538a1] text-white py-2 rounded font-medium">
+                Enviar
+            </ButtonComponent>
           </div>
         </form>
 
