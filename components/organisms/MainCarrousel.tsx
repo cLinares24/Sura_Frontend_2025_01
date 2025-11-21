@@ -1,14 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import CardCarrousel from "../molecules/CardsCarrouselComponent";
-import {
-  MousePointerClick,
-  CreditCard,
-  Calendar,
-  BookOpen,
-  User,
-} from "lucide-react";
-
+import ButtonComponent from "../atoms/ButtonComponent";
 const items = [
   {
     img: "https://www.elhospital.com/uploads/news-pictures/pphoto-1033.jpg",
@@ -94,7 +87,7 @@ const MainCarrousel: React.FC = () => {
       {/* Botones de navegación del carrusel */}
       {/* Flecha izquierda */}
       <div className="absolute inset-y-0 left-0 flex items-center text-[#C2C2C2]">
-        <button
+        <ButtonComponent
           onClick={prevSlide}
           className="p-3 ml-2 rounded-full transition hover:text-white
                      opacity-100 -translate-x-12  group-hover:translate-x-0 duration-300"
@@ -121,12 +114,12 @@ const MainCarrousel: React.FC = () => {
               ></path>
             </g>
           </svg>
-        </button>
+        </ButtonComponent>
       </div>
 
       {/* Flecha derecha */}
       <div className="absolute inset-y-0 right-0 flex items-center text-[#C2C2C2]">
-        <button
+        <ButtonComponent
           onClick={nextSlide}
           className="p-3 ml-2 rounded-full transition hover:text-white
                      opacity-100 translate-x-12  group-hover:translate-x-0 duration-300"
@@ -154,7 +147,7 @@ const MainCarrousel: React.FC = () => {
               ></path>
             </g>
           </svg>
-        </button>
+        </ButtonComponent>
       </div>
     </div>
   );

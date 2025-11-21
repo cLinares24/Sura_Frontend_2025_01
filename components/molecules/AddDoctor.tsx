@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Swal from "sweetalert2";
+import ButtonComponent from "../atoms/ButtonComponent";
 
 interface AddDoctor {
   idEspecialidad: number;
@@ -42,7 +43,10 @@ export default function AgregarMedicoForm({
     }
 
     // Aquí luego harás un POST al backend con id_especialidad
-    console.log("Nuevo médico:", { ...formData, id_especialidad: idEspecialidad });
+    console.log("Nuevo médico:", {
+      ...formData,
+      id_especialidad: idEspecialidad,
+    });
 
     await Swal.fire({
       icon: "success",
@@ -92,19 +96,19 @@ export default function AgregarMedicoForm({
         />
 
         <div className="flex justify-end gap-3 mt-2">
-          <button
+          <ButtonComponent
             type="button"
             onClick={onClose}
             className="px-4 py-2 rounded-md text-gray-600 hover:bg-gray-200 transition text-sm"
           >
             Cancelar
-          </button>
-          <button
+          </ButtonComponent>
+          <ButtonComponent
             type="submit"
             className="px-5 py-2 rounded-md bg-[#9155A7] hover:bg-[#7e3e92] text-white text-sm"
           >
             Guardar
-          </button>
+          </ButtonComponent>
         </div>
       </form>
     </div>
