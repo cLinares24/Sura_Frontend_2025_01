@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import ConditionalHeader from "@/components/ConditionalHeader";
+import { SpecialitiesProvider } from "@/context/SpecialitiesContext";
+import { DoctorsProvider } from "@/context/DoctorsContext";
 
 export const metadata: Metadata = {
   title: "MediciCol - Inicio",
@@ -16,7 +18,11 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <ConditionalHeader />
+          <SpecialitiesProvider>
+        <DoctorsProvider>
         {children}
+        </DoctorsProvider>
+        </SpecialitiesProvider>
       </body>
     </html>
   );
