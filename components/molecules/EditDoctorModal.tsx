@@ -1,3 +1,4 @@
+"use client";
 import { Medico, useMedicos } from "@/context/DoctorsContext";
 import { useState } from "react";
 import { CalendarComponent } from "@/components/atoms/CalendarComponent";
@@ -46,7 +47,7 @@ export const EditDoctorModal = ({
               {es.nombre}
             </option>
           ))}
-        </select>x
+        </select>
 
         <CalendarComponent
           onAdd={(d) =>
