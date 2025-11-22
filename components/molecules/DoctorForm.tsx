@@ -1,42 +1,81 @@
 "use client";
-import { useState } from "react";
-import { useMedicos } from "@/context/DoctorsContext";
+
+import ButtonComponent from "../atoms/ButtonComponent";
+import InputComponents from "../atoms/InputComponents";
+import { useMedicoForm } from "@/hooks/useDoctorForm";
 
 export const MedicoForm = () => {
-  const { agregarMedico } = useMedicos();
-  const [form, setForm] = useState({
-    nombre: "",
-    correo: "",
-    cedula: "",
-    id_especialidad: 1,
-  });
-
+  const { register, handleSubmit, errors, onSubmit, onError } = useMedicoForm();
+  
   return (
-    <div className="p-4 bg-gray-100 rounded-xl space-y-2">
-      <h2 className="font-bold text-xl">Añadir Médico</h2>
+    <form
+      onSubmit={handleSubmit(onSubmit, onError)}
+      className="p-6 bg-white rounded-2xl shadow-lg border border-[#0db26b] space-y-4"
+    >
+      <h2 className="font-bold text-2xl text-[#0db26b]">Añadir Médico</h2>
 
-      <input
-        className="p-2 border w-full rounded"
-        placeholder="Nombre"
-        onChange={(e) => setForm({ ...form, nombre: e.target.value })}
+      {/* Nombre */}
+      <InputComponents
+        label=""
+        typeElement="text"
+        placeHolder="Nombre"
+        className="p-3 border border-gray-300 w-full rounded-xl focus:outline-none focus:border-[#0db26b] transition"
+        classLabel="block"
+        register={register}
+        registerName="nombre"
       />
-      <input
-        className="p-2 border w-full rounded"
-        placeholder="Correo"
-        onChange={(e) => setForm({ ...form, correo: e.target.value })}
-      />
-      <input
-        className="p-2 border w-full rounded"
-        placeholder="Cédula"
-        onChange={(e) => setForm({ ...form, cedula: e.target.value })}
-      />
+      {errors.nombre && (
+        <p className="text-red-500 text-sm">{errors.nombre.message}</p>
+      )}
 
-      <button
-        className="bg-purple-600 text-white w-full p-2 rounded-lg"
-        onClick={() => agregarMedico(form)}
+      {/* Cédula */}
+      <InputComponents
+        label=""
+        typeElement="text"
+        placeHolder="Cédula"
+        className="p-3 border border-gray-300 w-full rounded-xl focus:outline-none focus:border-[#0db26b] transition"
+        classLabel="block"
+        register={register}
+        registerName="cedula"
+      />
+      {errors.cedula && (
+        <p className="text-red-500 text-sm">{errors.cedula.message}</p>
+      )}
+
+      {/* Correo */}
+      <InputComponents
+        label=""
+        typeElement="text"
+        placeHolder="Correo"
+        className="p-3 border border-gray-300 w-full rounded-xl focus:outline-none focus:border-[#0db26b] transition"
+        classLabel="block"
+        register={register}
+        registerName="correo"
+      />
+      {errors.correo && (
+        <p className="text-red-500 text-sm">{errors.correo.message}</p>
+      )}
+
+      {/* Teléfono */}
+      <InputComponents
+        label=""
+        typeElement="text"
+        placeHolder="Teléfono"
+        className="p-3 border border-gray-300 w-full rounded-xl focus:outline-none focus:border-[#0db26b] transition"
+        classLabel="block"
+        register={register}
+        registerName="telefono"
+      />
+      {errors.telefono && (
+        <p className="text-red-500 text-sm">{errors.telefono.message}</p>
+      )}
+
+      <ButtonComponent
+        type="submit"
+        className="bg-[#0db26b] hover:bg-[#7d4690] text-white w-full p-3 rounded-xl font-semibold transition-all"
       >
         Agregar
-      </button>
-    </div>
+      </ButtonComponent>
+    </form>
   );
 };

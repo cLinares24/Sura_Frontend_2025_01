@@ -1,9 +1,8 @@
-import { useForm } from "react-hook-form"
-
 interface valuesSelect {
   value: string
   label: string
 }
+
 interface InputComponentsProps {
   label: string;
   typeElement: string;
@@ -12,7 +11,7 @@ interface InputComponentsProps {
   className: string;
   classLabel: string;
   registerName: string;
-  register: any; 
+  register: any;
 }
 
 export default function InputComponents({
@@ -24,14 +23,16 @@ export default function InputComponents({
   classLabel,
   registerName,
   register,
-}: InputComponentsProps) {
+  ...rest
+}: InputComponentsProps & React.InputHTMLAttributes<HTMLInputElement>) {
   return (
     <>
       <label className={classLabel}>{label}</label>
 
       {listValues?.length ? (
         <select
-          {...(register && registerName ? register(registerName) : {})}
+          {...(register && registerName ? register(registerName) : {})} // <-- AHORA PRIMERO
+          {...rest}                                                     // <-- LUEGO EL RESTO
           className={className}
         >
           {listValues.map((item) => (
@@ -42,7 +43,8 @@ export default function InputComponents({
         </select>
       ) : (
         <input
-          {...(register && registerName ? register(registerName) : {})}
+          {...(register && registerName ? register(registerName) : {})} // <-- PRIMERO
+          {...rest}                                                     // <-- DESPUÉS
           type={typeElement}
           placeholder={placeHolder}
           className={className}

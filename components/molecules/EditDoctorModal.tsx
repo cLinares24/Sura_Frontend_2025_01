@@ -2,6 +2,7 @@
 import { Medico, useMedicos } from "@/context/DoctorsContext";
 import { useState } from "react";
 import { CalendarComponent } from "@/components/atoms/CalendarComponent";
+import  ButtonComponent  from "@/components/atoms/ButtonComponent";
 
 export const EditDoctorModal = ({
   medico,
@@ -58,7 +59,7 @@ export const EditDoctorModal = ({
           }
         />
 
-        <button
+        <ButtonComponent
           className="bg-purple-600 text-white w-full p-2 rounded-lg"
           onClick={() => {
             editarMedico(editado);
@@ -66,10 +67,10 @@ export const EditDoctorModal = ({
           }}
         >
           Guardar Cambios
-        </button>
-        <button className="text-red-500 w-full" onClick={onClose}>
+        </ButtonComponent>
+        <ButtonComponent className="text-red-500 w-full" onClick={onClose}>
           Cancelar
-        </button>
+        </ButtonComponent>
       </div>
     </div>
   );

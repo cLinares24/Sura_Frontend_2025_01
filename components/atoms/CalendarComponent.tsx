@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import ButtonComponent from "./ButtonComponent";
 
 export const CalendarComponent = ({ onAdd }: { onAdd: (d: any) => void }) => {
   const [fecha, setFecha] = useState("");
@@ -34,7 +35,7 @@ export const CalendarComponent = ({ onAdd }: { onAdd: (d: any) => void }) => {
         onChange={(e) => setFin(e.target.value)}
       />
 
-      <button
+      <ButtonComponent
         className="bg-purple-600 text-white w-full p-2 rounded-lg hover:bg-purple-700"
         onClick={() => {
           if (!fecha || !inicio || !fin) return;
@@ -51,7 +52,7 @@ export const CalendarComponent = ({ onAdd }: { onAdd: (d: any) => void }) => {
         }}
       >
         Agregar
-      </button>
+      </ButtonComponent>
     </div>
   );
 };

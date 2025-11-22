@@ -1,6 +1,23 @@
 @import "tailwindcss";
 
 .link-custom {
-    font-family: sans-serif;
+  font-family: sans-serif;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
   }
-  
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(-10px) scale(0.98);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}

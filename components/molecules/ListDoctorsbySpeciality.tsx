@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import DoctorCards from "@/components/molecules/DoctorbySpecialityCards"
+import ButtonComponent from "../atoms/ButtonComponent";
 
 interface Medico {
   id_medico: number;    
@@ -46,12 +47,12 @@ export default function ListDoctor({
    <DoctorCards medicos={medicos} />
 
       <div className="flex justify-end mt-4">
-        <button
+        <ButtonComponent
           onClick={onClose}
           className="px-4 py-2 text-sm rounded-md text-gray-600 hover:bg-gray-200 transition"
         >
           Cerrar
-        </button>
+        </ButtonComponent>
       </div>
     </div>
   );
