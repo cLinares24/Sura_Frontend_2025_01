@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import DoctorCards from "@/components/molecules/DoctorCards"
+import DoctorCards from "@/components/molecules/DoctorbySpecialityCards"
 
 interface Medico {
   id_medico: number;    

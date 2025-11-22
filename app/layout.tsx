@@ -19,9 +19,8 @@ export default function RootLayout({
       <body>
         <ConditionalHeader />
           <SpecialitiesProvider>
-        <DoctorsProvider>
+      
         {children}
-        </DoctorsProvider>
         </SpecialitiesProvider>
       </body>
     </html>

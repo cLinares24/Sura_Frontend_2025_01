@@ -1,73 +1,56 @@
 "use client";
+import { createContext, useState, useContext, ReactNode } from "react";
 
-import { createContext, useState, useEffect, ReactNode } from "react";
+
+export interface Disponibilidad {
+id_disponibilidad?: number;
+dia_semana: string;
+hora_inicio: string;
+hora_fin: string;
+}
+
 
 export interface Medico {
-  id_medico: number;
-  nombre: string;
-  cedula: string;
-  correo: string;
-  telefono?: string;
-  id_especialidad: number;
+id_medico?: number;
+nombre: string;
+cedula: string;
+correo: string;
+telefono?: string;
+id_especialidad: number;
+disponibilidad?: Disponibilidad[];
 }
+
 
 interface DoctorsContextProps {
-  medicos: Medico[];
-  cargarMedicosPorEspecialidad: (idEspecialidad: number) => Medico[];
+medicos: Medico[];
+agregarMedico: (m: Medico) => void;
+editarMedico: (m: Medico) => void;
+eliminarMedico: (id: number) => void;
 }
 
-export const DoctorsContext = createContext<DoctorsContextProps>({
-  medicos: [],
-  cargarMedicosPorEspecialidad: () => [],
-});
 
-export function DoctorsProvider({ children }: { children: ReactNode }) {
-  const [medicos, setMedicos] = useState<Medico[]>([]);
+const DoctorsContext = createContext<DoctorsContextProps | null>(null);
+export const useMedicos = () => useContext(DoctorsContext)!;
 
-  useEffect(() => {
-    // Simular carga inicial desde BD
-    const dataSimulada: Medico[] = [
-      {
-        id_medico: 1,
-        nombre: "Dr. Juan Pérez",
-        cedula: "12345",
-        correo: "juan@correo.com",
-        telefono: "3001234567",
-        id_especialidad: 1,
-      },
-      {
-        id_medico: 2,
-        nombre: "Dra. Ana Torres",
-        cedula: "67890",
-        correo: "ana@correo.com",
-        telefono: "3107654321",
-        id_especialidad: 2,
-      },
-      {
-        id_medico: 3,
-        nombre: "Dr. Carlos Ruiz",
-        cedula: "11111",
-        correo: "carlos@correo.com",
-        id_especialidad: 1,
-      },
-    ];
 
-    setMedicos(dataSimulada);
-  }, []);
+export const MedicosProvider = ({ children }: { children: ReactNode }) => {
+const [medicos, setMedicos] = useState<Medico[]>([]);
 
-  const cargarMedicosPorEspecialidad = (idEspecialidad: number) => {
-    return medicos.filter((m) => m.id_especialidad === idEspecialidad);
-  };
 
-  
-  return (
-    <DoctorsContext.Provider
-      value={{
-        medicos,
-        cargarMedicosPorEspecialidad,
-      }}
-    >
-      {children}
-    </DoctorsContext.Provider>
-  );
-}
+const agregarMedico = (m: Medico) => setMedicos([...medicos, { ...m, id_medico: Date.now() }]);
+
+
+const editarMedico = (editado: Medico) => {
+setMedicos(medicos.map((m) => (m.id_medico === editado.id_medico ? editado : m)));
+};
+
+
+const eliminarMedico = (id: number) => setMedicos(medicos.filter((m) => m.id_medico !== id));
+
+
+return (
+<DoctorsContext.Provider value={{ medicos, agregarMedico, editarMedico, eliminarMedico }}>
+{children}
+</DoctorsContext.Provider>
+);
+};

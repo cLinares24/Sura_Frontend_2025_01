@@ -1,7 +1,7 @@
 "use client";
 
 import AddDoctor from "@/components/molecules/AddDoctor";
-import ListDoctor from "@/components/molecules/ListDoctors";
+import ListDoctor from "@/components/molecules/ListDoctorsbySpeciality";
 import ButtonComponent from "@/components/atoms/ButtonComponent";
 import { useSpecialities } from "@/hooks/useSpecialities";
 
