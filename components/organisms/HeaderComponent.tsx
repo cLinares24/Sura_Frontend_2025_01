@@ -15,7 +15,7 @@ export default function HeaderComponent() {
         <div className="max-w-[1200px] flex items-center gap-8 h-[34px] px-4"></div>
       </div>
       {/* Barra Blanca */}
-      <div className="w-full max-w-7xl flex items-center justify-between h-17 px-6">
+     <div className="w-full max-w-7xl mx-auto flex items-center h-17 px-6 relative">
         {/* Logo */}
         <Link href="/../">
           <div className="flex items-center space-x-2 cursor-pointer">
@@ -65,7 +65,7 @@ export default function HeaderComponent() {
           </div>
         </Link>
         {/* Menú */}
-        <nav className="flex items-center space-x-8 text-sm font-medium">
+        <nav className="absolute left-1/2 -translate-x-1/2 flex items-center space-x-8 text-sm font-medium">
           <Link href="/" className="text-purple-500">
             INICIO
           </Link>
@@ -90,7 +90,7 @@ export default function HeaderComponent() {
         </nav>
 
         {/* Botón de usuario */}
-        <div className="relative inline-block text-left">
+        <div className="absolute left-[99%] transform -translate-x-1/2 inline-block text-left">
           {/* Botón */}
           <ButtonComponent
             onClick={() => setIsMenuOpen(!isMenuOpen)}
