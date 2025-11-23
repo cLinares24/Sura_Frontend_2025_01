@@ -5,5 +5,5 @@ import { LoginDTO } from "@/interfaces/user"
 
 export const loginService = (body: LoginDTO) => {
 
-  return apiFetch('/auth/login', 'POST', body)
+  return apiFetch('/usuarios/login', 'POST', body)
 }

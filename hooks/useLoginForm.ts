@@ -1,51 +1,157 @@
+// "use client";
+
+// import { useForm, SubmitHandler } from "react-hook-form";
+// import { zodResolver } from "@hookform/resolvers/zod";
+// import Swal from "sweetalert2";
+// import { LoginDTO } from "../interfaces/user";
+// import { loginScheme } from "../schemas/login";
+// import { useRouter } from "next/navigation";
+
+// export function useLogin() {
+//   const router = useRouter();
+
+//   const {
+//     register,
+//     handleSubmit,
+//     formState: { errors },
+//   } = useForm<LoginDTO>({
+//     resolver: zodResolver(loginScheme),
+//   });
+
+//   const onSubmit: SubmitHandler<LoginDTO> = async (data) => {
+//     console.log("Formulario enviado:", data);
+
+//     const fakeToken = crypto.randomUUID();
+
+//     localStorage.setItem("token", fakeToken);
+//     localStorage.setItem("user", JSON.stringify({ correo: data.correo }));
+//     localStorage.setItem("rol", JSON.stringify({ rol: "U" }));
+
+//     await Swal.fire({
+//       title: "¡Inicio de sesión exitoso!",
+//       text: "Bienvenido a MediciCol.",
+//       icon: "success",
+//       confirmButtonColor: "#ad46ff",
+//     });
+
+//   };
+
+//   const onErrors = () => {
+//     console.log("Errores:", errors);
+//   };
+
+//   return {
+//     register,
+//     handleSubmit,
+//     errors,
+//     onSubmit,
+//     onErrors,
+//   };
+// }
+
 "use client";
 
-import { useForm, SubmitHandler } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import Swal from "sweetalert2";
-import { LoginDTO } from "../interfaces/user";
-import { loginScheme } from "../schemas/login";
-import { useRouter } from "next/navigation";
+import { useForm, SubmitHandler } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { LoginDTO } from "@/interfaces/LoginDTO"
+import { loginScheme } from "@/schemas/login"
+import { loginService } from "@/libs/authService"
+import { useAuth } from "@/context/AuthContext"
+import Swal from "sweetalert2"
 
-export function useLogin() {
-  const router = useRouter();
+export function useLogin(onLoginSuccess?: () => void) {
+  const { setUser } = useAuth();
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }
   } = useForm<LoginDTO>({
-    resolver: zodResolver(loginScheme),
+    resolver: zodResolver(loginScheme)
   });
 
   const onSubmit: SubmitHandler<LoginDTO> = async (data) => {
-    console.log("Formulario enviado:", data);
+    try {
+      const info = await loginService(data);
+      console.log("Respuesta del loginService:", info);
 
-    const fakeToken = crypto.randomUUID();
+      // ✓ Adaptado al mensaje REAL del backend
+      if (info?.message === "Inicio de sesión exitoso") {
 
-    localStorage.setItem("token", fakeToken);
-    localStorage.setItem("user", JSON.stringify({ correo: data.correo }));
-    localStorage.setItem("rol", JSON.stringify({ rol: "U" }));
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true,
+        });
 
-    await Swal.fire({
-      title: "¡Inicio de sesión exitoso!",
-      text: "Bienvenido a MediciCol.",
-      icon: "success",
-      confirmButtonColor: "#ad46ff",
-    });
+        Toast.fire({
+          icon: "success",
+          title: "Inicio de sesión exitoso"
+        });
 
-    // router.push("/")
+        // Guardamos solo lo necesario ( NO el token )
+        localStorage.setItem("user", JSON.stringify(info.usuario.nombre));
+        localStorage.setItem("rol", JSON.stringify(info.usuario.rol));
+
+        // Contexto global
+        setUser(info.usuario.nombre);
+
+        // Callback para redirección
+        setTimeout(() => {
+          onLoginSuccess?.();
+        }, 800);
+      }
+      else if (info?.detail === "Correo o contraseña incorrectos") {
+        Swal.fire({
+          icon: "error",
+          title: "Credenciales inválidas",
+          text: "Por favor verifica tu correo o contraseña.",
+        });
+      }
+      else {
+        Swal.fire({
+          icon: "warning",
+          title: "Respuesta inesperada",
+          text: "El servidor no devolvió el formato esperado.",
+        });
+      }
+
+    } catch (e: any) {
+      console.error("Error en solicitud:", e);
+
+      // Si FastAPI lanzó HttpException con detail
+      if (e?.response?.data?.detail === "Correo o contraseña incorrectos") {
+        Swal.fire({
+          icon: "error",
+          title: "Credenciales inválidas",
+          text: "Por favor verifica tu correo o contraseña.",
+        });
+        return;
+      }
+
+      Swal.fire({
+        icon: "error",
+        title: "Error de conexión",
+        text: "No se pudo conectar al servidor. Intenta más tarde.",
+      });
+    }
   };
 
   const onErrors = () => {
-    console.log("Errores:", errors);
+    Swal.fire({
+      icon: "warning",
+      title: "Formulario incompleto",
+      text: "Por favor completa todos los campos correctamente."
+    });
   };
 
   return {
     register,
     handleSubmit,
-    errors,
     onSubmit,
     onErrors,
+    errors
   };
 }
