@@ -26,7 +26,7 @@ export const DoctorList = ({ onEdit }: { onEdit: (m: any) => void }) => {
 
   if (medicos.length === 0) {
     return (
-      <div className="mt-4 p-6 bg-gray-100 rounded-xl text-center text-gray-500 flex flex-col items-center justify-center gap-2">
+      <div className="mt-4 p-6 bg-white shadow-xl rounded-xl text-center text-gray-500 flex flex-col items-center justify-center gap-2">
         <p className="italic">No hay médicos registrados</p>
       </div>
     );
@@ -53,6 +53,9 @@ export const DoctorList = ({ onEdit }: { onEdit: (m: any) => void }) => {
         onClose={() => setModalOpen(false)}
         onConfirm={confirmarEliminacion}
         name={selectedDoctor?.nombre}
+        title="Eliminar Doctor"
+        message="¿Seguro que deseas eliminar "
+        boton="Eliminar"
       />
     </div>
   );

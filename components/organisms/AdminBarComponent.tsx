@@ -3,64 +3,62 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import ButtonComponent from "../atoms/ButtonComponent";
+import { ConfirmDeleteModal } from "../atoms/ConfirmDeleteModal";
+import { usePathname } from "next/navigation";
+import { useAdminBar } from "@/hooks/useAdminBar";
+import { useLogout } from "@/hooks/useLogout";
+import { useActiveLink } from "@/hooks/useActiveLink";
 
 export default function HeaderComponent() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { isOpen, openSidebar, closeSidebar } = useAdminBar();
+  const { logout } = useLogout();
+  const [isLogoutOpen, setIsLogoutOpen] = useState(false);
+    const pathname = usePathname();
+  
+    const { linkClass } = useActiveLink();
+
 
   return (
     <>
-      {/* ──────────────── BOTÓN PARA ABRIR EL SIDEBAR ──────────────── */}
-      <button
-        onClick={() => setIsOpen(true)}
-        className="fixed top-4 left-4 z-50 p-2 bg-purple-500 text-white rounded-lg shadow-lg hover:bg-purple-600"
+      {/* Botón para abrir */}
+      <ButtonComponent
+        onClick={openSidebar}
+        className="fixed top-4 left-4 z-50 p-2 bg-gray-500 text-white rounded-lg shadow-lg hover:bg-gray-600"
       >
-        {/* Icono hamburger */}
         <svg
           width="26"
           height="26"
           viewBox="0 0 24 24"
-          fill="none"
           stroke="white"
           strokeWidth="2"
-          strokeLinecap="round"
         >
           <line x1="3" y1="6" x2="21" y2="6" />
           <line x1="3" y1="12" x2="21" y2="12" />
           <line x1="3" y1="18" x2="21" y2="18" />
         </svg>
-      </button>
+      </ButtonComponent>
 
-      {/* ──────────────── FONDO OSCURO (solo cuando está abierto) ──────────────── */}
+      {/* Fondo oscuro */}
       {isOpen && (
         <div
           className="fixed inset-0 bg-black/40 z-40"
-          onClick={() => setIsOpen(false)}
+          onClick={closeSidebar}
         ></div>
       )}
 
-      {/* ──────────────── SIDEBAR ──────────────── */}
+      {/* Sidebar */}
       <aside
-        className={`fixed top-0 left-0 h-screen w-64 bg-white shadow-xl z-50 transform 
-        transition-transform duration-300 
+        className={`fixed top-0 left-0 h-screen w-64 bg-white shadow-xl z-50 transition-transform duration-300 
         ${isOpen ? "translate-x-0" : "-translate-x-full"}`}
       >
-        {/* Barra morada */}
         <div className="w-full bg-[#9155A7] h-10 flex items-center justify-end px-3">
-          {/* Botón para cerrar */}
-          <button
-            onClick={() => setIsOpen(false)}
-            className="text-white hover:text-gray-200"
-          >
+          <ButtonComponent onClick={closeSidebar} className="text-white">
             ✕
-          </button>
+          </ButtonComponent>
         </div>
 
-        {/* Contenido */}
         <div className="flex flex-col p-6 space-y-6">
-
-          {/* Logo */}
-          <Link href="/../" onClick={() => setIsOpen(false)}>
+          <Link href="/../" onClick={closeSidebar}>
             <div className="flex items-center space-x-2 cursor-pointer">
               <svg
                 fill="#ad46ff"
@@ -89,50 +87,33 @@ export default function HeaderComponent() {
             </div>
           </Link>
 
-          {/* Enlaces */}
-          <nav className="flex flex-col space-y-4 text-sm font-medium mt-2">
-            <Link href="/" onClick={() => setIsOpen(false)} className="text-purple-500">
-              INICIO
+          <nav className="flex flex-col space-y-4 text-sm font-medium mt-2 text-gray-700">
+            <Link href="/users" onClick={closeSidebar}  className={linkClass("/users")}>
+              USUARIOS
             </Link>
-            <Link href="/specialities" onClick={() => setIsOpen(false)} className="text-gray-700 hover:text-purple-500">
-              ACERCA DE
+            <Link href="/specialities" onClick={closeSidebar}  className={linkClass("/specialities")}>
+              ESPECIALIDADES
             </Link>
-            <Link href="/doctors" onClick={() => setIsOpen(false)} className="text-gray-700 hover:text-purple-500">
-              DEPARTAMENTOS
+            <Link href="/doctors" onClick={closeSidebar}  className={linkClass("/doctors")}>
+              DOCTORES
             </Link>
-            <Link href="/seguro" onClick={() => setIsOpen(false)} className="text-gray-700 hover:text-purple-500">
-              SEGURO
-            </Link>
-            <Link href="/contacto" onClick={() => setIsOpen(false)} className="text-gray-700 hover:text-purple-500">
-              CONTACTO
-            </Link>
-          </nav>
+            <span className="text-gray-300 -mt-3">________________</span>
 
-          {/* Menú usuario */}
-          <div className="relative">
             <ButtonComponent
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="flex items-center space-x-1 text-purple-500 hover:text-purple-600 cursor-pointer"
+              onClick={() => setIsLogoutOpen(true)}
+              className="text-gray-700 hover:text-red-500 text-left"
             >
-              <span>Entrar</span>
+              CERRAR SESIÓN
             </ButtonComponent>
 
-            {isMenuOpen && (
-              <div className="absolute top-full mt-2 left-0 w-56 shadow-lg bg-white z-[999] rounded-lg">
-                <div className="py-1">
-                  <Link href="/login" onClick={() => setIsOpen(false)} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                    Inicia sesión
-                  </Link>
-                  <Link href="/register" onClick={() => setIsOpen(false)} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                    Regístrate
-                  </Link>
-                  <Link href="/account" onClick={() => setIsOpen(false)} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                    Mi cuenta
-                  </Link>
-                </div>
-              </div>
-            )}
-          </div>
+            <ConfirmDeleteModal
+              open={isLogoutOpen}
+              onClose={() => setIsLogoutOpen(false)}
+              onConfirm={logout}
+              title="Cerrar Sesión"
+              boton="Cerrar Sesión"
+            />
+          </nav>
         </div>
       </aside>
     </>
