@@ -40,9 +40,7 @@ export default function RegisterComponent() {
             </div>
           </div>
         </Link>
-
         <h2 className="text-center text-2xl font-semibold mb-3">Regístrate</h2>
-
         <form
           onSubmit={handleSubmit(onSubmit, onErrors)}
           className="grid grid-cols-2 gap-10"
