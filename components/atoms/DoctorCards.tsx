@@ -10,7 +10,7 @@ export const DoctorCard = ({
   onEdit: () => void;
   onDelete: () => void;
 }) => (
-  <div className=" p-4 rounded-xl shadow-lg transition-transform hover:scale-102 hover:shadow-lg bg-[#eff1ef]">
+  <div className="p-4 rounded-xl shadow-lg transition-transform hover:scale-102  hover:shadow-green-300 hover:shadow-sm">
     <div className="space-y-1">
       <h2 className="font-bold text-lg text-[#0db26b]">{m.nombre}</h2>
       <p className="text-sm text-gray-800">Cédula: {m.cedula}</p>
@@ -25,6 +25,7 @@ export const DoctorCard = ({
       >
         Editar
       </ButtonComponent>
+
       <ButtonComponent
         className="bg-gray-500 hover:bg-gray-800 text-white px-4 py-2 rounded-xl font-medium transition-all shadow-sm hover:shadow-md"
         onClick={onDelete}

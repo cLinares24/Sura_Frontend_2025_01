@@ -5,7 +5,7 @@ import { DoctorList } from "@/components/molecules/DoctorList";
 import { EditDoctorModal } from "@/components/molecules/EditDoctorModal";
 import { useState } from "react";
 import ButtonComponent from "../atoms/ButtonComponent";
-
+    
 export default function App() {
   const [editar, setEditar] = useState<any | null>(null);
   const [mostrarForm, setMostrarForm] = useState(false);
