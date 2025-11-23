@@ -27,7 +27,8 @@ export const EditDoctorModal = ({
   ];
 
   return (
-    <div className="fixed inset-0  bg-opacity-40 flex items-center justify-center ">
+   <div className="fixed inset-0 bg-opacity-40 flex items-center justify-center z-[9999]">
+
       <form
         onSubmit={handleSubmit(onSubmit, onError)}
         className="bg-white p-6 rounded-2xl w-[30%] space-y-3 shadow-fuchsia-300 shadow-sm"

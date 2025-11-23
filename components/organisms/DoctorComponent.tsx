@@ -13,8 +13,8 @@ export default function App() {
   return (
     <MedicosProvider>
       {/* Botón totalmente a la izquierda */}
-      <div className="w-full px-6 py-4 min-h-[77vh]">
-        <div className="flex justify-start">
+      <div className="w-full px-6 py-4 min-h-[90vh]">
+        <div className="flex justify-start mt-12">
           <ButtonComponent
             className={`
     px-6 py-2.5 rounded-xl font-semibold
