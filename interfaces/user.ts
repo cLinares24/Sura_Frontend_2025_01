@@ -3,8 +3,8 @@ export interface UserDTO {
   genero: "M" | "F";
   nombre: string;
   correo: string;
-  contrasena: string;
-  contrasena2: string;
+  contrasena?: string;
+  contrasena2?: string;
   rol: "A" | "U";
 }
 

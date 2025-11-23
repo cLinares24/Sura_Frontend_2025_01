@@ -1,26 +1,32 @@
-import { Medico } from "@/context/DoctorsContext";
-import ButtonComponent from "./ButtonComponent";
+import { UserDTO } from "@/context/UsersContext";
+import ButtonComponent from "@/components/atoms/ButtonComponent";
 
-export const DoctorCard = ({
-  m,
+export const UserCard = ({
+  u,
   onEdit,
   onDelete,
 }: {
-  m: Medico;
+  u: UserDTO;
   onEdit: () => void;
   onDelete: () => void;
 }) => (
-  <div className="p-4 rounded-xl shadow-lg transition-transform hover:scale-102  bg-white hover:shadow-green-300 hover:shadow-sm">
+  <div className="p-4 rounded-xl bg-white shadow-lg transition-transform hover:scale-102 hover:shadow-green-300 hover:shadow-sm">
     <div className="space-y-1">
-      <h2 className="font-bold text-lg text-[#0db26b]">{m.nombre}</h2>
+      <h2 className="font-bold text-lg text-[#0db26b]">{u.nombre}</h2>
       <p className="text-sm text-gray-800">
-        <span className="font-semibold">Cédula:</span> {m.cedula}
+        <span className="font-semibold">Documento de Identidad:</span>{" "}
+        {u.cedula}
       </p>
       <p className="text-sm text-gray-800">
-        <span className="font-semibold">Correo:</span> {m.correo}
+        <span className="font-semibold">Género:</span>{" "}
+        {u.genero === "M" ? "Masculino" : "Femenino"}
       </p>
       <p className="text-sm text-gray-800">
-        <span className="font-semibold">Teléfono:</span> {m.telefono}
+        <span className="font-semibold">Correo:</span> {u.correo}
+      </p>
+      <p className="text-sm text-gray-800">
+        <span className="font-semibold">Rol:</span>{" "}
+        {u.rol === "A" ? "Administrador" : "Usuario"}
       </p>
     </div>
 

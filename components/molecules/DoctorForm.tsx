@@ -2,10 +2,10 @@
 
 import ButtonComponent from "../atoms/ButtonComponent";
 import InputComponents from "../atoms/InputComponents";
-import { useMedicoForm } from "@/hooks/useDoctorForm";
+import { useDoctorForm } from "@/hooks/useDoctorForm";
 
-export const MedicoForm = () => {
-  const { register, handleSubmit, errors, onSubmit, onError } = useMedicoForm();
+export const DoctorForm = () => {
+  const { register, handleSubmit, errors, onSubmit, onError } = useDoctorForm();
   
   return (
     <form

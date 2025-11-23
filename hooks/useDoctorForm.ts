@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import { doctorScheme } from "@/schemas/doctor";
 import { useMedicos } from "@/context/DoctorsContext";
 
-export const useMedicoForm = () => {
+export const useDoctorForm = () => {
   const { agregarMedico } = useMedicos();
 
   const {

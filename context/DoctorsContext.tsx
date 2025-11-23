@@ -13,8 +13,8 @@ export interface Medico {
   nombre: string;
   cedula: string;
   correo: string;
-  telefono?: string;
-  id_especialidad: number;
+  telefono: string;
+  id_especialidad?: number;
   disponibilidad?: Disponibilidad[];
 }
 
@@ -29,7 +29,17 @@ const DoctorsContext = createContext<DoctorsContextProps | null>(null);
 export const useMedicos = () => useContext(DoctorsContext)!;
 
 export const MedicosProvider = ({ children }: { children: ReactNode }) => {
-  const [medicos, setMedicos] = useState<Medico[]>([]);
+  const [medicos, setMedicos] = useState<Medico[]>([
+
+{
+      id_medico: 1,
+      cedula: "101010",
+      nombre: "Carlos Gómez",
+      telefono: '3432324324',
+      correo: "carlos@example.com",
+      id_especialidad: 1,
+    }
+  ]);
 
   const agregarMedico = (m: Medico) =>
     setMedicos([...medicos, { ...m, id_medico: Date.now() }]);

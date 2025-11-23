@@ -13,7 +13,7 @@ export default function SpecialitiesComponent() {
   } = useSpecialities();
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-[#f5f8ff] to-[#e1ffed] py-12 px-4">
+    <div className="min-h-[90vh] w-full bg-gradient-to-br from-[#fbf5ff] to-[#f4e1ff] py-12 px-4">
       <div className="max-w-3xl mx-auto bg-white/80 backdrop-blur-xl rounded-3xl shadow-2xl p-10 mt-15">
         <h1 className="text-3xl font-extrabold text-[#7b3fa1] text-center mb-10">
           Especialidades Médicas

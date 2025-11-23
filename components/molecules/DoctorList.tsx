@@ -5,7 +5,14 @@ import { useMedicos } from "@/context/DoctorsContext";
 import { DoctorCard } from "@/components/atoms/DoctorCards";
 import { ConfirmDeleteModal } from "@/components/atoms/ConfirmDeleteModal";
 
-export const DoctorList = ({ onEdit }: { onEdit: (m: any) => void }) => {
+export const DoctorList = ({
+  onEdit,
+  columnas,
+}: {
+  onEdit: (m: any) => void;
+  columnas: number;
+}) => 
+{
   const { medicos, eliminarMedico } = useMedicos();
 
   // Estado para el modal
@@ -26,7 +33,7 @@ export const DoctorList = ({ onEdit }: { onEdit: (m: any) => void }) => {
 
   if (medicos.length === 0) {
     return (
-      <div className="mt-4 p-6 bg-white shadow-xl rounded-xl text-center text-gray-500 flex flex-col items-center justify-center gap-2">
+      <div className="mt-4 p-6 bg-white shadow-xl  rounded-xl text-center text-gray-500 flex flex-col items-center justify-center gap-2">
         <p className="italic">No hay médicos registrados</p>
       </div>
     );
@@ -36,7 +43,10 @@ export const DoctorList = ({ onEdit }: { onEdit: (m: any) => void }) => {
     <div className="text-center">
       <h2 className="font-bold text-2xl text-[#0db26b]">Médicos</h2>
 
-      <div className="grid grid-cols-2 gap-4 mt-4">
+      <div className="grid gap-4 mt-4"
+        style={{
+          gridTemplateColumns: `repeat(${columnas}, minmax(0, 1fr))`,
+        }}>
         {medicos.map((m) => (
           <DoctorCard
             key={m.id_medico}

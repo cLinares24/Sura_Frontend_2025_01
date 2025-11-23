@@ -24,7 +24,7 @@ export default function SpecialitiesList({ esp }: Props) {
 
   return (
     <li
-      className="p-5 bg-white rounded-2xl shadow-md hover:shadow-xl 
+      className="p-5 bg-white rounded-2xl shadow-md hover:shadow-sm hover:shadow-fuchsia-300 
       transition transform hover:scale-[1.01]"
     >
       <div className="flex justify-between items-center flex-wrap gap-4">
