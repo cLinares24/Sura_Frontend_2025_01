@@ -1,12 +1,14 @@
 export interface UserDTO {
-  cedula: string;
-  genero: "M" | "F";
   nombre: string;
+  cedula: string;
   correo: string;
   contrasena: string;
   contrasena2: string;
-  rol: "A" | "U";
+  genero: "masculino" | "femenino"; // <--- ahora coincide EXACTO con schema
+  rol?: string;
 }
+
+
 
 // Login solo necesita correo y contraseña
 export type LoginDTO = Pick<UserDTO, "correo" | "contrasena">;

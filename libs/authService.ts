@@ -7,3 +7,8 @@ export const loginService = (body: LoginDTO) => {
 
   return apiFetch('/usuarios/login', 'POST', body)
 }
+
+export const registerService = (body: LoginDTO) => {
+
+  return apiFetch('/usuarios/registro', 'POST', body)
+}

@@ -3,22 +3,19 @@ import { z } from "zod";
 
 export const registerSchema = z
   .object({
-    cedula: z
-      .string()
-      .min(7, { message: "La cédula debe tener al menos 7 caracteres" })
-      .regex(/^\d+$/, { message: "La cédula solo puede contener números" }),
-    genero: z.enum(["M", "F"], { message: "Debe seleccionar un género válido" }),
-    nombre: z
-      .string()
-      .min(3, { message: "El nombre debe tener al menos 3 caracteres" }),
-    correo: z.string().email({ message: "Debe ingresar un correo válido" }),
-    contrasena: z
-      .string()
-      .min(6, { message: "La contraseña debe tener al menos 6 caracteres" }),
+    nombre: z.string().min(3),
+    cedula: z.string().min(7).regex(/^\d+$/),
+    correo: z.string().email(),
+    contrasena: z.string().min(6),
     contrasena2: z.string(),
-    rol: z.enum(["A", "U"]),
+    genero: z.enum(["masculino", "femenino"], {
+    message: "Debe seleccionar un género válido",
+}),
+
   })
-  .refine((data) => data.contrasena === data.contrasena2, {
+  .refine((d) => d.contrasena === d.contrasena2, {
     message: "Las contraseñas no coinciden",
     path: ["contrasena2"],
   });
+
+
