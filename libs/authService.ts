@@ -12,3 +12,8 @@ export const registerService = (body: LoginDTO) => {
 
   return apiFetch('/usuarios/registro', 'POST', body)
 }
+
+export const getProfileByIdService = (id: string) => {
+
+  return apiFetch(`/usuarios/${id}`, 'GET', id)
+}

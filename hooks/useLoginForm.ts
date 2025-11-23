@@ -94,6 +94,7 @@ export function useLogin(onLoginSuccess?: () => void) {
         // Guardamos solo lo necesario ( NO el token )
         localStorage.setItem("user", JSON.stringify(info.usuario.nombre));
         localStorage.setItem("rol", JSON.stringify(info.usuario.rol));
+        localStorage.setItem("id", JSON.stringify(info.usuario.id));
 
         // Contexto global
         setUser(info.usuario.nombre);
