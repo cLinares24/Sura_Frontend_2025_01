@@ -58,7 +58,7 @@ export default function HeaderComponent() {
         </div>
 
         <div className="flex flex-col p-6 space-y-6">
-          <Link href="/../" onClick={closeSidebar}>
+          <div onClick={closeSidebar}>
             <div className="flex items-center space-x-2 cursor-pointer">
               <svg
                 fill="#ad46ff"
@@ -85,7 +85,7 @@ export default function HeaderComponent() {
                 </span>
               </div>
             </div>
-          </Link>
+          </div>
 
           <nav className="flex flex-col space-y-4 text-sm font-medium mt-2 text-gray-700">
             <Link href="/users" onClick={closeSidebar}  className={linkClass("/users")}>

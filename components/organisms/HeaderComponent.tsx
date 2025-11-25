@@ -73,9 +73,15 @@ export default function HeaderComponent() {
             href="/specialities"
             className="text-gray-700 hover:text-purple-500"
           >
+            ADMIN
+          </Link>
+          <Link
+            href="/about"
+            className="text-gray-700 hover:text-purple-500"
+          >
             ACERCA DE
           </Link>
-          <Link href="/doctors" className="text-gray-700 hover:text-purple-500">
+          <Link href="/departaments" className="text-gray-700 hover:text-purple-500">
             DEPARTAMENTOS
           </Link>
           <Link href="/seguro" className="text-gray-700 hover:text-purple-500">
