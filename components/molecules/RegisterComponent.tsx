@@ -40,9 +40,7 @@ export default function RegisterComponent() {
             </div>
           </div>
         </Link>
-
         <h2 className="text-center text-2xl font-semibold mb-3">Regístrate</h2>
-
         <form
           onSubmit={handleSubmit(onSubmit, onErrors)}
           className="grid grid-cols-2 gap-10"
@@ -76,8 +74,8 @@ export default function RegisterComponent() {
               register={register}
               listValues={[
                 { value: "", label: "Selecciona una opción..." },
-                { value: "M", label: "Masculino" },
-                { value: "F", label: "Femenino" },
+                { value: "masculino", label: "Masculino" },
+                { value: "femenino", label: "Femenino" }
               ]}
             />
             {errors.genero && (
@@ -157,7 +155,7 @@ export default function RegisterComponent() {
           </div>
 
           {/* Campo oculto que siempre envía "U" */}
-          <input type="hidden" {...register("rol")} value="U" />
+          {/* <input type="hidden" {...register("rol")} value="U" /> */}
 
           {/* Botón en toda la fila */}
           <div className="col-span-2">

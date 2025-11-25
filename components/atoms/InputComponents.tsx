@@ -8,8 +8,8 @@ interface InputComponentsProps {
   typeElement: string;
   listValues?: valuesSelect[];
   placeHolder: string;
-  className: string;
-  classLabel: string;
+  className?: string;
+  classLabel?: string;
   registerName: string;
   register: any;
 }

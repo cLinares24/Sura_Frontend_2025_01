@@ -40,7 +40,7 @@ export const DoctorCard = ({
           <g
             id="SVGRepo_tracerCarrier"
             strokeLinecap="round"
-            stroke-linejoin="round"
+            strokeLinejoin="round"
           ></g>
           <g id="SVGRepo_iconCarrier">
             {" "}
@@ -65,7 +65,7 @@ export const DoctorCard = ({
           <g
             id="SVGRepo_tracerCarrier"
             strokeLinecap="round"
-            stroke-linejoin="round"
+            strokeLinejoin="round"
           ></g>
           <g id="SVGRepo_iconCarrier">
             {" "}
@@ -74,7 +74,7 @@ export const DoctorCard = ({
               stroke="#ffffff"
               strokeWidth="2"
               strokeLinecap="round"
-              stroke-linejoin="round"
+              strokeLinejoin="round"
             ></path>{" "}
           </g>
         </svg>
