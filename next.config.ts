@@ -31,6 +31,18 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "static.wixstatic.com",
       },
+      {
+        protocol: "https",
+        hostname: "www.modernheartandvascular.com",
+      },
+      {
+        protocol: "https",
+        hostname: "giovanafemat.com",
+      },
+      {
+        protocol: "https",
+        hostname: "urosario.edu.co",
+      },
     ],
   },
 };

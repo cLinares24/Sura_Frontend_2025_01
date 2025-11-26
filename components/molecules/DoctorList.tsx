@@ -41,7 +41,10 @@ export const DoctorList = ({
 
   return (
     <div className="text-center">
-      <h2 className="font-bold text-2xl text-[#0db26b]">Médicos</h2>
+       <div className="flex items-center gap-3  mb-3">
+        <span className="w-1 h-9 bg-[#0db26b] rounded-full"></span>
+        <h2 className="font-bold text-3xl text-[#0db26b]">Doctores</h2>
+      </div>
 
       <div className="grid gap-4 mt-4"
         style={{

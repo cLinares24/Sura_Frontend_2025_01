@@ -7,7 +7,7 @@ import { ConfirmDeleteModal } from "@/components/atoms/ConfirmDeleteModal";
 
 export const UserList = ({
   onEdit,
-  columnas, 
+  columnas,
 }: {
   onEdit: (u: any) => void;
   columnas: number;
@@ -38,8 +38,11 @@ export const UserList = ({
   }
 
   return (
-    <div className="text-center">
-      <h2 className="font-bold text-2xl text-[#0db26b]">Usuarios</h2>
+    <div className="text-center mb-20">
+      <div className="flex items-center gap-3  mb-3">
+        <span className="w-1 h-9 bg-[#0db26b] rounded-full"></span>
+        <h2 className="font-bold text-3xl text-[#0db26b]">Usuarios</h2>
+      </div>
 
       <div
         className="grid gap-4 mt-4"

@@ -2,6 +2,7 @@
 
 import React from "react";
 import { useQAList } from "@/hooks/useQAList";
+import ButtonComponent from "../atoms/ButtonComponent";
 
 export default function QAList() {
   const { qaList, loading, error, deleteQA } = useQAList();
@@ -31,12 +32,12 @@ export default function QAList() {
               <td className="border px-4 py-2">{qa.correo}</td>
               <td className="border px-4 py-2">{qa.observaciones}</td>
               <td className="border px-4 py-2">
-                <button
+                <ButtonComponent
                   onClick={() => deleteQA(qa.id_observacion)}
                   className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
                 >
                   Eliminar
-                </button>
+                </ButtonComponent>
               </td>
             </tr>
           ))}

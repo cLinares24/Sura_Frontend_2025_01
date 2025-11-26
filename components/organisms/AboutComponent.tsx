@@ -1,12 +1,28 @@
 "use client";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import AboutCards, { AboutCard } from "@/components/atoms/AboutCards";
 
 export default function AboutComponent() {
+
+  const aboutCard: AboutCard[] = [
+  {
+    title: "Calidad Internacional",
+    desc: "Aplicamos estándares globales de atención, asegurando procesos clínicos confiables, diagnósticos precisos y seguimiento continuo basado en buenas prácticas médicas.",
+  },
+  {
+    title: "Atención Humana",
+    desc: "Más allá de la medicina, brindamos acompañamiento cercano y empático, pensando siempre en la tranquilidad y bienestar de cada paciente y su familia.",
+  },
+  {
+    title: "Innovación Médica",
+    desc: "Integramos tecnología moderna, equipos de alta precisión y sistemas digitales que facilitan una atención más ágil, segura y eficiente.",
+  },
+];
+
   return (
     <div className="w-full min-h-screen overflow-x-hidden">
-      {/* Header verde (sin animación) */}
-      <div className="bg-[#097747] py-10 md:py-10 px-4 md:px-10 w-full">
+      <div className="bg-[#097747b0] py-10 md:py-10 px-4 md:px-10 w-full">
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">
           Acerca de
         </h1>
@@ -73,37 +89,8 @@ export default function AboutComponent() {
       <section className="w-full bg-gray-50 py-16 px-4 md:px-10">
         <div className="max-w-6xl mx-auto text-center">
           {/* Sección de valores */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mt-10 w-full">
-            {[
-              {
-                title: "Calidad Internacional",
-                desc: "Aplicamos estándares globales de atención, asegurando procesos clínicos confiables, diagnósticos precisos y seguimiento continuo basado en buenas prácticas médicas.",
-              },
-              {
-                title: "Atención Humana",
-                desc: "Más allá de la medicina, brindamos acompañamiento cercano y empático, pensando siempre en la tranquilidad y bienestar de cada paciente y su familia.",
-              },
-              {
-                title: "Innovación Médica",
-                desc: "Integramos tecnología moderna, equipos de alta precisión y sistemas digitales que facilitan una atención más ágil, segura y eficiente.",
-              },
-            ].map((v, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: i * 0.2 }}
-                className="bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition-shadow w-full"
-              >
-                <h3 className="text-xl font-semibold text-[#097747] text-center">
-                  {v.title}
-                </h3>
-                <p className="mt-3 text-gray-700 text-sm leading-relaxed text-center">
-                  {v.desc}
-                </p>
-              </motion.div>
-            ))}
-          </div>
+          <AboutCards data={aboutCard} />
+
 
           {/* Sección de compromiso */}
           <motion.div
