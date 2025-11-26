@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import Link from "next/link";
 import ButtonComponent from "../atoms/ButtonComponent";
 import { ConfirmDeleteModal } from "../atoms/ConfirmDeleteModal";
-import { usePathname } from "next/navigation";
 import { useAdminBar } from "@/hooks/useAdminBar";
 import { useLogout } from "@/hooks/useLogout";
 import { useActiveLink } from "@/hooks/useActiveLink";
@@ -12,10 +11,8 @@ import { useActiveLink } from "@/hooks/useActiveLink";
 export default function HeaderComponent() {
   const { isOpen, openSidebar, closeSidebar } = useAdminBar();
   const { logout } = useLogout();
-  const [isLogoutOpen, setIsLogoutOpen] = useState(false);
-    const pathname = usePathname();
-  
-    const { linkClass } = useActiveLink();
+  const [isLogoutOpen, setIsLogoutOpen] = useState(false); 
+  const { linkClass } = useActiveLink();
 
 
   return (

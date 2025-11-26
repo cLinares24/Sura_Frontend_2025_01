@@ -1,115 +1,8 @@
-// "use client";
-// import React from "react";
-// import { ArrowRight } from "lucide-react";
-// import Image from "next/image";
-
-// import InputComponents from "./../atoms/InputComponents";
-// import { zodResolver } from "@hookform/resolvers/zod";
-// import { LoginDTO } from "../../interfaces/user";
-// import { qaSchema } from "../../schemas/qa";
-// import { useForm, SubmitHandler } from "react-hook-form";
-// import { loginService } from "../../libs/authService";
-// import { QADTO } from "@/interfaces/QADTO";
-// import ButtonComponent from "../atoms/ButtonComponent";
-
-// interface FormValues {
-//   nombre: string;
-//   email: string;
-//   duda: string;
-// }
-
-// export default function Bulletin() {
-//   const {
-//     register,
-//     handleSubmit,
-//     formState: { errors },
-//   } = useForm<QADTO>({
-//     resolver: zodResolver(qaSchema),
-//   });
-
-//   // Manejo de errores
-//   const onErrors = () => {
-//     const campos = Object.keys(errors);
-
-//     if (campos.length === 0) {
-//       alert("Por favor, ingrese los datos.");
-//       return;
-//     }
-
-//     // Busca el primer mensaje disponible o usa un texto genérico
-//     const primerError = errors[campos[0] as keyof typeof errors];
-//     const mensaje = primerError?.message || "Por favor, ingrese los datos.";
-
-//     alert(mensaje);
-//   };
-
-//   // onSubmit temporal
-//   const onSubmit = (data: QADTO) => {
-//     console.log("Formulario enviado:", data);
-//     alert("Melo");
-//     // Por ahora no hace nada más
-//   };
-
-//   return (
-//     <section className="bg-[#f2f2f2] py-10 w-full h-max-[650px]">
-//       <div className="mx-auto text-center mb-5">
-//         <h2 className="text-[#0db26b] text-xl md:text-3xl py-2 mb-2">
-//           Dudas y quejas
-//         </h2>
-//         <div className="border-t-2 border-[#ccd6ec] max-w-[60px] mx-auto"></div>
-//       </div>
-//       <div className="max-w-[800px] mx-auto items-center">
-//         <form
-//           onSubmit={handleSubmit(onSubmit, onErrors)}
-//           className="flex flex-col space-y-4"
-//         >
-//           {/* Correo */}
-//           <InputComponents
-//             label="Correo electrónico*"
-//             typeElement="email"
-//             placeHolder="Ingresa tu correo electrónico"
-//             className="w-full bg-transparent border-b border-black focus:border-[#0db26b] outline-none py-2 placeholder-gray-500 text-sm text-black"
-//             classLabel="block text-sm text-black mb-1"
-//             registerName="email"
-//             register={register}
-//           />
-
-//           <InputComponents
-//             label="Nombre Completo*"
-//             typeElement="text"
-//             placeHolder="Ingresa tu nombre completo"
-//             className="w-full bg-transparent border-b border-black focus:border-[#0db26b] outline-none py-2 placeholder-gray-500 text-sm text-black"
-//             classLabel="block text-sm text-black mb-1"
-//             registerName="name"
-//             register={register}
-//           />
-
-//           <InputComponents
-//             label="Observaciones*"
-//             typeElement="text-area"
-//             placeHolder="Ingresa tus dudas o quejas"
-//             className="w-full bg-transparent border-b border-black focus:border-[#0db26b] outline-none py-2 placeholder-gray-500 text-sm text-black"
-//             classLabel="block text-sm text-black mb-1"
-//             registerName="text"
-//             register={register}
-//           />
-
-//           <ButtonComponent
-//             type="submit"
-//             className="w-full bg-[#9155a7] hover:bg-[#8538a1] text-white py-2 rounded- font-medium"
-//           >
-//             Enviar
-//           </ButtonComponent>
-//         </form>
-//       </div>
-//     </section>
-//   );
-// }
-
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 
 import InputComponents from "../atoms/InputComponents";
 import ButtonComponent from "../atoms/ButtonComponent";
@@ -119,34 +12,27 @@ import { qaSchema } from "@/schemas/qa";
 import { useQA } from "@/hooks/useQA";
 
 export default function Bulletin() {
-  const { sendQA, loading } = useQA();
+ const { sendQA, loading } = useQA();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<QADTO>({
-    resolver: zodResolver(qaSchema),
-  });
+const {
+  register,
+  handleSubmit,
+  formState: { errors },
+  reset,
+} = useForm<QADTO>({
+  resolver: zodResolver(qaSchema),
+});
 
-  const onSubmit = async (data: QADTO) => {
-    try {
-      const info = await sendQA(data);
+const onSubmit = async (data: QADTO) => {
+  try {
+    await sendQA(data);
+    reset();
+  } catch {}
+};
 
-      alert("Tu duda/queja fue enviada correctamente.");
-    } catch (e) {
-      alert("Error enviando la información.");
-    }
-  };
-
-  const onErrors = () => {
-    const campos = Object.keys(errors);
-    const mensaje = errors[campos[0] as keyof typeof errors]?.message;
-    alert(mensaje || "Datos inválidos");
-  };
 
   return (
-    <section className="bg-[#f2f2f2] py-10">
+    <section className="bg-[#f2f2f2] py-10 px-4">
       <div className="mx-auto text-center mb-5">
         <h2 className="text-[#0db26b] text-xl md:text-3xl py-2 mb-2">
           Dudas y quejas
@@ -154,44 +40,71 @@ export default function Bulletin() {
         <div className="border-t-2 border-[#ccd6ec] max-w-[60px] mx-auto"></div>
       </div>
 
-      <div className="max-w-[800px] mx-auto items-center">
+      <div className="w-full max-w-4xl md:max-w-5xl mx-auto">
         <form
-          onSubmit={handleSubmit(onSubmit, onErrors)}
-          className="flex flex-col space-y-4"
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex flex-col space-y-8 md:p-8 p-5"
         >
-          <InputComponents
-            label="Correo electrónico*"
-            typeElement="email"
-            placeHolder="Ingresa tu correo electrónico"
-            className="w-full bg-transparent border-b border-black focus:border-[#0db26b] outline-none py-2 placeholder-gray-500 text-sm text-black"
-            classLabel="block text-sm text-black mb-1"
-            registerName="correo"
-            register={register}
-          />
+          {/* CORREO */}
+          <div>
+            <InputComponents
+              label="Correo electrónico*"
+              typeElement="email"
+              placeHolder="Ingresa tu correo electrónico"
+              className="w-full bg-transparent border-b border-black focus:border-[#0db26b] outline-none py-2 placeholder-gray-500 text-sm text-black"
+              classLabel="block text-sm text-black mb-1"
+              registerName="correo"
+              register={register}
+            />
 
-          <InputComponents
-            label="Nombre Completo*"
-            typeElement="text"
-            placeHolder="Ingresa tu nombre completo"
-            className="w-full bg-transparent border-b border-black focus:border-[#0db26b] outline-none py-2 placeholder-gray-500 text-sm text-black"
-            classLabel="block text-sm text-black mb-1"
-            registerName="nombre"
-            register={register}
-          />
+            {errors.correo && (
+              <span className="text-red-600 text-sm">
+                {errors.correo.message}
+              </span>
+            )}
+          </div>
 
-          <InputComponents
-            label="Observaciones*"
-            typeElement="text"
-            placeHolder="Ingresa tus dudas o quejas"
-            className="w-full bg-transparent border-b border-black focus:border-[#0db26b] outline-none py-2 placeholder-gray-500 text-sm text-black"
-            classLabel="block text-sm text-black mb-1"
-            registerName="observaciones"
-            register={register}
-          />
+          {/* NOMBRE */}
+          <div>
+            <InputComponents
+              label="Nombre Completo*"
+              typeElement="text"
+              placeHolder="Ingresa tu nombre completo"
+              className="w-full bg-transparent border-b border-black focus:border-[#0db26b] outline-none py-2 placeholder-gray-500 text-sm text-black"
+              classLabel="block text-sm text-black mb-1"
+              registerName="nombre"
+              register={register}
+            />
+
+            {errors.nombre && (
+              <span className="text-red-600 text-sm">
+                {errors.nombre.message}
+              </span>
+            )}
+          </div>
+
+          {/* OBSERVACIONES */}
+          <div>
+            <InputComponents
+              label="Observaciones*"
+              typeElement="text"
+              placeHolder="Ingresa tus dudas o quejas"
+              className="w-full bg-transparent border-b border-black focus:border-[#0db26b] outline-none py-2 placeholder-gray-500 text-sm text-black"
+              classLabel="block text-sm text-black mb-1"
+              registerName="observaciones"
+              register={register}
+            />
+
+            {errors.observaciones && (
+              <span className="text-red-600 text-sm">
+                {errors.observaciones.message}
+              </span>
+            )}
+          </div>
 
           <ButtonComponent
             type="submit"
-            className="w-full bg-[#9155a7] hover:bg-[#8538a1] text-white py-2 rounded font-medium"
+            className="w-full bg-[#9155a7] hover:bg-[#8538a1] text-white py-2 font-medium"
           >
             {loading ? "Enviando..." : "Enviar"}
           </ButtonComponent>

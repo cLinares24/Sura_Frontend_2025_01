@@ -9,8 +9,8 @@ export default function LoginComponent() {
   const { register, handleSubmit, errors, onSubmit, onErrors } = useLogin();
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="w-[40%] bg-[#6DCCA3]/20 rounded-lg p-8 border border-[#6DCCA3]">
+    <div className="min-h-screen w-full flex items-center justify-center">
+      <div className="w-full max-w-4xl bg-[#6DCCA3]/20 rounded-lg p-8 border border-[#6DCCA3]">
 
         {/* Logo */}
         <Link href="/../">

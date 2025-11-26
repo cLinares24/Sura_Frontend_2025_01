@@ -1,26 +1,57 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Swal from "sweetalert2";
 import { sendQAService } from "@/libs/qaService";
 import { QADTO } from "@/interfaces/QADTO";
 
 export function useQA() {
   const [loading, setLoading] = useState(false);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const sendQA = async (data: QADTO) => {
     try {
       setLoading(true);
-      console.log("Body: ", data)
-      const res = await sendQAService(data);
+      setSuccessMessage(null);
+      setErrorMessage(null);
 
-      return res; // debe devolver algo del backend
+      const res = await sendQAService(data);
+      setSuccessMessage("Tu duda/queja fue enviada correctamente.");
+      return res;
+
     } catch (error) {
-      console.error("Error en useQA:", error);
+      setErrorMessage("Error enviando la información.");
       throw error;
+
     } finally {
       setLoading(false);
     }
   };
 
-  return { sendQA, loading };
+  // ⭐ Ahora el SweetAlert está dentro del hook
+  useEffect(() => {
+    if (successMessage) {
+      Swal.fire({
+        icon: "success",
+        title: "¡Enviado!",
+        text: successMessage,
+      });
+    }
+
+    if (errorMessage) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: errorMessage,
+      });
+    }
+  }, [successMessage, errorMessage]);
+
+  return {
+    sendQA,
+    loading,
+    successMessage,
+    errorMessage,
+  };
 }

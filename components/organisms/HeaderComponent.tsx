@@ -2,21 +2,28 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import ButtonComponent from "../atoms/ButtonComponent";
+import { useActiveLink } from "@/hooks/useActiveLink";
+import { motion, AnimatePresence } from "framer-motion";
+import { useMobileMenu } from "@/hooks/useMobileMenu";
+import MobileMenu from "../molecules/MobileMenu";
 
 export default function HeaderComponent() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { isMenuOpen, setIsMenuOpen, isMobileMenu, setIsMobileMenu } =
+    useMobileMenu();
+
+  const { linkClass } = useActiveLink();
 
   return (
     <header className="sticky top-0 w-full z-50 bg-white shadow-md">
-      {/* Barra Morada */}
-      <div className="w-full bg-[#9155A7] ">
-        <div className="max-w-[1200px] flex items-center gap-8 h-[34px] px-4"></div>
+      {/* TOP PURPLE BAR */}
+      <div className="w-full bg-[#9155A7]">
+        <div className="max-w-[1200px] h-[34px] px-4"></div>
       </div>
-      {/* Barra Blanca */}
-     <div className="w-full max-w-7xl mx-auto flex items-center h-17 px-6 relative">
-        {/* Logo */}
+
+      {/* MAIN HEADER */}
+      <div className="w-full max-w-7xl mx-auto flex items-center justify-between h-20 px-6 relative">
+        {/* --- LOGO --- */}
         <Link href="/../">
           <div className="flex items-center space-x-2 cursor-pointer">
             {/* Icono tipo ECG */}
@@ -64,37 +71,39 @@ export default function HeaderComponent() {
             </div>
           </div>
         </Link>
-        {/* Menú */}
-        <nav className="absolute left-1/2 -translate-x-1/2 flex items-center space-x-8 text-sm font-medium">
-          <Link href="/" className="text-purple-500">
+
+        {/* =======================
+         DESKTOP NAVIGATION
+        ========================= */}
+        <nav className="hidden md:flex items-center space-x-8 text-sm font-medium">
+          <Link href="/" className={linkClass("/")}>
             INICIO
           </Link>
+
           <Link
             href="/specialities"
             className="text-gray-700 hover:text-purple-500"
           >
             ADMIN
           </Link>
-          <Link
-            href="/about"
-            className="text-gray-700 hover:text-purple-500"
-          >
+
+          <Link href="/about" className={linkClass("/about")}>
             ACERCA DE
           </Link>
-          <Link href="/departaments" className="text-gray-700 hover:text-purple-500">
+
+          <Link href="/departaments" className={linkClass("/departaments")}>
             DEPARTAMENTOS
           </Link>
-          <Link
-            href="/contact"
-            className="text-gray-700 hover:text-purple-500"
-          >
+
+          <Link href="/contact" className={linkClass("/contact")}>
             CONTACTO
           </Link>
         </nav>
 
-        {/* Botón de usuario */}
-        <div className="absolute left-[99%] transform -translate-x-1/2 inline-block text-left">
-          {/* Botón */}
+        {/* =======================
+         LOGIN BUTTON
+        ========================= */}
+        <div className="hidden md:block">
           <ButtonComponent
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="flex items-center space-x-1 text-purple-500 hover:text-purple-600 cursor-pointer"
@@ -181,12 +190,32 @@ export default function HeaderComponent() {
                 >
                   Encuestas
                 </Link>
-
               </div>
             </div>
           )}
         </div>
+
+        {/* =======================
+         MOBILE MENU BUTTON
+        ========================= */}
+        <ButtonComponent
+          className="md:hidden flex flex-col gap-1"
+          onClick={() => setIsMobileMenu(true)}
+        >
+          <span className="w-6 h-[3px] bg-purple-500 rounded"></span>
+          <span className="w-6 h-[3px] bg-purple-500 rounded"></span>
+          <span className="w-6 h-[3px] bg-purple-500 rounded"></span>
+        </ButtonComponent>
       </div>
+
+      {/* =======================
+       MOBILE SIDEBAR MENU
+      ========================= */}
+      <MobileMenu
+        isOpen={isMobileMenu}
+        onClose={() => setIsMobileMenu(false)}
+        linkClass={linkClass}
+      />
     </header>
   );
 }
