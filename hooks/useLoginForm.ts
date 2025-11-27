@@ -51,23 +51,24 @@
 
 "use client";
 
-import { useForm, SubmitHandler } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { LoginDTO } from "@/interfaces/LoginDTO"
-import { loginScheme } from "@/schemas/login"
-import { loginService } from "@/libs/authService"
-import { useAuth } from "@/context/AuthContext"
-import Swal from "sweetalert2"
+import { useForm, SubmitHandler } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { LoginDTO } from "@/interfaces/LoginDTO";
+import { loginScheme } from "@/schemas/login";
+import { loginService } from "@/libs/authService";
+import { useAuth } from "@/context/AuthContext";
+import Swal from "sweetalert2";
+import { useRouter } from "next/navigation";
 
 export function useLogin(onLoginSuccess?: () => void) {
   const { setUser } = useAuth();
-
+  const router = useRouter();
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
   } = useForm<LoginDTO>({
-    resolver: zodResolver(loginScheme)
+    resolver: zodResolver(loginScheme),
   });
 
   const onSubmit: SubmitHandler<LoginDTO> = async (data) => {
@@ -77,48 +78,36 @@ export function useLogin(onLoginSuccess?: () => void) {
 
       // ✓ Adaptado al mensaje REAL del backend
       if (info?.message === "Inicio de sesión exitoso") {
-
-        const Toast = Swal.mixin({
-          toast: true,
-          position: "top-end",
-          showConfirmButton: false,
-          timer: 2000,
-          timerProgressBar: true,
-        });
-
-        Toast.fire({
+        Swal.fire({
           icon: "success",
-          title: "Inicio de sesión exitoso"
+          title: "Inicio de sesión exitoso",
+          text: "Bienvenido!",
+          confirmButtonText: "Aceptar",
+        }).then(() => {
+          // Guardamos solo lo necesario ( NO el token )
+          localStorage.setItem("user", JSON.stringify(info.usuario.nombre));
+          localStorage.setItem("rol", JSON.stringify(info.usuario.rol));
+          localStorage.setItem("id", JSON.stringify(info.usuario.id));
+
+          // Contexto global
+          setUser(info.usuario.nombre);
+
+          // Redirección SOLO después de dar aceptar
+          router.push("/../");
         });
-
-        // Guardamos solo lo necesario ( NO el token )
-        localStorage.setItem("user", JSON.stringify(info.usuario.nombre));
-        localStorage.setItem("rol", JSON.stringify(info.usuario.rol));
-        localStorage.setItem("id", JSON.stringify(info.usuario.id));
-
-        // Contexto global
-        setUser(info.usuario.nombre);
-
-        // Callback para redirección
-        setTimeout(() => {
-          onLoginSuccess?.();
-        }, 800);
-      }
-      else if (info?.detail === "Correo o contraseña incorrectos") {
+      } else if (info?.detail === "Correo o contraseña incorrectos") {
         Swal.fire({
           icon: "error",
           title: "Credenciales inválidas",
           text: "Por favor verifica tu correo o contraseña.",
         });
-      }
-      else {
+      } else {
         Swal.fire({
           icon: "warning",
           title: "Respuesta inesperada",
           text: "El servidor no devolvió el formato esperado.",
         });
       }
-
     } catch (e: any) {
       console.error("Error en solicitud:", e);
 
@@ -144,7 +133,7 @@ export function useLogin(onLoginSuccess?: () => void) {
     Swal.fire({
       icon: "warning",
       title: "Formulario incompleto",
-      text: "Por favor completa todos los campos correctamente."
+      text: "Por favor completa todos los campos correctamente.",
     });
   };
 
@@ -153,6 +142,6 @@ export function useLogin(onLoginSuccess?: () => void) {
     handleSubmit,
     onSubmit,
     onErrors,
-    errors
+    errors,
   };
 }

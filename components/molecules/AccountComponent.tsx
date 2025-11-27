@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { useProfile } from "@/hooks/useProfile";
+import AccountCards from "@/components/atoms/AccountCards"; // ← nombre corregido
+// Si el archivo realmente se llama AccountCard, cámbialo a singular.
 
 export default function AccountComponent() {
   const [userId, setUserId] = useState<string | null>(null);
@@ -11,25 +13,27 @@ export default function AccountComponent() {
     setUserId(storedId);
   }, []);
 
-  // 🔥 Siempre llamamos el hook, aunque userId sea null
+  // Si no hay userId aún, pasamos string vacío
   const { profile, loading, error } = useProfile(userId ?? "");
 
-  // Si aún no tenemos el ID, mostramos algo
   if (!userId) return <p>Cargando tu información…</p>;
-
   if (loading) return <p>Cargando perfil...</p>;
   if (error) return <p>Error: {error}</p>;
 
-  return (
-    <div className="p-4 border rounded-md shadow">
-      <h1 className="text-xl font-bold mb-4">Mi Perfil</h1>
+  // 👉 Esta función se ejecuta cuando guardas cambios en SweetAlert
+  const handleUpdate = (updatedData: any) => {
+    console.log("Datos actualizados:", updatedData);
 
-      <p><strong>Nombre:</strong> {profile.nombre}</p>
-      <p><strong>Cédula:</strong> {profile.cedula}</p>
-      <p><strong>Correo:</strong> {profile.correo}</p>
-      <p><strong>Género:</strong> {profile.genero}</p>
-      <p><strong>Rol:</strong> {profile.rol}</p>
-      <p><strong>Fecha de Registro:</strong> {new Date(profile.fecha_registro).toLocaleString()}</p>
+    // Puedes actualizar el estado local así:
+    Object.assign(profile, updatedData);
+
+    // O enviar los datos al backend:
+    // await axios.put(`/api/usuarios/${userId}`, updatedData)
+  };
+
+  return (
+    <div className="w-full flex justify-center py-10">
+      <AccountCards profile={profile} onUpdate={handleUpdate} />
     </div>
   );
 }

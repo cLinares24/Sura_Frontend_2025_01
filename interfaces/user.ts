@@ -5,7 +5,7 @@ export interface UserDTO {
   contrasena: string;
   contrasena2: string;
   genero: "masculino" | "femenino"; // <--- ahora coincide EXACTO con schema
-  rol?: string;
+  rol: string;
 }
 
 
