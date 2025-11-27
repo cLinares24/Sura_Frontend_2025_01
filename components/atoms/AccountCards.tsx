@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import Swal from "sweetalert2";
 import { userSchema } from "@/schemas/user";
+import { editUserSchema } from "@/schemas/userEdit";
 
 interface AccountCardProps {
   profile: {
@@ -45,15 +46,14 @@ export default function AccountCard({ profile, onUpdate }: AccountCardProps) {
           nombre: (document.getElementById("nombre") as HTMLInputElement).value,
           cedula: (document.getElementById("cedula") as HTMLInputElement).value,
           correo: (document.getElementById("correo") as HTMLInputElement).value,
-          genero: (document.getElementById("genero") as HTMLSelectElement).value,
-          rol: "paciente"
+          genero: (document.getElementById("genero") as HTMLSelectElement).value
         };
       },
     });
 
     if (!formValues) return;
 
-    const parsed = userSchema.safeParse(formValues);
+    const parsed = editUserSchema.safeParse(formValues);
 
     if (!parsed.success) {
       Swal.fire({ icon: "error", title: "Error", text: parsed.error.issues[0].message });

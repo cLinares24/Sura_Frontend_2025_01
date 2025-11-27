@@ -17,3 +17,7 @@ export const getProfileByIdService = (id: string) => {
 
   return apiFetch(`/usuarios/${id}`, 'GET', id)
 }
+
+export const editUserService = (id_user: number, data: any) => {
+  return apiFetch(`/usuarios/${id_user}`, 'PUT', data)
+}
