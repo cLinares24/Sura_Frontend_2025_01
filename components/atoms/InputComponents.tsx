@@ -1,19 +1,22 @@
-interface valuesSelect {
-  value: string
-  label: string
+import { UseFormRegister } from "react-hook-form";
+
+interface ValuesSelect {
+  value: string;
+  label: string;
 }
 
 interface InputComponentsProps {
   label: string;
   typeElement: string;
-  listValues?: valuesSelect[];
+  listValues?: ValuesSelect[];
   placeHolder: string;
   className?: string;
   classLabel?: string;
   registerName: string;
-  register: any;
+  register?: UseFormRegister<any>;
 }
 
+// Usaremos props específicos para input y select
 export default function InputComponents({
   label,
   typeElement,
@@ -24,15 +27,16 @@ export default function InputComponents({
   registerName,
   register,
   ...rest
-}: InputComponentsProps & React.InputHTMLAttributes<HTMLInputElement>) {
+}: InputComponentsProps &
+  (React.InputHTMLAttributes<HTMLInputElement> | React.SelectHTMLAttributes<HTMLSelectElement>)) {
   return (
     <>
       <label className={classLabel}>{label}</label>
 
       {listValues?.length ? (
         <select
-          {...(register && registerName ? register(registerName) : {})} // <-- AHORA PRIMERO
-          {...rest}                                                     // <-- LUEGO EL RESTO
+          {...(register && registerName ? register(registerName) : {})}
+          {...(rest as React.SelectHTMLAttributes<HTMLSelectElement>)} // forzamos el tipo
           className={className}
         >
           {listValues.map((item) => (
@@ -43,8 +47,8 @@ export default function InputComponents({
         </select>
       ) : (
         <input
-          {...(register && registerName ? register(registerName) : {})} // <-- PRIMERO
-          {...rest}                                                     // <-- DESPUÉS
+          {...(register && registerName ? register(registerName) : {})}
+          {...(rest as React.InputHTMLAttributes<HTMLInputElement>)} // forzamos el tipo
           type={typeElement}
           placeholder={placeHolder}
           className={className}

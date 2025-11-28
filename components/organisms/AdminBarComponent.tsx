@@ -94,6 +94,9 @@ export default function HeaderComponent() {
             <Link href="/doctors" onClick={closeSidebar}  className={linkClass("/doctors")}>
               DOCTORES
             </Link>
+            <Link href="/survey" onClick={closeSidebar}  className={linkClass("/survey")}>
+              DUDAS Y QUEJAS  
+            </Link>
             <span className="text-gray-300 -mt-3">________________</span>
 
             <ButtonComponent
