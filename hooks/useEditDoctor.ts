@@ -3,7 +3,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Swal from "sweetalert2";
-import { doctorScheme } from "@/schemas/doctor";
+import { doctorSchema } from "@/schemas/doctor";
 import { Medico, useMedicos } from "@/context/DoctorsContext";
 
 export const useEditarMedicoForm = (medico: Medico, onClose: () => void) => {
@@ -14,7 +14,7 @@ export const useEditarMedicoForm = (medico: Medico, onClose: () => void) => {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: zodResolver(doctorScheme),
+    resolver: zodResolver(doctorSchema),
     defaultValues: {
       nombre: medico.nombre ?? "",
       cedula: medico.cedula ?? "",
