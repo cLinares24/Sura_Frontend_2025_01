@@ -1,5 +1,5 @@
-import { UserDTO } from "@/context/UsersContext";
-import ButtonComponent from "@/components/atoms/ButtonComponent";
+import { UserDTO } from "../../context/UsersContext";
+import ButtonComponent from "../../components/atoms/ButtonComponent";
 
 export const UserCard = ({
   u,

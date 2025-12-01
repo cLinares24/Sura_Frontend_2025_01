@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { vi } from "vitest";
-import ButtonComponent from "../../components/atoms/ButtonComponent";
+import ButtonComponent from "../../../components/atoms/ButtonComponent";
 
 describe("ButtonComponent", () => {
   test("Renderiza el botón con texto", () => {

@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import AboutCards, { AboutCard } from "../../components/atoms/AboutCards";
+import AboutCards, { AboutCard } from "../../../components/atoms/AboutCards";
 import { vi } from "vitest";
 
 // ------------------- Mock de framer-motion -------------------

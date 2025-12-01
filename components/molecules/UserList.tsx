@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { useUsuarios } from "@/context/UsersContext";
-import { UserCard } from "@/components/atoms/UserCard";
-import { ConfirmDeleteModal } from "@/components/atoms/ConfirmDeleteModal";
+import { useUsuarios } from "../../context/UsersContext";
+import { UserCard } from "../../components/atoms/UserCard";
+import { ConfirmDeleteModal } from "../../components/atoms/ConfirmDeleteModal";
 
 export const UserList = ({
   onEdit,
