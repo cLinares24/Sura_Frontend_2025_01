@@ -3,7 +3,7 @@
 import Link from "next/link";
 import InputComponents from "../atoms/InputComponents";
 import ButtonComponent from "../atoms/ButtonComponent";
-import { useLogin } from "@/hooks/useLoginForm";
+import { useLogin } from "../../hooks/useLoginForm";
 
 export default function LoginComponent() {
   const { register, handleSubmit, errors, onSubmit, onErrors } = useLogin();
