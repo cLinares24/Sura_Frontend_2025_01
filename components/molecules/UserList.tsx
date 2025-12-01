@@ -1,9 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { useUsuarios } from "@/context/UsersContext";
+// import { useUsuarios } from "@/context/UsersContext";
+import { useUsers } from "@/context/UsersContext";
+
 import { UserCard } from "@/components/atoms/UserCard";
 import { ConfirmDeleteModal } from "@/components/atoms/ConfirmDeleteModal";
+import { UserAdminDTO } from "@/interfaces/user";
 
 export const UserList = ({
   onEdit,
@@ -12,7 +15,7 @@ export const UserList = ({
   onEdit: (u: any) => void;
   columnas: number;
 }) => {
-  const { usuarios, eliminarUsuario } = useUsuarios();
+  const { usuarios, eliminarUsuario } = useUsers();
 
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState<any>(null);
@@ -25,7 +28,7 @@ export const UserList = ({
   const confirmarEliminacion = () => {
     if (!selectedUser) return;
 
-    eliminarUsuario(selectedUser.cedula);
+    eliminarUsuario(selectedUser.id_usuario);
     setModalOpen(false);
   };
 
@@ -50,7 +53,7 @@ export const UserList = ({
           gridTemplateColumns: `repeat(${columnas}, minmax(0, 1fr))`,
         }}
       >
-        {usuarios.map((u) => (
+        {usuarios.map((u: UserAdminDTO) => (
           <UserCard
             key={u.cedula}
             u={u}

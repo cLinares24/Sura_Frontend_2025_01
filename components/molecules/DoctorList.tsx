@@ -51,12 +51,18 @@ export const DoctorList = ({
           gridTemplateColumns: `repeat(${columnas}, minmax(0, 1fr))`,
         }}>
         {medicos.map((m) => (
-          <DoctorCard
-            key={m.id_medico}
-            m={m}
-            onEdit={() => onEdit(m)}
-            onDelete={() => pedirConfirmacion(m)}
-          />
+          // <DoctorCard
+          //   key={m.id_medico}
+          //   m={m}
+          //   onEdit={() => onEdit(m)}
+          //   onDelete={() => pedirConfirmacion(m)}
+          // />
+        <DoctorCard
+          key={m.id_medico}
+          m={m}
+          onEdit={() => onEdit(m)}
+          onDelete={() => eliminarMedico(m.id_medico!)}
+        />
         ))}
       </div>
 

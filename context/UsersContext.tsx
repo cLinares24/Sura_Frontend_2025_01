@@ -1,73 +1,54 @@
 "use client";
-import { createContext, useState, useContext, ReactNode } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import {
+  getAllUsersService,
+  editUserByIdService,
+  deleteUserService,
+} from "@/libs/userService";
+import { UserAdminDTO } from "@/interfaces/user";
 
-export interface UserDTO {
-  cedula: string;
-  genero: "M" | "F";
-  nombre: string;
-  correo: string;
-  contrasena: string;
-  contrasena2: string;
-  rol: "A" | "U"; // Admin, User
-}
+const UsersContext = createContext<any>(null);
 
-interface UsersContextProps {
-  usuarios: UserDTO[];
-  agregarUsuario: (u: UserDTO) => void;
-  editarUsuario: (u: UserDTO) => void;
-  eliminarUsuario: (cedula: string) => void;
-}
+export function UsersProvider({ children }: { children: React.ReactNode }) {
+  const [usuarios, setUsuarios] = useState<UserAdminDTO[]>([]);
+  const [loading, setLoading] = useState(true);
 
-const UsersContext = createContext<UsersContextProps | null>(null);
-export const useUsuarios = () => useContext(UsersContext)!;
+  async function loadUsers() {
+    setLoading(true);
+    const data = await getAllUsersService();
+    setUsuarios(data);
+    setLoading(false);
+  }
 
-export const UsersProvider = ({ children }: { children: ReactNode }) => {
-  const [usuarios, setUsuarios] = useState<UserDTO[]>([
-    {
-      cedula: "101010",
-      genero: "M",
-      nombre: "Carlos Gómez",
-      correo: "carlos@example.com",
-      contrasena: "123",
-      contrasena2: "123",
-      rol: "A",
-    },
-    {
-      cedula: "202020",
-      genero: "F",
-      nombre: "Laura Martínez",
-      correo: "laura@example.com",
-      contrasena: "abc",
-      contrasena2: "abc",
-      rol: "U",
-    },
-    {
-      cedula: "303030",
-      genero: "M",
-      nombre: "José Rodríguez",
-      correo: "jose@example.com",
-      contrasena: "xyz",
-      contrasena2: "xyz",
-      rol: "U",
-    },
-  ]);
+  async function editarUsuario(data: UserAdminDTO) {
+    await editUserByIdService(data.id_usuario, {
+      nombre: data.nombre,
+      correo: data.correo,
+      cedula: data.cedula,
 
-  const agregarUsuario = (u: UserDTO) =>
-    setUsuarios([...usuarios, u]);
+      rol: data.rol,
+    });
+    await loadUsers();
+  }
 
-  const editarUsuario = (editado: UserDTO) =>
-    setUsuarios(
-      usuarios.map((u) => (u.cedula === editado.cedula ? editado : u))
-    );
+  async function eliminarUsuario(id: number) {
+    await deleteUserService(id);
+    await loadUsers();
+  }
 
-  const eliminarUsuario = (cedula: string) =>
-    setUsuarios(usuarios.filter((u) => u.cedula !== cedula));
+  useEffect(() => {
+    loadUsers();
+  }, []);
 
   return (
     <UsersContext.Provider
-      value={{ usuarios, agregarUsuario, editarUsuario, eliminarUsuario }}
+      value={{ usuarios, loading, editarUsuario, eliminarUsuario, reloadUsers: loadUsers }}
     >
       {children}
     </UsersContext.Provider>
   );
-};
+}
+
+export function useUsers() {
+  return useContext(UsersContext);
+}

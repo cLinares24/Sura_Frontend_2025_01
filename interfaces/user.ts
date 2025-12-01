@@ -4,14 +4,22 @@ export interface UserDTO {
   correo: string;
   contrasena: string;
   contrasena2: string;
-  genero: "masculino" | "femenino"; // <--- ahora coincide EXACTO con schema
+  genero: "masculino" | "femenino"; 
   rol: string;
 }
 
+export interface UserAdminDTO {
+  id_usuario: number;
+  nombre: string;
+  cedula: string;
+  correo: string;
+  genero: string;
+  rol: "paciente" | "medico" | "admin";
+  fecha_registro?: string;
+}
 
 
-// Login solo necesita correo y contraseña
 export type LoginDTO = Pick<UserDTO, "correo" | "contrasena">;
 
-// Registro usa todos los campos del usuario
 export type RegisterDTO = UserDTO;
+

@@ -20,12 +20,6 @@ export const EditDoctorModal = ({
     medico.disponibilidad || []
   );
 
-  const especialidades = [
-    { id: 1, nombre: "Medicina General" },
-    { id: 2, nombre: "Pediatría" },
-    { id: 3, nombre: "Cardiología" },
-  ];
-
   return (
    <div className="fixed inset-0 bg-opacity-40 flex items-center justify-center z-[9999]">
 

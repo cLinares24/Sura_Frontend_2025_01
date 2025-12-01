@@ -1,15 +1,17 @@
 "use client";
 
+import { useSpecialities } from "@/hooks/useSpecialities";
 import ButtonComponent from "../atoms/ButtonComponent";
 import InputComponents from "../atoms/InputComponents";
 import { useDoctorForm } from "@/hooks/useDoctorForm";
 
 export const DoctorForm = () => {
-  const { register, handleSubmit, errors, onSubmit, onError } = useDoctorForm();
-  
+  const { register, handleSubmit, errors, onSubmit } = useDoctorForm();
+  const { especialidades } = useSpecialities();
+
   return (
     <form
-      onSubmit={handleSubmit(onSubmit, onError)}
+      onSubmit={handleSubmit(onSubmit)}
       className="p-6 bg-white rounded-2xl shadow-lg border border-[#0db26b] space-y-4"
     >
       <h2 className="font-bold text-2xl text-[#0db26b]">Añadir Médico</h2>
@@ -65,6 +67,56 @@ export const DoctorForm = () => {
         classLabel="block"
         register={register}
         registerName="telefono"
+      />
+      {errors.telefono && (
+        <p className="text-red-500 text-sm">{errors.telefono.message}</p>
+      )}
+
+      {/* Especialidad */}
+      <div className="flex flex-col gap-2">
+        <label className="text-sm font-medium text-gray-700">Especialidad</label>
+
+        {/* <select
+          {...register("id_especialidad")}
+          className="p-3 border border-gray-300 w-full rounded-xl focus:outline-none focus:border-[#0db26b] transition"
+        >
+          <option value="">Seleccione una especialidad</option>
+
+          {especialidades.map((esp) => (
+            <option key={esp.id_especialidad} value={esp.id_especialidad}>
+              {esp.nombre}
+            </option>
+          ))}
+        </select> */}
+
+      <select
+        {...register("id_especialidad")}
+        className="p-3 border border-gray-300 w-full rounded-xl focus:outline-none focus:border-[#0db26b] transition"
+      >
+        <option value="">Seleccione una especialidad</option>
+
+        {especialidades.map((esp) => (
+          <option key={esp.id_especialidad} value={esp.id_especialidad}>
+            {esp.nombre}
+          </option>
+        ))}
+      </select>
+
+        {errors.id_especialidad && (
+          <p className="text-red-500 text-sm">{errors.id_especialidad.message}</p>
+        )}
+      </div>
+
+
+      {/* Contraseña */}
+      <InputComponents
+        label=""
+        typeElement="password"
+        placeHolder="Contraseña"
+        className="p-3 border border-gray-300 w-full rounded-xl focus:outline-none focus:border-[#0db26b] transition"
+        classLabel="block"
+        register={register}
+        registerName="contrasena"
       />
       {errors.telefono && (
         <p className="text-red-500 text-sm">{errors.telefono.message}</p>
