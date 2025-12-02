@@ -7,9 +7,9 @@ import Swal from "sweetalert2";
 import InputComponents from "../atoms/InputComponents";
 import ButtonComponent from "../atoms/ButtonComponent";
 
-import { QADTO } from "@/interfaces/QADTO";
-import { qaSchema } from "@/schemas/qa";
-import { useQA } from "@/hooks/useQA";
+import { QADTO } from "../../interfaces/QADTO";
+import { qaSchema } from "../../schemas/qa";
+import { useQA } from "../../hooks/useQA";
 
 export default function Bulletin() {
  const { sendQA, loading } = useQA();

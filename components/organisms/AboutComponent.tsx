@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import AboutCards, { AboutCard } from "@/components/atoms/AboutCards";
+import AboutCards, { AboutCard } from "../../components/atoms/AboutCards";
 
 export default function AboutComponent() {
 

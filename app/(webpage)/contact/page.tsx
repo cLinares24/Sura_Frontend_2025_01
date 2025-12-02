@@ -1,9 +1,9 @@
 // import RegisterComponent from "@/components/molecules/LoginComponent";
-import ContactComponent from "@/components/organisms/ContactComponent";
-import DepartamentsComponent from "@/components/organisms/DepartamentsComponent";
-import FooterComponent from "@/components/organisms/Footer";
+import ContactComponent from "../../../components/organisms/ContactComponent";
 
-export default function Departaments() {
+import FooterComponent from "../../../components/organisms/Footer";
+
+export default function Contact() {
   return (
     <>
       <ContactComponent />
