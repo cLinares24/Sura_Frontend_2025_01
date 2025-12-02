@@ -179,6 +179,7 @@ export const MedicosProvider = ({ children }: { children: ReactNode }) => {
   }, [apiMedicos, loading]);
 
 const agregarMedico = async (m: any) => {
+  console.log("Agregando medico ", m)
   await createMedicoService(m);
   fetchMedicos();
 };
@@ -190,6 +191,7 @@ const agregarMedico = async (m: any) => {
   };
 
   const eliminarMedico = async (id: number) => {
+    console.log("Voy a eliminar el medico: ", id)
     await deleteMedicoService(id);
     setMedicos(medicos.filter((x) => x.id_medico !== id));
   };

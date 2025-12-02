@@ -9,6 +9,7 @@ export const deleteMedicoService = (id: number) => {
 };
 
 export const createMedicoService = (body: any) => {
+  console.log("Mandando")
   return apiFetch("/medicos/registro", "POST", body);
 };
 

@@ -4,6 +4,7 @@ import AddDoctor from "@/components/molecules/AddDoctor";
 import ListDoctor from "@/components/molecules/ListDoctorsbySpeciality";
 import ButtonComponent from "@/components/atoms/ButtonComponent";
 import { useSpecialities } from "@/hooks/useSpecialities";
+import { MedicosProvider } from "@/context/DoctorsContext";
 
 interface Especialidad {
   id_especialidad: number;
@@ -33,12 +34,17 @@ export default function SpecialitiesList({ esp }: Props) {
         </span>
 
         <div className="flex gap-3">
+          <MedicosProvider>
+
           <ButtonComponent
             onClick={() => abrirFormulario(esp.id_especialidad)}
             className="text-sm bg-[#9155A7] text-white px-4 py-2 rounded-xl shadow hover:bg-[#7e3e92] transition"
-          >
+            >
             {formAbierto === esp.id_especialidad ? "Cerrar" : "Agregar Médico"}
           </ButtonComponent>
+          </MedicosProvider>
+
+
 
           <ButtonComponent
             onClick={() => abrirLista(esp.id_especialidad)}
