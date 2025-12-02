@@ -14,7 +14,6 @@ export default function HeaderComponent() {
   const [isLogoutOpen, setIsLogoutOpen] = useState(false); 
   const { linkClass } = useActiveLink();
 
-
   return (
     <>
       {/* Botón para abrir */}

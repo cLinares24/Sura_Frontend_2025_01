@@ -1,54 +1,3 @@
-// "use client";
-
-// import { useForm, SubmitHandler } from "react-hook-form";
-// import { zodResolver } from "@hookform/resolvers/zod";
-// import Swal from "sweetalert2";
-// import { LoginDTO } from "../interfaces/user";
-// import { loginScheme } from "../schemas/login";
-// import { useRouter } from "next/navigation";
-
-// export function useLogin() {
-//   const router = useRouter();
-
-//   const {
-//     register,
-//     handleSubmit,
-//     formState: { errors },
-//   } = useForm<LoginDTO>({
-//     resolver: zodResolver(loginScheme),
-//   });
-
-//   const onSubmit: SubmitHandler<LoginDTO> = async (data) => {
-//     console.log("Formulario enviado:", data);
-
-//     const fakeToken = crypto.randomUUID();
-
-//     localStorage.setItem("token", fakeToken);
-//     localStorage.setItem("user", JSON.stringify({ correo: data.correo }));
-//     localStorage.setItem("rol", JSON.stringify({ rol: "U" }));
-
-//     await Swal.fire({
-//       title: "¡Inicio de sesión exitoso!",
-//       text: "Bienvenido a MediciCol.",
-//       icon: "success",
-//       confirmButtonColor: "#ad46ff",
-//     });
-
-//   };
-
-//   const onErrors = () => {
-//     console.log("Errores:", errors);
-//   };
-
-//   return {
-//     register,
-//     handleSubmit,
-//     errors,
-//     onSubmit,
-//     onErrors,
-//   };
-// }
-
 "use client";
 
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -59,6 +8,7 @@ import { loginService } from "@/libs/authService";
 import { useAuth } from "@/context/AuthContext";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 export function useLogin(onLoginSuccess?: () => void) {
   const { setUser } = useAuth();
@@ -88,6 +38,8 @@ export function useLogin(onLoginSuccess?: () => void) {
           localStorage.setItem("user", JSON.stringify(info.usuario.nombre));
           localStorage.setItem("rol", JSON.stringify(info.usuario.rol));
           localStorage.setItem("id", JSON.stringify(info.usuario.id));
+          Cookies.set("rol", info.usuario.rol, { expires: 7 }); 
+          Cookies.set("id", info.usuario.id, { expires: 7 });  
 
           // Contexto global
           setUser(info.usuario.nombre);

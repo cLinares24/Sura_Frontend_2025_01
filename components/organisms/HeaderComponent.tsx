@@ -1,10 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import ButtonComponent from "../atoms/ButtonComponent";
 import { useActiveLink } from "@/hooks/useActiveLink";
-import { motion, AnimatePresence } from "framer-motion";
 import { useMobileMenu } from "@/hooks/useMobileMenu";
 import MobileMenu from "../molecules/MobileMenu";
 
@@ -13,6 +12,23 @@ export default function HeaderComponent() {
     useMobileMenu();
 
   const { linkClass } = useActiveLink();
+
+  const [rol, setRol] = useState<string | null>(null);
+
+  const normalizeRole = (raw: string | null) => {
+    if (!raw) return null;
+    let v = raw.trim();
+    if ((v.startsWith('"') && v.endsWith('"')) || (v.startsWith("'") && v.endsWith("'"))) {
+      v = v.slice(1, -1).trim();
+    }
+    v = v.replace(/^"+|"+$/g, "").replace(/^'+|'+$/g, "");
+    return v || null;
+  };
+
+  useEffect(() => {
+    const r = localStorage.getItem("rol");
+    setRol(normalizeRole(r));
+  }, []);
 
   return (
     <header className="sticky top-0 w-full z-50 bg-white shadow-md">
@@ -80,12 +96,12 @@ export default function HeaderComponent() {
             INICIO
           </Link>
 
-          <Link
-            href="/specialities"
-            className="text-gray-700 hover:text-purple-500"
-          >
-            ADMIN
-          </Link>
+          {rol === "admin" && (
+            <Link href="/specialities" className="text-gray-700 hover:text-purple-500">
+              ADMIN
+            </Link>
+          )}
+
 
           <Link href="/about" className={linkClass("/about")}>
             ACERCA DE
@@ -182,14 +198,16 @@ export default function HeaderComponent() {
                 >
                   Mi cuenta
                 </Link>
+                {(rol === "admin" || rol === "medico") && (
+                  <Link
+                    href="/survey"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Encuestas
+                  </Link>
+                )}
 
-                <Link
-                  href="/survey"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Encuestas
-                </Link>
               </div>
             </div>
           )}
