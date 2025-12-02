@@ -1,12 +1,12 @@
 "use client";
-import { MedicosProvider } from "@/context/DoctorsContext";
-import { DoctorForm } from "@/components/molecules/DoctorForm";
-import { DoctorList } from "@/components/molecules/DoctorList";
-import { EditDoctorModal } from "@/components/molecules/EditDoctorModal";
+import { MedicosProvider } from "../../context/DoctorsContext";
+import { DoctorForm } from "../../components/molecules/DoctorForm";
+import { DoctorList } from "../../components/molecules/DoctorList";
+import { EditDoctorModal } from "../../components/molecules/EditDoctorModal";
 import { useState } from "react";
 import ButtonComponent from "../atoms/ButtonComponent";
 import { ColumnSelect } from "../atoms/ColumnSelect";
-import { useColumns } from "@/hooks/useColumns";
+import { useColumns } from "../../hooks/useColumns";
 
 export default function App() {
   const [editar, setEditar] = useState<any | null>(null);

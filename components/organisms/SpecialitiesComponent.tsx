@@ -1,8 +1,8 @@
 "use client";
 
-import SpecialitiesList from "@/components/molecules/SpecialitiesList";
-import ButtonComponent from "@/components/atoms/ButtonComponent";
-import { useSpecialities } from "@/hooks/useSpecialities";
+import SpecialitiesList from "../../components/molecules/SpecialitiesList";
+import ButtonComponent from "../../components/atoms/ButtonComponent";
+import { useSpecialities } from "../../hooks/useSpecialities";
 
 export default function SpecialitiesComponent() {
   const {

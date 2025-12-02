@@ -1,11 +1,11 @@
 import { render, screen } from "@testing-library/react";
-import Contact from "../../contact/page";
+import Departaments from "../../../app/departaments/page";
 import { vi } from "vitest";
 
 // Mock de los componentes según rutas reales
-vi.mock("../../../components/organisms/ContactComponent", () => ({
+vi.mock("../../../components/organisms/DepartamentsComponent", () => ({
   __esModule: true,
-  default: () => <div data-testid="contact-component">Mock Contact</div>,
+  default: () => <div data-testid="departaments-component">Mock Departaments</div>,
 }));
 
 vi.mock("../../../components/organisms/Footer", () => ({
@@ -14,13 +14,13 @@ vi.mock("../../../components/organisms/Footer", () => ({
 }));
 
 describe("Departaments Page", () => {
-  it("renderiza el ContactComponent", () => {
-    render(<Contact />);
-    expect(screen.getByTestId("contact-component")).toBeInTheDocument();
+  it("renderiza el DepartamentsComponent", () => {
+    render(<Departaments />);
+    expect(screen.getByTestId("departaments-component")).toBeInTheDocument();
   });
 
   it("renderiza el FooterComponent", () => {
-    render(<Contact />);
+    render(<Departaments />);
     expect(screen.getByTestId("footer-component")).toBeInTheDocument();
   });
 });
