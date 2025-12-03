@@ -13,6 +13,6 @@ export async function editUserByIdService(id: number, data: any) {
 }
 
 export async function deleteUserService(id: number) {
-  console.log("id de usuario: ", id)
+  // console.log("id de usuario: ", id)
   return await apiFetch(`/admin/usuarios/${id}`, "DELETE");
 }

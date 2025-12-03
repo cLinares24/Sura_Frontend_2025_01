@@ -24,7 +24,7 @@ export function useLogin(onLoginSuccess?: () => void) {
   const onSubmit: SubmitHandler<LoginDTO> = async (data) => {
     try {
       const info = await loginService(data);
-      console.log("Respuesta del loginService:", info);
+      // console.log("Respuesta del loginService:", info);
 
       // ✓ Adaptado al mensaje REAL del backend
       if (info?.message === "Inicio de sesión exitoso") {

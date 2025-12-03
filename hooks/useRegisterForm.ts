@@ -24,7 +24,7 @@ export function useRegisterForm() {
 
   const onSubmit: SubmitHandler<RegisterSchemaType> = async (data) => {
     try {
-      console.log("→ Enviando datos de registro:", data);
+      // console.log("→ Enviando datos de registro:", data);
 
       await registerService(data);
 

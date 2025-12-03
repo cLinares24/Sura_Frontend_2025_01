@@ -68,7 +68,7 @@ export const useDoctorForm = () => {
 
   const onSubmit: SubmitHandler<DoctorCreateInput> = async (data) => {
     const parsed: DoctorCreateOutput = doctorCreateSchema.parse(data);
-    console.log("Ejecutando la función")
+    // console.log("Ejecutando la función")
     await agregarMedico(parsed); // ← USAS LA FUNCIÓN DEL CONTEXTO
 
     reload(); // ← ya existe en el provider
