@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
-import Swal from "sweetalert2";
-import { editUserSchema } from "../../schemas/userEdit";
+import { useEditProfile } from "../../hooks/useEditProfile";
+import ButtonComponent from "./ButtonComponent";
 
 interface AccountCardProps {
   profile: {
@@ -15,54 +15,7 @@ interface AccountCardProps {
 }
 
 export default function AccountCard({ profile, onUpdate }: AccountCardProps) {
-  const handleEdit = async () => {
-    const { value: formValues } = await Swal.fire({
-      title: "Editar Perfil",
-      html: `
-        <div class='text-left'>
-          <label class='font-semibold'>Nombre</label>
-          <input id='nombre' class='swal2-input' value='${profile.nombre}' />
-
-          <label class='font-semibold'>Cédula</label>
-          <input id='cedula' class='swal2-input' value='${profile.cedula}' />
-
-          <label class='font-semibold'>Correo</label>
-          <input id='correo' type='email' class='swal2-input' value='${profile.correo}' />
-
-          <label class='font-semibold'>Género</label>
-          <select id='genero' class='swal2-input'>
-            <option value='masculino' ${profile.genero === "masculino" ? "selected" : ""}>Masculino</option>
-            <option value='femenino' ${profile.genero === "femenino" ? "selected" : ""}>Femenino</option>
-          </select>
-        </div>
-      `,
-      focusConfirm: false,
-      showCancelButton: true,
-      confirmButtonText: "Guardar",
-      cancelButtonText: "Cancelar",
-      preConfirm: () => {
-        return {
-          nombre: (document.getElementById("nombre") as HTMLInputElement).value,
-          cedula: (document.getElementById("cedula") as HTMLInputElement).value,
-          correo: (document.getElementById("correo") as HTMLInputElement).value,
-          genero: (document.getElementById("genero") as HTMLSelectElement).value
-        };
-      },
-    });
-
-    if (!formValues) return;
-
-    const parsed = editUserSchema.safeParse(formValues);
-
-    if (!parsed.success) {
-      Swal.fire({ icon: "error", title: "Error", text: parsed.error.issues[0].message });
-      return;
-    }
-
-    onUpdate(parsed.data);
-
-    Swal.fire({ icon: "success", title: "Datos actualizados" });
-  };
+  const { handleEdit } = useEditProfile(profile, onUpdate);
 
   return (
     <motion.div
@@ -84,13 +37,12 @@ export default function AccountCard({ profile, onUpdate }: AccountCardProps) {
         <p><span className="font-semibold text-[#1a8c68]">Fecha de Registro:</span> {new Date(profile.fecha_registro).toLocaleString()}</p>
       </div>
 
-      <button
+      <ButtonComponent
         onClick={handleEdit}
         className="mt-6 w-full bg-[#097747] text-white py-3 rounded-lg font-medium hover:bg-[#07653c] transition-colors"
       >
         Editar Perfil
-      </button>
-
+      </ButtonComponent>
     </motion.div>
   );
 }
