@@ -78,6 +78,7 @@ import type { NextRequest } from "next/server";
 export function middleware(req: NextRequest) {
   const rol = req.cookies.get("rol")?.value || null;
   const pathname = req.nextUrl.pathname;
+  
 
   const adminRoutes = [
     "/admin",
@@ -86,6 +87,11 @@ export function middleware(req: NextRequest) {
     "/doctors",
     "/survey",
   ];
+
+   if (rol && (pathname === "/login" || pathname === "/register")) {
+    return NextResponse.redirect(new URL("/", req.url));
+  }
+
 
   // ---------------------------------------
   // 🔥 0. EXCEPCIÓN: /admin/citas → admin + medico
@@ -135,6 +141,8 @@ export function middleware(req: NextRequest) {
     }
   }
 
+  
+
   return NextResponse.next();
 }
 
@@ -150,5 +158,7 @@ export const config = {
     "/paciente/:path*",
     "/medico/:path*",
     "/departaments/:path*",
+    "/login/:path*",
+    "/register/:path*"
   ],
 };

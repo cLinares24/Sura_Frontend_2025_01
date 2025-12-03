@@ -10,7 +10,7 @@ export const ConfirmDeleteModal = ({
   title = "Confirmar acción",
   message = "¿Seguro que deseas continuar?",
   name,
-  boton = "Eliminar"
+  boton = "Eliminar",
 }: {
   open: boolean;
   onClose: () => void;
@@ -18,7 +18,7 @@ export const ConfirmDeleteModal = ({
   title?: string;
   message?: string;
   name?: string;
-  boton?: string
+  boton?: string;
 }) => {
   if (!open) return null;
 
@@ -53,7 +53,10 @@ export const ConfirmDeleteModal = ({
             </ButtonComponent>
 
             <ButtonComponent
-              onClick={onConfirm}
+              onClick={() => {
+                onConfirm();
+                onClose();
+              }}
               className="px-4 py-2 rounded-xl bg-gray-600 hover:bg-gray-800 text-white shadow"
             >
               {boton}

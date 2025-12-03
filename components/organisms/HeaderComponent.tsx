@@ -6,31 +6,22 @@ import ButtonComponent from "../atoms/ButtonComponent";
 import { useActiveLink } from "@/hooks/useActiveLink";
 import { useMobileMenu } from "@/hooks/useMobileMenu";
 import MobileMenu from "../molecules/MobileMenu";
+import { useAuth } from "@/context/AuthContext";
+import { ConfirmDeleteModal } from "../atoms/ConfirmDeleteModal";
+import { useLogout } from "@/hooks/useLogout";
+import { useRole } from "@/hooks/useRole";
 
 export default function HeaderComponent() {
   const { isMenuOpen, setIsMenuOpen, isMobileMenu, setIsMobileMenu } =
     useMobileMenu();
 
+  const [isLogoutOpen, setIsLogoutOpen] = useState(false);
   const { linkClass } = useActiveLink();
+  const { logout } = useLogout();
 
-  const [rol, setRol] = useState<string | null>(null);
-
-  const normalizeRole = (raw: string | null) => {
-    if (!raw) return null;
-    let v = raw.trim();
-    if ((v.startsWith('"') && v.endsWith('"')) || (v.startsWith("'") && v.endsWith("'"))) {
-      v = v.slice(1, -1).trim();
-    }
-    v = v.replace(/^"+|"+$/g, "").replace(/^'+|'+$/g, "");
-    return v || null;
-  };
-
-  useEffect(() => {
-    const r = localStorage.getItem("rol");
-    setRol(normalizeRole(r));
-  }, []);
-
-  return (
+  const { user } = useAuth();
+  const { rol } = useRole();
+return (
     <header className="sticky top-0 w-full z-50 bg-white shadow-md">
       {/* TOP PURPLE BAR */}
       <div className="w-full bg-[#9155A7]">
@@ -96,13 +87,6 @@ export default function HeaderComponent() {
             INICIO
           </Link>
 
-          {rol === "admin" && (
-            <Link href="/specialities" className="text-gray-700 hover:text-purple-500">
-              ADMIN
-            </Link>
-          )}
-
-
           <Link href="/about" className={linkClass("/about")}>
             ACERCA DE
           </Link>
@@ -163,7 +147,7 @@ export default function HeaderComponent() {
                 ></path>{" "}
               </g>
             </svg>
-            <span>Entrar</span>
+            {user ? <span>Hola, {user}</span> : <p>Entrar</p>}
           </ButtonComponent>
 
           {/* Menú desplegable */}
@@ -175,39 +159,80 @@ export default function HeaderComponent() {
               aria-labelledby="menu-button"
             >
               <div className="py-1" role="none">
-                <Link
-                  href="/login"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Inicia sesión
-                </Link>
+                <>
+                  {rol === "admin" || rol === "medico" ? (
+                    <>
+                      {/* ADMIN + MEDICO */}
+                      <Link
+                        href="/users"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        Administración
+                      </Link>
 
-                <Link
-                  href="/register"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Regístrate
-                </Link>
+                      <ButtonComponent
+                        onClick={() => setIsLogoutOpen(true)}
+                        className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:text-red-500"
+                      >
+                        Cerrar sesión
+                      </ButtonComponent>
 
-                <Link
-                  href="/account"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Mi cuenta
-                </Link>
-                {(rol === "admin" || rol === "medico") && (
-                  <Link
-                    href="/survey"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    Encuestas
-                  </Link>
-                )}
+                      <ConfirmDeleteModal
+                        open={isLogoutOpen}
+                        onClose={() => setIsLogoutOpen(false)}
+                        onConfirm={logout}
+                        title="Cerrar Sesión"
+                        boton="Cerrar Sesión"
+                      />
+                    </>
+                  ) : rol === "paciente" ? (
+                    <>
+                      {/* PACIENTE */}
+                      <Link
+                        href="/account"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        Mi cuenta
+                      </Link>
 
+                      <ButtonComponent
+                        onClick={() => setIsLogoutOpen(true)}
+                        className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:text-red-500"
+                      >
+                        Cerrar sesión
+                      </ButtonComponent>
+
+                      <ConfirmDeleteModal
+                        open={isLogoutOpen}
+                        onClose={() => setIsLogoutOpen(false)}
+                        onConfirm={logout}
+                        title="Cerrar Sesión"
+                        boton="Cerrar Sesión"
+                      />
+                    </>
+                  ) : (
+                    <>
+                      {/* SIN LOGIN */}
+                      <Link
+                        href="/login"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        Inicia sesión
+                      </Link>
+
+                      <Link
+                        href="/register"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        Regístrate
+                      </Link>
+                    </>
+                  )}
+                </>
               </div>
             </div>
           )}

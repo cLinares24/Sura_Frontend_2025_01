@@ -38,14 +38,18 @@ export function useLogin(onLoginSuccess?: () => void) {
           localStorage.setItem("user", JSON.stringify(info.usuario.nombre));
           localStorage.setItem("rol", JSON.stringify(info.usuario.rol));
           localStorage.setItem("id", JSON.stringify(info.usuario.id));
-          Cookies.set("rol", info.usuario.rol, { expires: 7 }); 
-          Cookies.set("id", info.usuario.id, { expires: 7 });  
+          Cookies.set("rol", info.usuario.rol, { expires: 7 });
+          Cookies.set("id", info.usuario.id, { expires: 7 });
 
           // Contexto global
           setUser(info.usuario.nombre);
 
           // Redirección SOLO después de dar aceptar
-          router.push("/../");
+          if (info.usuario.rol === "admin" || info.usuario.rol === "medico") {
+            router.push("/users");
+          }  else {
+            router.push("/"); // Fallback por si acaso
+          }
         });
       } else if (info?.detail === "Correo o contraseña incorrectos") {
         Swal.fire({
