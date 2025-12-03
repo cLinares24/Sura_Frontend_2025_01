@@ -8,6 +8,7 @@ import dayjs from "dayjs";
 import { motion } from "framer-motion";
 import ButtonComponent from "@/components/atoms/ButtonComponent";
 import { useRole } from "@/hooks/useRole";
+import { useSpecialities } from "@/hooks/useSpecialities";
 
 export default function DepartmentSchedulePage({
   params,
@@ -20,8 +21,16 @@ export default function DepartmentSchedulePage({
   const router = useRouter(); // ← 🟣 NUEVO
   const { rol } = useRole();
 
+
   const [fecha, setFecha] = React.useState(dayjs().format("YYYY-MM-DD"));
   const { citas, loading, fetchCitas, crearCita } = useCitas(idEspecialidad);
+
+
+    const { especialidades, loading: loadingEspecialidades } = useSpecialities();
+
+
+    const especialidadActual = especialidades.find(e => e.id_especialidad === idEspecialidad);
+
 
   React.useEffect(() => {
     fetchCitas(fecha);
@@ -45,7 +54,15 @@ export default function DepartmentSchedulePage({
       {/* 🟣 BOTÓN PARA ADMIN CITAS */}
       {/* --------------------------- */}
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold text-[#9155A7]">Citas disponibles</h1>
+      <h1 className="text-3xl font-bold text-[#9155A7] flex items-center gap-2">
+  Citas disponibles
+  {!loadingEspecialidades && especialidadActual && (
+    <span className="text-3xl font-semibold text-[#9155A7]">
+      - {especialidadActual.nombre}
+    </span>
+  )}
+</h1>
+
         {(rol === "admin" || rol === "medico") && (
           <ButtonComponent
             onClick={() => router.push("/admin/citas")}

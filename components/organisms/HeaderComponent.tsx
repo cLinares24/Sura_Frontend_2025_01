@@ -92,7 +92,7 @@ return (
           </Link>
 
           <Link href="/departaments" className={linkClass("/departaments")}>
-            DEPARTAMENTOS
+            {user ? <span>CITAS</span> : <span>DEPARTAMENTOS</span>}
           </Link>
 
           <Link href="/contact" className={linkClass("/contact")}>
