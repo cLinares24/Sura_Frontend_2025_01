@@ -1,118 +1,122 @@
 import { describe, it, expect } from "vitest";
-import { doctorScheme } from "../../../schemas/doctor"; // ajusta la ruta real
+import { doctorCreateSchema } from "../../../schemas/doctor"; // ajusta ruta real
 import { ZodError } from "zod";
 
-describe("doctorScheme", () => {
+describe("doctorCreateSchema", () => {
   it("valida datos correctos", () => {
     const data = {
-      cedula: "1234567",
       nombre: "Juan Pérez",
-      telefono: "1234567890",
+      cedula: "123456",
       correo: "juan@example.com",
+      telefono: "1234567890",
+      id_especialidad: "3",
+      contrasena: "1234",
     };
-    expect(() => doctorScheme.parse(data)).not.toThrow();
+
+    expect(() => doctorCreateSchema.parse(data)).not.toThrow();
   });
 
-  it("falla si la cédula es muy corta", () => {
-    const data = {
-      cedula: "123",
-      nombre: "Juan Pérez",
-      telefono: "1234567890",
-      correo: "juan@example.com",
-    };
+  it("falla si el nombre está vacío", () => {
     try {
-      doctorScheme.parse(data);
+      doctorCreateSchema.parse({
+        nombre: "",
+        cedula: "123",
+        correo: "a@a.com",
+        telefono: "1",
+        id_especialidad: "1",
+      });
     } catch (e) {
       const err = e as ZodError;
-      expect(err.issues[0].message).toBe(
-        "La cédula debe tener al menos 7 caracteres"
-      );
+      expect(err.issues[0].message).toBe("El nombre es obligatorio");
     }
   });
 
-  it("falla si la cédula contiene letras", () => {
-    const data = {
-      cedula: "123abc456",
-      nombre: "Juan Pérez",
-      telefono: "1234567890",
-      correo: "juan@example.com",
-    };
+  it("falla si la cédula está vacía", () => {
     try {
-      doctorScheme.parse(data);
+      doctorCreateSchema.parse({
+        nombre: "Juan",
+        cedula: "",
+        correo: "a@a.com",
+        telefono: "1",
+        id_especialidad: "1",
+      });
     } catch (e) {
       const err = e as ZodError;
-      expect(err.issues[0].message).toBe(
-        "La cédula solo puede contener números"
-      );
-    }
-  });
-
-  it("falla si el nombre es muy corto", () => {
-    const data = {
-      cedula: "1234567",
-      nombre: "Ju",
-      telefono: "1234567890",
-      correo: "juan@example.com",
-    };
-    try {
-      doctorScheme.parse(data);
-    } catch (e) {
-      const err = e as ZodError;
-      expect(err.issues[0].message).toBe(
-        "El nombre debe tener al menos 3 caracteres"
-      );
-    }
-  });
-
-  it("falla si el teléfono es inválido", () => {
-    const invalidPhones = ["12345", "12345678901", "12345abcde"];
-    for (const tel of invalidPhones) {
-      try {
-        doctorScheme.parse({
-          cedula: "1234567",
-          nombre: "Juan Pérez",
-          telefono: tel,
-          correo: "juan@example.com",
-        });
-      } catch (e) {
-        const err = e as ZodError;
-        expect(err.issues[0].message).toBe("Debe ingresar un teléfono válido");
-      }
+      expect(err.issues[0].message).toBe("La cédula es obligatoria");
     }
   });
 
   it("falla si el correo es inválido", () => {
-    const data = {
-      cedula: "1234567",
-      nombre: "Juan Pérez",
-      telefono: "1234567890",
-      correo: "juanexample.com",
-    };
     try {
-      doctorScheme.parse(data);
+      doctorCreateSchema.parse({
+        nombre: "Juan",
+        cedula: "123",
+        correo: "correoInvalido",
+        telefono: "1",
+        id_especialidad: "1",
+      });
     } catch (e) {
       const err = e as ZodError;
-      expect(err.issues[0].message).toBe("Debe ingresar un correo válido");
+      expect(err.issues[0].message).toBe("Correo inválido");
     }
   });
 
-  it("falla si hay varios campos inválidos a la vez", () => {
-    const data = {
-      cedula: "123abc",
-      nombre: "Ju",
-      telefono: "12345abc",
-      correo: "juanexample.com",
-    };
+  it("falla si el teléfono está vacío", () => {
     try {
-      doctorScheme.parse(data);
+      doctorCreateSchema.parse({
+        nombre: "Juan",
+        cedula: "123",
+        correo: "juan@ejemplo.com",
+        telefono: "",
+        id_especialidad: "3",
+      });
     } catch (e) {
       const err = e as ZodError;
-      const messages = err.issues.map((issue) => issue.message);
-      expect(messages).toContain("La cédula debe tener al menos 7 caracteres");
-      expect(messages).toContain("La cédula solo puede contener números");
-      expect(messages).toContain("El nombre debe tener al menos 3 caracteres");
-      expect(messages).toContain("Debe ingresar un teléfono válido");
-      expect(messages).toContain("Debe ingresar un correo válido");
+      expect(err.issues[0].message).toBe("El teléfono es obligatorio");
     }
+  });
+
+  it("falla si no se selecciona una especialidad", () => {
+    try {
+      doctorCreateSchema.parse({
+        nombre: "Juan",
+        cedula: "123",
+        correo: "a@a.com",
+        telefono: "123",
+        id_especialidad: "",
+      });
+    } catch (e) {
+      const err = e as ZodError;
+      expect(err.issues[0].message).toBe("Seleccione una especialidad");
+    }
+  });
+
+  it("falla si la especialidad no es un número válido", () => {
+    try {
+      doctorCreateSchema.parse({
+        nombre: "Juan",
+        cedula: "123",
+        correo: "a@a.com",
+        telefono: "123",
+        id_especialidad: "abc",
+      });
+    } catch (e) {
+      const err = e as ZodError;
+      expect(err.issues[0].message).toBe(
+        "La especialidad debe ser un número"
+      );
+    }
+  });
+
+  it("permite que la contraseña sea opcional", () => {
+    const data = {
+      nombre: "Juan",
+      cedula: "123",
+      correo: "juan@example.com",
+      telefono: "123456",
+      id_especialidad: "2",
+    };
+
+    expect(() => doctorCreateSchema.parse(data)).not.toThrow();
   });
 });

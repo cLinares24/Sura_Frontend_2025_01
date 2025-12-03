@@ -1,6 +1,6 @@
 // hooks/useProfile.ts
 import { useEffect, useState } from "react";
-import { getProfileByIdService } from "@/libs/authService";
+import { getProfileByIdService } from "../libs/authService";
 
 export function useProfile(userId: string) {
   const [profile, setProfile] = useState<any>(null);

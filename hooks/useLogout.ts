@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
-import { useAuth } from "@/context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 
 export const useLogout = () => {
   const router = useRouter();

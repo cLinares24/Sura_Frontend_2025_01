@@ -2,7 +2,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getAllMedicosService } from "@/libs/medicosService";
+import { getAllMedicosService } from "../libs/medicosService";
 
 export const useMedico = () => {
   const [medicos, setMedicos] = useState([]);

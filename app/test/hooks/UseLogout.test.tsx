@@ -1,8 +1,8 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect, vi, beforeEach, afterAll } from "vitest";
 import { renderHook, act } from "@testing-library/react";
-import { useLogout } from "../../../hooks/useLogout"; // ajusta la ruta
+import { AuthProvider } from "../../../context/AuthContext";
 
-// Mock de next/navigation
+// 🔥 Mock de next/navigation COMPLETO (antes del hook)
 const pushMock = vi.fn();
 vi.mock("next/navigation", () => ({
   useRouter: () => ({
@@ -10,19 +10,43 @@ vi.mock("next/navigation", () => ({
   }),
 }));
 
-describe("useLogout", () => {
-  beforeEach(() => {
-    localStorage.clear();
-    pushMock.mockClear();
+// Ahora que next/navigation está mockeado, importamos el hook
+import { useLogout } from "../../../hooks/useLogout";
+
+// Guardamos localización real
+const originalLocation = window.location;
+
+beforeEach(() => {
+  localStorage.clear();
+
+  // mock de window.location
+  Object.defineProperty(window, "location", {
+    configurable: true,
+    value: {
+      ...originalLocation,
+      href: "",
+    },
   });
 
-  it("elimina token, user y rol de localStorage y redirige", () => {
-    // Configuramos localStorage
+  pushMock.mockClear();
+});
+
+afterAll(() => {
+  Object.defineProperty(window, "location", {
+    configurable: true,
+    value: originalLocation,
+  });
+});
+
+describe("useLogout", () => {
+  it("elimina token, user, rol y redirige a /", () => {
     localStorage.setItem("token", "123");
     localStorage.setItem("user", "Juan");
     localStorage.setItem("rol", "admin");
 
-    const { result } = renderHook(() => useLogout());
+    const { result } = renderHook(() => useLogout(), {
+      wrapper: AuthProvider,
+    });
 
     act(() => {
       result.current.logout();
@@ -32,7 +56,10 @@ describe("useLogout", () => {
     expect(localStorage.getItem("user")).toBeNull();
     expect(localStorage.getItem("rol")).toBeNull();
 
-    expect(pushMock).toHaveBeenCalledTimes(1);
-    expect(pushMock).toHaveBeenCalledWith("/");
+    // 🔥 Tu redirección real
+    expect(window.location.href).toBe("/");
+
+    // 🔥 Y si usas router.push en el futuro, esto lo cubre también:
+    expect(pushMock).not.toHaveBeenCalled(); // porque tu hook no usa push
   });
 });

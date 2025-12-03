@@ -141,12 +141,12 @@
 "use client";
 
 import { createContext, useContext, ReactNode, useEffect, useState } from "react";
-import { useMedico } from "@/hooks/useMedicos";
+import { useMedico } from "../hooks/useMedicos";
 import {
   deleteMedicoService,
   updateMedicoService,
   createMedicoService,
-} from "@/libs/medicosService";
+} from "../libs/medicosService";
 
 export interface Medico {
   id_medico?: number;
