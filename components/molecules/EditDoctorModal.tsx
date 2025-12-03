@@ -13,18 +13,18 @@ export const EditDoctorModal = ({
   medico: Medico;
   onClose: () => void;
 }) => {
-  const { register, handleSubmit, errors, onSubmit, onError } =
+  const { register, handleSubmit, errors, onSubmit } =
     useEditarMedicoForm(medico, onClose);
 
-  const [disponibilidad, setDisponibilidad] = useState(
-    medico.disponibilidad || []
-  );
+  // const [disponibilidad, setDisponibilidad] = useState(
+  //   medico.disponibilidad || []
+  // );
 
   return (
    <div className="fixed inset-0 bg-opacity-40 flex items-center justify-center z-[9999]">
 
       <form
-        onSubmit={handleSubmit(onSubmit, onError)}
+        onSubmit={handleSubmit(onSubmit)}
         className="bg-white p-6 rounded-2xl w-[30%] space-y-3 shadow-fuchsia-300 shadow-sm"
       >
         <h2 className="font-bold text-[#9155a7] text-center py-5 text-2xl">
