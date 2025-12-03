@@ -1,5 +1,5 @@
 // import { UserDTO } from "../../context/UsersContext";
-import { UserDTO } from "@/interfaces/user";
+import { UserAdminDTO, UserDTO } from "@/interfaces/user";
 import ButtonComponent from "../../components/atoms/ButtonComponent";
 
 export const UserCard = ({
@@ -7,7 +7,7 @@ export const UserCard = ({
   onEdit,
   onDelete,
 }: {
-  u: UserDTO;
+  u: UserDTO | UserAdminDTO;
   onEdit: () => void;
   onDelete: () => void;
 }) => (
