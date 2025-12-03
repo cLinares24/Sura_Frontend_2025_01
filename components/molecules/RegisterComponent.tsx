@@ -6,8 +6,10 @@ import Link from "next/link";
 import { useRegisterForm } from "../../hooks/useRegisterForm";
 
 export default function RegisterComponent() {
+  // const { register, errors, handleSubmit, onSubmit, onErrors } =
+  //   useRegisterForm();
   const { register, errors, handleSubmit, onSubmit, onErrors } =
-    useRegisterForm();
+  useRegisterForm();
 
   return (
 
@@ -46,6 +48,7 @@ export default function RegisterComponent() {
 
           {/* GRID RESPONSIVA */}
           <form
+            // onSubmit={handleSubmit(onSubmit, onErrors)}
             onSubmit={handleSubmit(onSubmit, onErrors)}
             className="grid grid-cols-1 md:grid-cols-2 gap-10"
           >
