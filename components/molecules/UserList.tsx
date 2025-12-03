@@ -1,11 +1,9 @@
 "use client";
 
 import { useState } from "react";
-// import { useUsuarios } from "@/context/UsersContext";
-import { useUsers } from "@/context/UsersContext";
-
-import { UserCard } from "@/components/atoms/UserCard";
-import { ConfirmDeleteModal } from "@/components/atoms/ConfirmDeleteModal";
+import { useUsers } from "../../context/UsersContext";
+import { UserCard } from "../../components/atoms/UserCard";
+import { ConfirmDeleteModal } from "../../components/atoms/ConfirmDeleteModal";
 import { UserAdminDTO } from "@/interfaces/user";
 
 export const UserList = ({

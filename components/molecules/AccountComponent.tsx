@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useProfile } from "@/hooks/useProfile";
-import AccountCard from "@/components/atoms/AccountCards";
-import { editUserService } from "@/libs/authService";
+import { useProfile } from "../../hooks/useProfile";
+import AccountCard from "../../components/atoms/AccountCards";
+import { editUserService } from "../../libs/authService";
 
 export default function AccountComponent() {
   const [userId, setUserId] = useState<string | null>(null);

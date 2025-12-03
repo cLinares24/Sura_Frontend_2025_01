@@ -1,5 +1,5 @@
 "use client";
-import CardHealth from "@/components/molecules/CardsCaringComponent";
+import CardHealth from "../../components/molecules/CardsCaringComponent";
 
 export default function CaringYourHealth() {
   const items = [

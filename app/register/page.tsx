@@ -1,5 +1,5 @@
 
-import RegisterComponent from "@/components/molecules/RegisterComponent";
+import RegisterComponent from "../../components/molecules/RegisterComponent";
 
 export default function Home() {
   return (

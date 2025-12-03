@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import Swal from "sweetalert2";
-import { userSchema } from "@/schemas/user";
-import { editUserSchema } from "@/schemas/userEdit";
+import { editUserSchema } from "../../schemas/userEdit";
 
 interface AccountCardProps {
   profile: {

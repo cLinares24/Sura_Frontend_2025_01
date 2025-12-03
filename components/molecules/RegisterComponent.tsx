@@ -3,7 +3,7 @@
 import InputComponents from "../atoms/InputComponents";
 import ButtonComponent from "../atoms/ButtonComponent";
 import Link from "next/link";
-import { useRegisterForm } from "@/hooks/useRegisterForm";
+import { useRegisterForm } from "../../hooks/useRegisterForm";
 
 export default function RegisterComponent() {
   const { register, errors, handleSubmit, onSubmit, onErrors } =

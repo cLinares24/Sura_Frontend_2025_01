@@ -3,9 +3,9 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginDTO } from "@/interfaces/LoginDTO";
-import { loginScheme } from "@/schemas/login";
-import { loginService } from "@/libs/authService";
-import { useAuth } from "@/context/AuthContext";
+import { loginScheme } from "../schemas/login";
+import { loginService } from "../libs/authService";
+import { useAuth } from "../context/AuthContext";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";

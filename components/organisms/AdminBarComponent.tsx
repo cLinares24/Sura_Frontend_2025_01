@@ -4,11 +4,11 @@ import React, { useState } from "react";
 import Link from "next/link";
 import ButtonComponent from "../atoms/ButtonComponent";
 import { ConfirmDeleteModal } from "../atoms/ConfirmDeleteModal";
-import { useAdminBar } from "@/hooks/useAdminBar";
-import { useLogout } from "@/hooks/useLogout";
-import { useActiveLink } from "@/hooks/useActiveLink";
+import { useAdminBar } from "../../hooks/useAdminBar";
+import { useLogout } from "../../hooks/useLogout";
+import { useActiveLink } from "../../hooks/useActiveLink";
 
-export default function HeaderComponent() {
+export default function AdminBarComponent() {
   const { isOpen, openSidebar, closeSidebar } = useAdminBar();
   const { logout } = useLogout();
   const [isLogoutOpen, setIsLogoutOpen] = useState(false); 

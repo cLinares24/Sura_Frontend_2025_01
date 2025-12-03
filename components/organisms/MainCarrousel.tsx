@@ -1,5 +1,5 @@
 "use client";
-import { useCarrousel } from "@/hooks/useCarrousel";
+import { useCarrousel } from "../../hooks/useCarrousel";
 import CardCarrousel from "../molecules/CardsCarrouselComponent";
 import ButtonComponent from "../atoms/ButtonComponent";
 
@@ -32,7 +32,7 @@ export default function MainCarrousel() {
   const { currentIndex, nextSlide, prevSlide } = useCarrousel(items.length, 10000);
 
   return (
-    <div className="w-full mx-auto relative h-[600px] md:h-[600px] h-[450px] overflow-hidden group">
+    <div className="w-full mx-auto relative  md:h-[600px] h-[450px] overflow-hidden group">
 
   {/* Slides */}
   <div

@@ -50,9 +50,9 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Swal from "sweetalert2";
-import { registerSchema } from "@/schemas/register";
+import { registerSchema } from "../schemas/register";
 import { RegisterDTO } from "@/interfaces/user";
-import { registerService } from "@/libs/authService";
+import { registerService } from "../libs/authService";
 import { useRouter } from "next/navigation";
 
 export function useRegisterForm() {
