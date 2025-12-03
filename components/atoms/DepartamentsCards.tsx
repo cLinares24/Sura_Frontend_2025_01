@@ -26,6 +26,7 @@ export const DepartmentCards: React.FC<DepartmentCardProps> = ({
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, delay: index * 0.15 }}
+      viewport={{ once: true }} // asegura que la animación siempre se vea
       className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-shadow overflow-hidden group cursor-pointer"
     >
       {/* Imagen */}
@@ -47,5 +48,5 @@ export const DepartmentCards: React.FC<DepartmentCardProps> = ({
   );
 
   // Si hay rol, envolvemos en Link; si no, solo el div
-  return rol ? <Link href={`/departamentos/${id}`}>{content}</Link> : content;
+  return rol ? <Link href={`/departamentos/${id}`} className="block">{content}</Link> : content;
 };

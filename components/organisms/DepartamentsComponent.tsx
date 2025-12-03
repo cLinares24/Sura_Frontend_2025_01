@@ -44,6 +44,7 @@ export default function Departments() {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
+        viewport={{ once: true }} // asegura que la animación se vea siempre
         className="text-3xl md:text-4xl font-bold text-center text-[#9155A7]"
       >
         Departamentos Médicos
@@ -53,6 +54,7 @@ export default function Departments() {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.2 }}
+        viewport={{ once: true }} // asegura que la animación se vea siempre
         className="max-w-2xl mx-auto mt-4 text-center text-gray-700 text-sm sm:text-base"
       >
         Conoce las áreas de especialidad de nuestra clínica, cada una diseñada
@@ -62,22 +64,14 @@ export default function Departments() {
       {/* GRID */}
       <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
         {items.map((item, index) => (
-          // <DepartmentCards
-          //   key={index}
-          //   title={item.title}
-          //   img={item.img}
-          //   desc={item.desc}
-          //   index={index}
-          // />
           <DepartmentCards
-          key={index}
-          id={item.id}
-          title={item.title}
-          img={item.img}
-          desc={item.desc}
-          index={index}
-        />
-
+            key={index}
+            id={item.id}
+            title={item.title}
+            img={item.img}
+            desc={item.desc}
+            index={index}
+          />
         ))}
       </div>
     </section>

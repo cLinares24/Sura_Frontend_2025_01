@@ -3,8 +3,10 @@ import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import ButtonComponent from "../atoms/ButtonComponent";
+import { useRouter } from "next/navigation";
 
 const Appointment = () => {
+  const router = useRouter();
   return (
     <header className=" bg-white shadow-md">
       {/* Barra Morada */}
@@ -38,7 +40,10 @@ const Appointment = () => {
             <h1 className="text-xl">Agende aquí su cita</h1>
           </div>
 
-          <ButtonComponent className="cursor-pointer absolute left-[80%] -translate-x-1/2 bg-[#7A3E96] text-white px-6 py-2 rounded-md text-sm sm:text-base hover:bg-[#6a3584] transition">
+          <ButtonComponent
+            className="cursor-pointer absolute left-[80%] -translate-x-1/2 bg-[#7A3E96] text-white px-6 py-2 rounded-md text-sm sm:text-base hover:bg-[#6a3584] transition"
+            onClick={() => router.push("/departaments")}
+          >
             Reserva una cita
           </ButtonComponent>
         </div>
