@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import About from "../../(webpage)/about/page";
+import About from "../../about/page";
 import { vi } from "vitest";
 
 // Mock EXACTOS según las rutas reales

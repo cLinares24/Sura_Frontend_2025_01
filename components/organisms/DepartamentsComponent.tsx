@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { DepartmentCards } from "@/components/atoms/DepartamentsCards";
+import { DepartmentCards } from "../../components/atoms/DepartamentsCards";
 
 interface DepartmentItem {
   id: number;
