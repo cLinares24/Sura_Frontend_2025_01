@@ -1,33 +1,54 @@
-import { useForm } from "react-hook-form"
+import { UseFormRegister } from "react-hook-form";
 
-interface valuesSelect {
-  value: string
-  label: string
+interface ValuesSelect {
+  value: string;
+  label: string;
 }
+
 interface InputComponentsProps {
   label: string;
   typeElement: string;
-  listValues?: valuesSelect[];
+  listValues?: ValuesSelect[];
   placeHolder: string;
-  className: string;
-  classLabel: string;
+  className?: string;
+  classLabel?: string;
   registerName: string;
-  register: any; 
+  register?: UseFormRegister<any>;
 }
 
-export default function InputComponents({ label, typeElement, listValues, placeHolder, className, classLabel, registerName, register }: InputComponentsProps) {
+// Usaremos props específicos para input y select
+export default function InputComponents({
+  label,
+  typeElement,
+  listValues,
+  placeHolder,
+  className,
+  classLabel,
+  registerName,
+  register,
+  ...rest
+}: InputComponentsProps &
+  (React.InputHTMLAttributes<HTMLInputElement> | React.SelectHTMLAttributes<HTMLSelectElement>)) {
   return (
     <>
       <label className={classLabel}>{label}</label>
+
       {listValues?.length ? (
-        <select {...register(registerName)} className={className}>
-          {listValues.map(item => (
-            <option key={item.value} value={item.value}>{item.label}</option>
+        <select
+          {...(register && registerName ? register(registerName) : {})}
+          {...(rest as React.SelectHTMLAttributes<HTMLSelectElement>)} // forzamos el tipo
+          className={className}
+        >
+          {listValues.map((item) => (
+            <option key={item.value} value={item.value}>
+              {item.label}
+            </option>
           ))}
         </select>
       ) : (
         <input
-          {...register(registerName)}
+          {...(register && registerName ? register(registerName) : {})}
+          {...(rest as React.InputHTMLAttributes<HTMLInputElement>)} // forzamos el tipo
           type={typeElement}
           placeholder={placeHolder}
           className={className}

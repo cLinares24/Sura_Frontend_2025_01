@@ -1,8 +1,8 @@
 import { z } from 'zod'
 
 export const loginScheme = z.object({
-  user: z.email({ message: 'Error en mail no sirve' })
-          .min(5, { message: "Se requiere minimo 5 caracteres" }),
-  password: z.string()
-          .min(5, { message: "Se requiere minimo 5 caracteres" })
+          correo: z.string().email({ message: "Debe ingresar un correo válido" }),
+    contrasena: z
+      .string()
+      .min(6, { message: "La contraseña debe tener al menos 6 caracteres" }),
 })
