@@ -1,4 +1,5 @@
-import { UserDTO } from "../../context/UsersContext";
+// import { UserDTO } from "../../context/UsersContext";
+import { UserDTO } from "@/interfaces/user";
 import ButtonComponent from "../../components/atoms/ButtonComponent";
 
 export const UserCard = ({
@@ -19,7 +20,7 @@ export const UserCard = ({
       </p>
       <p className="text-sm text-gray-800">
         <span className="font-semibold">Género:</span>{" "}
-        {u.genero === "M" ? "Masculino" : "Femenino"}
+        {u.genero === "masculino" ? "Masculino" : "Femenino"}
       </p>
       <p className="text-sm text-gray-800">
         <span className="font-semibold">Correo:</span> {u.correo}
