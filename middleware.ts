@@ -105,12 +105,12 @@ export function middleware(req: NextRequest) {
   // ---------------------------------------
   // 🔥 0. EXCEPCIÓN: /admin/citas → admin + medico + paciente
   // ---------------------------------------
-  if (pathname.startsWith("/departaments")) {
-    if (rol !== "admin" && rol !== "medico" && rol !== "paciente") {
-      return NextResponse.redirect(new URL("/unauthorized", req.url));
-    }
-    return NextResponse.next(); // ⚠️ IMPORTANTE → evita que siga a la regla admin
-  }
+  // if (pathname.startsWith("/departaments")) {
+  //   if (rol !== "admin" && rol !== "medico" && rol !== "paciente") {
+  //     return NextResponse.redirect(new URL("/unauthorized", req.url));
+  //   }
+  //   return NextResponse.next(); // ⚠️ IMPORTANTE → evita que siga a la regla admin
+  // }
 
   // ---------------------------------------
   // 🔒 1. Rutas exclusivas de ADMIN
