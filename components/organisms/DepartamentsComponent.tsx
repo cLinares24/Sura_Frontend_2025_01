@@ -39,7 +39,7 @@ export default function Departments() {
   ];
 
   return (
-    <section className="w-full bg-gray-50 py-16 px-4 sm:px-8 lg:px-16 overflow-hidden">
+    <section className="w-full bg-gray-50 py-16 px-4 sm:px-8 lg:px-16 overflow-hidden min-h-[90vh]">
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
