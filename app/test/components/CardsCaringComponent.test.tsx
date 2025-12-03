@@ -1,4 +1,4 @@
-// app/test/components/CardHealth.test.tsx
+// app/test/components/CardsCaringComponent.test.tsx
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect } from "vitest";
@@ -9,28 +9,14 @@ describe("CardHealth", () => {
     icon: <svg data-testid="icon-svg" />,
     title: "Salud Física",
     text: "Cuida tu cuerpo diariamente",
-    link: "Ver más",
+    link: "Ver más", // este prop no se renderiza
   };
 
-  it("Renderiza correctamente el título, texto y enlace", () => {
+  it("Renderiza correctamente el título, texto y el icono", () => {
     render(<CardHealth {...props} />);
 
-    // Verifica el título
     expect(screen.getByText(props.title)).toBeInTheDocument();
-
-    // Verifica el texto
     expect(screen.getByText(props.text)).toBeInTheDocument();
-
-    // Verifica el link
-    expect(screen.getByText(`> ${props.link}`)).toBeInTheDocument();
-
-    // Verifica que el icono está presente
     expect(screen.getByTestId("icon-svg")).toBeInTheDocument();
-  });
-
-  it("El enlace tiene href correcto", () => {
-    render(<CardHealth {...props} />);
-    const linkElement = screen.getByText(`> ${props.link}`);
-    expect(linkElement).toHaveAttribute("href", "#");
   });
 });

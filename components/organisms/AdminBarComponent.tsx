@@ -96,6 +96,9 @@ export default function AdminBarComponent() {
             <Link href="/survey" onClick={closeSidebar}  className={linkClass("/survey")}>
               DUDAS Y QUEJAS
             </Link>
+            <Link href="/admin/citas" onClick={closeSidebar}  className={linkClass("/admin/citas")}>
+              CITAS
+            </Link>
             <span className="text-gray-300 -mt-3">________________</span>
 
             <ButtonComponent

@@ -30,60 +30,60 @@ export default function AboutComponent() {
 
       {/* Contenido general */}
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        className="w-full mx-auto px-4 sm:px-6 lg:px-12 py-12 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14"
-      >
-        {/* Imagen */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="w-full"
-        >
-          <div className="relative w-full aspect-video md:aspect-[4/3] lg:aspect-[16/10]">
-            <Image
-              src="https://static.wixstatic.com/media/3b1f25_f5ab27214c6e4cda8b8814a072cf1227.jpg/v1/fill/w_412,h_239,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/3b1f25_f5ab27214c6e4cda8b8814a072cf1227.jpg"
-              alt="Acerca de nosotros"
-              fill
-              className="rounded-lg shadow-md object-cover"
-              sizes="(max-width: 768px) 100vw,
-                     (max-width: 1200px) 50vw,
-                     600px"
-            />
-          </div>
-        </motion.div>
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ duration: 0.8 }}
+  className="w-full mx-auto px-4 sm:px-6 lg:px-12 py-12 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14"
+>
+  {/* Imagen */}
+  <motion.div
+    initial={{ opacity: 0, y: 30 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.8 }}
+    className="w-full"
+  >
+    <div className="relative w-full aspect-video md:aspect-[4/3] lg:aspect-[16/10]">
+      <Image
+        src="https://static.wixstatic.com/media/3b1f25_f5ab27214c6e4cda8b8814a072cf1227.jpg/v1/fill/w_412,h_239,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/3b1f25_f5ab27214c6e4cda8b8814a072cf1227.jpg"
+        alt="Acerca de nosotros"
+        fill
+        className="rounded-lg shadow-md object-cover"
+        sizes="(max-width: 768px) 100vw,
+               (max-width: 1200px) 50vw,
+               600px"
+      />
+    </div>
+  </motion.div>
 
-        {/* Texto */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="flex flex-col justify-center"
-        >
-          <h2 className="text-2xl sm:text-3xl font-semibold text-[#1a8c68]">
-            Acerca de Clínica Médica
-          </h2>
+  {/* Texto */}
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.8 }}
+    className="flex flex-col justify-center"
+  >
+    <h2 className="text-2xl sm:text-3xl font-semibold text-[#1a8c68]">
+      Acerca de Clínica Médica
+    </h2>
 
-          <p className="mt-4 text-gray-700 leading-relaxed text-sm sm:text-base">
-            En Medicicol trabajamos para brindar una atención en salud humana,
-            cercana y confiable, enfocada en el bienestar integral de nuestros
-            pacientes. Somos una clínica colombiana que combina experiencia
-            médica, tecnología actualizada y un equipo humano comprometido con
-            ofrecer servicios oportunos y de calidad para toda la comunidad.
-          </p>
+    <p className="mt-4 text-gray-700 leading-relaxed text-sm sm:text-base">
+      En Medicicol trabajamos para brindar una atención en salud humana,
+      cercana y confiable, enfocada en el bienestar integral de nuestros
+      pacientes. Somos una clínica colombiana que combina experiencia
+      médica, tecnología actualizada y un equipo humano comprometido con
+      ofrecer servicios oportunos y de calidad para toda la comunidad.
+    </p>
 
-          <p className="mt-4 text-gray-700 leading-relaxed text-sm sm:text-base">
-            Nuestro propósito es acompañar a cada paciente durante todo su
-            proceso de atención, con un enfoque humano, ético y seguro. En
-            Medicicol encontrarás profesionales capacitados, diagnósticos
-            precisos y servicios diseñados para responder a las necesidades
-            reales de las familias colombianas. Estamos aquí para cuidarte,
-            orientarte y mejorar tu calidad de vida.
-          </p>
-        </motion.div>
-      </motion.div>
+    <p className="mt-4 text-gray-700 leading-relaxed text-sm sm:text-base">
+      Nuestro propósito es acompañar a cada paciente durante todo su
+      proceso de atención, con un enfoque humano, ético y seguro. En
+      Medicicol encontrarás profesionales capacitados, diagnósticos
+      precisos y servicios diseñados para responder a las necesidades
+      reales de las familias colombianas. Estamos aquí para cuidarte,
+      orientarte y mejorar tu calidad de vida.
+    </p>
+  </motion.div>
+</motion.div>
 
       {/* Sección extensiva */}
       <section className="w-full bg-gray-50 py-16 px-4 md:px-10">

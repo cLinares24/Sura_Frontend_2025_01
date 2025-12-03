@@ -92,12 +92,12 @@
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { doctorEditSchema } from "@/schemas/doctor";
+import { doctorSchema } from "@/schemas/doctor";
 import { updateMedicoService } from "@/libs/medicosService";
 import { useMedicos } from "@/context/DoctorsContext";
 import z from "zod";
 
-type FormValues = z.infer<typeof doctorEditSchema>;
+type FormValues = z.infer<typeof doctorSchema>;
 
 export const useEditarMedicoForm = (medico: any, onClose: () => void) => {
   const { reload } = useMedicos();
@@ -108,7 +108,7 @@ export const useEditarMedicoForm = (medico: any, onClose: () => void) => {
     formState: { errors },
   } = useForm<FormValues>({
     defaultValues: medico,
-    resolver: zodResolver(doctorEditSchema),
+    resolver: zodResolver(doctorSchema),
   });
 
   const onSubmit = async (data: FormValues) => {

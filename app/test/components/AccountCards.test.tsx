@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { vi } from "vitest";
 import AccountCard from "../../../components/atoms/AccountCards";
+import { AuthProvider } from "../../../context/AuthContext"; // importa tu provider
 import Swal from "sweetalert2";
 
 // Mock de Swal
@@ -21,9 +22,13 @@ const mockOnUpdate = vi.fn();
 
 describe("AccountCard", () => {
   test("Renderiza correctamente los datos del perfil", () => {
-    render(<AccountCard profile={profile} onUpdate={mockOnUpdate} />);
+    render(
+      <AuthProvider>
+        <AccountCard profile={profile} onUpdate={mockOnUpdate} />
+      </AuthProvider>
+    );
 
-    // Buscar todos los <p> y verificar su contenido combinando el span y el texto
+    // Verificaciones
     expect(
       screen.getByText((content, element) =>
         element?.tagName === "P" && element.textContent?.includes(`Nombre: ${profile.nombre}`)
